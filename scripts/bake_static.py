@@ -439,6 +439,9 @@ def bake_seo(src, rel):
             i = head.index('<meta name="description"'); j = head.index('\n', i) + 1
             head = head[:j] + '  ' + link + '\n' + head[j:]
         head = meta_set(head, 'property', 'og:url', url, after='<meta property="og:type"')
+    else:  # trang 404: không canonical / og:url (phần đầu trang có thể copy từ trang khác)
+        head = re.sub(r'\s*<link rel="canonical" href="[^"]*" />', '', head)
+        head = re.sub(r'\s*<meta property="og:url" content="[^"]*" />', '', head)
     head = meta_set(head, 'property', 'og:type', 'article' if is_post else 'website')
     head = meta_set(head, 'property', 'og:image', SITE_URL + og)
     head = meta_set(head, 'property', 'og:image:width', w)
