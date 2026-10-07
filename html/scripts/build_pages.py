@@ -21,6 +21,7 @@ HOME = read('index.html')
 HEAD_END = SHOP.index('<body')
 SPRITE_AND_HEADERS = SHOP[SHOP.index('>', HEAD_END) + 1: SHOP.index('    <!-- ============ DANH SÁCH SẢN PHẨM ============ -->')]
 FOOTER = SHOP[SHOP.index('    <footer class="afooter">'): SHOP.index('  <!-- ============ LIVE CHAT PANEL')]
+FOOTER = FOOTER.split('  <!-- ============ XEM NHANH')[0]  # khung xem nhanh chỉ cần ở trang có lưới sản phẩm
 TAIL = SHOP[SHOP.index('  <!-- ============ LIVE CHAT PANEL'):]
 
 
@@ -443,6 +444,7 @@ def build_contact():
     from urllib.parse import quote_plus
     cards = HOME[HOME.index('<div class="contact-grid">'): HOME.index('<div class="footer__bottom">')].rstrip()
     cards = cards[:cards.rindex('</div>') + len('</div>')]
+    cards = re.sub(r'<br />\s*<a [^>]*data-contact="hotline2"[^>]*>.*?</a>', '', cards)  # số phụ chỉ hiện ở footer trang chủ
     main = '''    <main class="contact-page">
 %(hero)s      <div class="container contact-body">
         <div class="contact-quick">
@@ -501,8 +503,74 @@ def build_contact():
          main, active='/lien-he/', page_id='contact')
 
 
+PRIVACY_UPDATED = '07/10/2026'
+PRIVACY = """
+<p>Hiệu Vàng Ngọc Diệp (Công Ty TNHH MTV Hiệu Vàng Ngọc Diệp) tôn trọng và cam kết bảo vệ thông tin cá nhân của Quý khách. Chính sách này giải thích chúng tôi thu thập thông tin gì, dùng vào việc gì và Quý khách có những quyền gì khi truy cập website hoặc liên hệ với cửa hàng.</p>
+<h2>1. Thông tin chúng tôi thu thập</h2>
+<p>Website <strong>không yêu cầu đăng ký tài khoản</strong> và <strong>không thanh toán trực tuyến</strong>. Chúng tôi chỉ nhận những thông tin do Quý khách chủ động cung cấp khi:</p>
+<ul>
+<li>Gửi yêu cầu tư vấn qua form Liên hệ: họ tên, số điện thoại, nhu cầu và nội dung cần tư vấn.</li>
+<li>Trò chuyện qua khung Live Chat: họ tên, số điện thoại (nếu có), nội dung tin nhắn và sản phẩm Quý khách quan tâm.</li>
+<li>Gọi điện, nhắn Zalo, nhắn tin Fanpage hoặc gửi email cho cửa hàng.</li>
+</ul>
+<p>Chúng tôi <strong>không</strong> thu thập số CCCD, thông tin thẻ ngân hàng hay mật khẩu của Quý khách qua website.</p>
+<h2>2. Mục đích sử dụng thông tin</h2>
+<ul>
+<li>Liên hệ lại để tư vấn sản phẩm, báo giá, đặt làm hoặc gia công trang sức theo yêu cầu.</li>
+<li>Xác nhận lịch hẹn, thông báo khi sản phẩm sẵn sàng tại cửa hàng.</li>
+<li>Giải đáp thắc mắc, tiếp nhận góp ý để nâng cao chất lượng phục vụ.</li>
+</ul>
+<p>Chúng tôi không dùng thông tin của Quý khách để gửi quảng cáo hàng loạt khi chưa được Quý khách đồng ý.</p>
+<h2>3. Chia sẻ thông tin</h2>
+<p>Hiệu Vàng Ngọc Diệp <strong>không bán, không cho thuê và không trao đổi</strong> thông tin cá nhân của Quý khách cho bên thứ ba. Thông tin chỉ được cung cấp khi có yêu cầu của cơ quan nhà nước có thẩm quyền theo quy định của pháp luật.</p>
+<h2>4. Lưu trữ và bảo mật</h2>
+<ul>
+<li>Thông tin được lưu giữ trong thời gian cần thiết để phục vụ yêu cầu của Quý khách hoặc theo thời hạn pháp luật quy định.</li>
+<li>Chỉ nhân viên phụ trách tư vấn, chăm sóc khách hàng mới được tiếp cận thông tin.</li>
+<li>Website sử dụng kết nối mã hoá HTTPS để bảo vệ dữ liệu khi truyền đi.</li>
+</ul>
+<h2>5. Cookie và dữ liệu trên trình duyệt</h2>
+<p>Website không dùng cookie quảng cáo. Trình duyệt của Quý khách chỉ lưu lựa chọn giao diện sáng / tối để lần sau mở lại đúng chế độ Quý khách đã chọn. Quý khách có thể xoá dữ liệu này bất cứ lúc nào trong phần cài đặt trình duyệt.</p>
+<h2>6. Dịch vụ bên thứ ba</h2>
+<p>Một số tiện ích trên website do bên thứ ba cung cấp và có chính sách bảo mật riêng: bản đồ Google Maps, biểu đồ giá vàng TradingView, nguồn giá vàng / bạc thế giới và tỷ giá ngoại tệ dùng để tham khảo, cùng các liên kết tới Facebook và Zalo. Khi Quý khách sử dụng các tiện ích này, nhà cung cấp có thể ghi nhận thông tin kỹ thuật như địa chỉ IP, loại trình duyệt theo chính sách của họ.</p>
+<h2>7. Quyền của Quý khách</h2>
+<p>Quý khách có quyền yêu cầu xem, chỉnh sửa hoặc xoá thông tin cá nhân đã cung cấp cho cửa hàng, cũng như rút lại sự đồng ý cho việc sử dụng thông tin, phù hợp với quy định pháp luật hiện hành về bảo vệ dữ liệu cá nhân. Vui lòng liên hệ theo thông tin bên dưới, chúng tôi sẽ phản hồi trong thời gian sớm nhất.</p>
+<h2>8. Thay đổi chính sách</h2>
+<p>Chính sách có thể được cập nhật để phù hợp với hoạt động của cửa hàng và quy định pháp luật. Phiên bản mới sẽ được đăng tại trang này, kèm ngày cập nhật.</p>
+<h2>9. Liên hệ</h2>
+<ul>
+<li>Địa chỉ: <a href="#" data-contact="address">94-96 Lý Thái Tổ, phường Thanh Khê, TP. Đà Nẵng</a></li>
+<li>Hotline / Zalo: <a href="#" data-contact="hotline">0905 887 044</a></li>
+<li>Email: <a href="#" data-contact="email">Đang cập nhật</a></li>
+</ul>
+"""
+
+
+def build_privacy():
+    main = """    <main class="post-page">
+      <article class="post">
+        <header class="post__head container">
+          <nav class="crumb" aria-label="Đường dẫn"><a href="/">Trang chủ</a><span aria-hidden="true">/</span><span>Chính sách bảo mật</span></nav>
+          <h1 class="post__title">Chính Sách <span class="gold-text">Bảo Mật</span></h1>
+          <p class="post__lead">Cách Hiệu Vàng Ngọc Diệp thu thập, sử dụng và bảo vệ thông tin cá nhân của Quý khách.</p>
+          <div class="post__meta">
+            <span><svg class="i i-16" stroke-width="2"><use href="#i-calendar"/></svg>Cập nhật: %s</span>
+          </div>
+        </header>
+        <div class="post__content">
+%s
+        </div>
+      </article>
+    </main>
+""" % (PRIVACY_UPDATED, '\n'.join('          ' + l if l.strip() else '' for l in PRIVACY.strip().split('\n')))
+    page('chinh-sach-bao-mat/index.html', 'Chính Sách Bảo Mật | Hiệu Vàng Ngọc Diệp',
+         'Chính sách bảo mật thông tin khách hàng của Hiệu Vàng Ngọc Diệp – 94-96 Lý Thái Tổ, Thanh Khê, Đà Nẵng.',
+         main, page_id='privacy')
+
+
 if __name__ == '__main__':
     print('Dựng trang:')
     build_prices()
     build_contact()
     build_news()
+    build_privacy()
