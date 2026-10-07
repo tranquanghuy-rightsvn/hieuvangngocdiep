@@ -1,0 +1,49 @@
+{
+  "fonts": [
+    "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+    "\"Be Vietnam Pro\", sans-serif",
+    "\"Cormorant Garamond\", serif",
+    "\"Be Vietnam Pro\", system-ui, sans-serif"
+  ],
+  "links": [
+    "https://phulocjdn.com/favicon.png?v=7",
+    "https://phulocjdn.com/favicon.png?v=7",
+    "https://phulocjdn.com/assets/index-BecX6bAC.js",
+    "https://phulocjdn.com/assets/index-ELmmDzPR.css"
+  ],
+  "vars": {
+    ":root --background": "30 12% 6%",
+    ":root --foreground": "40 30% 92%",
+    ":root --card": "30 10% 9%",
+    ":root --card-foreground": "40 30% 92%",
+    ":root --gold": "43 74% 52%",
+    ":root --gold-light": "44 85% 72%",
+    ":root --popover": "30 10% 9%",
+    ":root --popover-foreground": "40 30% 92%",
+    ":root --primary": "43 74% 52%",
+    ":root --primary-foreground": "30 12% 6%",
+    ":root --secondary": "30 8% 14%",
+    ":root --secondary-foreground": "40 30% 92%",
+    ":root --muted": "30 8% 14%",
+    ":root --muted-foreground": "40 12% 62%",
+    ":root --accent": "43 74% 52%",
+    ":root --accent-foreground": "30 12% 6%",
+    ":root --destructive": "0 72% 51%",
+    ":root --destructive-foreground": "0 0% 98%",
+    ":root --border": "40 15% 20%",
+    ":root --input": "240 5.9% 90%",
+    ":root --ring": "240 5.9% 10%",
+    ":root --radius": ".5rem",
+    ":root --sidebar-background": "0 0% 98%",
+    ":root --sidebar-foreground": "240 5.3% 26.1%",
+    ":root --sidebar-primary": "240 5.9% 10%",
+    ":root --sidebar-primary-foreground": "0 0% 98%",
+    ":root --sidebar-accent": "240 4.8% 95.9%",
+    ":root --sidebar-accent-foreground": "240 5.9% 10%",
+    ":root --sidebar-border": "220 13% 91%",
+    ":root --sidebar-ring": "217.2 91.2% 59.8%"
+  },
+  "outline": "body\n  div#root\n    div.min-h-screen.bg-background.text-foreground\n      div.md:hidden.force-dark.pwa-safe-top.sticky.top-0.z-50\n        div.transition-colors.duration-700\n        header.border-b.border-gold/15.backdrop-blur-md.transition-colors.duration-700\n          div.mx-auto.flex.max-w-6xl.items-center.justify-between\n            div.flex.min-w-0.items-center\n            div.flex.min-w-0.items-center.justify-center\n            div.flex.min-w-0.items-center.justify-end\n      div.hidden.md:block.force-dark.sticky.top-0.z-50\n        header.border-b.border-gold/15.backdrop-blur-md.transition-colors.duration-700\n          div.flex.w-full.items-center.justify-between.py-3.px-4\n            button.text-primary.transition-transform.duration-200.hover:scale-110\n            button.inline-flex.h-10.items-center.justify-center.rounded-full.px-6\n      section#top.force-dark.relative.overflow-hidden\n        div.absolute.inset-0\n          img.hidden.h-full.w-full.object-cover.md:block\n          img.block.h-full.w-full.object-cover.md:hidden\n      div.relative.overflow-hidden.border-y.border-gold/20.bg-background.py-3\n        div.flex.w-max.animate-marquee.gap-12.whitespace-nowrap.px-6\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n          span.inline-flex.items-center.gap-2.text-sm\n            span.font-semibold.text-gold\n            span.tabular-nums.text-foreground/80\n      div#bang-gia\n        section#bang-gia.bg-background\n          div.mx-auto.max-w-6xl.px-6.py-12\n            div.w-full\n      div.border-t.border-gold/20\n      section.py-12.sm:py-16.bg-background\n        div.mx-auto.max-w-6xl.px-4.sm:px-6\n          div.mb-8.text-center\n            h2.font-display.text-3xl.font-semibold.sm:text-5xl\n            p.mt-4.text-sm.text-muted-foreground.sm:text-base\n          div.hidden.md:block\n            div.grid.grid-cols-3.gap-5.mb-5\n            div.grid.grid-cols-2.gap-5.mx-auto.max-w-[66%]\n          div.md:hidden.relative\n            div.overflow-hidden.rounded-2xl\n            div.mt-4.flex.justify-center.gap-2\n            div.mt-4.flex.gap-2.overflow-x-auto.pb-1.scrollbar-none\n      div.border-t.border-gold/20\n      footer#lien-he.relative.border-t.border-gold/20.bg-background.pb-24.sm:pb-0\n        div.pointer-events-none.absolute.inset-0.opacity-[0.35]\n        div.relative.mx-auto.max-w-6xl.px-4.sm:px-6.py-14\n          div.mb-10.sm:mb-12.text-center\n            div.mx-auto.mb-4.flex.h-14.w-14.items-center\n            h2.font-semibold.tracking-tight.text-gold-light.text-[clamp(1.05rem,3.8vw,1.65rem)].leading-snug\n            div.mx-auto.mt-4.h-px.w-24.bg-gradient-to-r.from-transparent\n          div.grid.grid-cols-1.sm:grid-cols-2.lg:grid-cols-3.gap-3.5.sm:gap-5\n            div.group.relative.rounded-2xl.border.border-gold/25.bg-card\n            div.group.relative.rounded-2xl.border.border-gold/25.bg-card\n            div.group.relative.rounded-2xl.border.border-gold/25.bg-card\n            div.group.relative.rounded-2xl.border.border-gold/25.bg-card\n            div.group.relative.rounded-2xl.border.border-gold/25.bg-card\n            div.group.relative.rounded-2xl.border.border-gold/25.bg-card\n          div.mt-10.sm:mt-12.border-t.border-gold/15.pt-6.space-y-4\n            div.text-center.text-xs.text-muted-foreground.tracking-wide\n    div.fixed.bottom-24.right-4.z-50.flex.h-[78vh]\n      div.flex.items-center.justify-between.gap-3.bg-gradient-to-r.from-gold\n        div.flex.items-center.gap-2\n          span.flex.h-9.w-9.items-center.justify-center.rounded-full\n          div.leading-tight\n            p.text-sm.font-semibold.text-primary-foreground\n            p.flex.items-center.gap-1.text-[11px].text-primary-foreground/90\n        div.flex.items-center.gap-1\n          button.flex.h-8.w-8.shrink-0.items-center.justify-center\n      div.flex-1.overflow-y-auto.px-4.py-4\n        div.mb-4.rounded-xl.bg-secondary/70.px-4.py-3.text-sm\n        form.space-y-3\n          div\n            label.mb-1.block.text-xs.font-medium.text-muted-foreground\n            input.w-full.rounded-lg.border.border-border.bg-secondary.px-3\n          div\n            label.mb-1.block.text-xs.font-medium.text-muted-foreground\n            input.w-full.rounded-lg.border.border-border.bg-secondary.px-3\n          div.flex.items-center.gap-2.rounded-lg.bg-secondary/70.px-3\n            p.text-xs.text-foreground\n          button.flex.w-full.items-center.justify-center.gap-2.rounded-lg\n    div.fixed.bottom-5.left-0.right-0.z-40.flex\n      div.relative.w-full.flex.flex-col.items-center\n        button.absolute.-top-0.5.left-1/2.z-10.flex.h-8\n        div.w-full.flex.items-center.justify-between.rounded-full.border\n          button.flex.h-11.w-11.items-center.justify-center.rounded-full\n          button.flex.h-11.w-11.items-center.justify-center.rounded-full\n          a.flex.h-11.w-11.items-center.justify-center.rounded-full\n          a.flex.h-11.w-11.items-center.justify-center.rounded-full\n          button.flex.h-11.w-11.items-center.justify-center.rounded-full\n          button.flex.h-11.w-11.items-center.justify-center.rounded-full\n    div.fixed.bottom-5.right-6.z-40.hidden.sm:flex\n      button.flex.h-14.w-14.items-center.justify-center.rounded-full\n      a.flex.h-14.w-14.items-center.justify-center.rounded-full\n      button.flex.h-14.w-14.items-center.justify-center.rounded-full\n    button.fixed.bottom-5.z-50.flex.items-center.justify-center\n    div.fixed.inset-x-0.bottom-0.z-[70].flex.flex-col\n      div.pointer-events-auto.w-full.max-w-md.rounded-2xl.border.border-[#d4af37]/40\n        div.flex.items-start.gap-3\n          div.mt-0.5.flex.h-10.w-10.shrink-0.items-center\n          div.flex-1\n            p.font-semibold.text-[#f5d57a]\n            p.text-sm.text-amber-100/70.mt-0.5\n            div.mt-3.flex.gap-2\n          button.text-amber-100/40.hover:text-amber-100\n      div.pointer-events-auto.w-full.max-w-md.rounded-2xl.border.border-[#d4af37]/40\n        div.flex.items-start.gap-3\n          div.mt-0.5.flex.h-10.w-10.shrink-0.items-center\n          div.flex-1\n            p.font-semibold.text-[#f5d57a]\n            p.text-sm.text-amber-100/70.mt-0.5\n            div.mt-3.flex.gap-2\n          button.text-amber-100/40.hover:text-amber-100\n    div\n      ol.fixed.top-0.z-[100].flex.max-h-screen.w-full\n",
+  "bodyFont": "\"Be Vietnam Pro\", sans-serif",
+  "bodyBg": "rgb(246, 243, 238)"
+}

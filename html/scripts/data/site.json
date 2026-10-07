@@ -1,0 +1,133 @@
+{
+  "CONTACT": {
+    "gpkd": "",
+    "address": "94-96 Lý Thái Tổ, phường Thanh Khê, TP. Đà Nẵng",
+    "hotline": "0905 887 044",
+    "zalo": "0905 887 044",
+    "hotline2": "0905 886 011",
+    "email": "haulien2448@gmail.com",
+    "facebook": "https://www.facebook.com/HieuVangNgocDiepHau/",
+    "hours": "Mở cửa tất cả các ngày trong tuần"
+  },
+  "PRODUCTS": [
+    {
+      "slug": "vang-tich-tru",
+      "title": "Vàng Tích Trữ",
+      "desc": "Nhẫn tròn 24K, đồng vàng, vàng ép vỉ 999.9",
+      "img": "dong-vang-999.jpg",
+      "children": [
+        "Nhẫn Tròn Trơn",
+        "Đồng Vàng",
+        "Vàng Ép Vỉ"
+      ]
+    },
+    {
+      "slug": "trang-suc-cuoi",
+      "title": "Trang Sức Cưới",
+      "desc": "Dây cổ cưới, mặt khoá, vòng cưới truyền thống",
+      "img": "day-co-cuoi-5-tang.jpg",
+      "children": [
+        "Dây Cổ Cưới",
+        "Mặt Khoá",
+        "Vòng Cưới"
+      ]
+    },
+    {
+      "slug": "day-chuyen",
+      "title": "Dây Chuyền",
+      "desc": "Cỏ 4 lá, mặt charm, dây hoa men",
+      "img": "day-chuyen-co-4-la-vang.jpg",
+      "children": [
+        "Dây Chuyền Cỏ 4 Lá",
+        "Dây Chuyền Mặt Charm",
+        "Dây Hoa Men"
+      ]
+    },
+    {
+      "slug": "lac-vong",
+      "title": "Lắc & Vòng Tay",
+      "desc": "Lắc tay cỏ 4 lá, bọ rùa, bộ lắc & nhẫn",
+      "img": "lac-co-4-la-xanh.jpg",
+      "children": [
+        "Lắc Tay",
+        "Bộ Lắc & Nhẫn"
+      ]
+    },
+    {
+      "slug": "nhan",
+      "title": "Nhẫn Thời Trang",
+      "desc": "Nhẫn nữ đính đá, bản lưới, mắt xích",
+      "img": "nhan-hoa-dinh-da.jpg",
+      "children": [
+        "Nhẫn Nữ"
+      ]
+    },
+    {
+      "slug": "qua-tang",
+      "title": "Quà Tặng Vàng",
+      "desc": "Tượng phong thuỷ, hoa hồng vàng, quà cho bé",
+      "img": "tuong-tai-than-cuoi-ngua.jpg",
+      "children": [
+        "Tượng Vàng Phong Thuỷ",
+        "Hoa Vàng",
+        "Quà Tặng Bé"
+      ]
+    }
+  ],
+  "MENU_ORDER": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "PRICES": [
+    {
+      "id": "9999",
+      "name": "Vàng 9999",
+      "buy": 14100000,
+      "sell": 14230000
+    },
+    {
+      "id": "980",
+      "name": "Vàng 98",
+      "buy": 13760000,
+      "sell": 13950000
+    },
+    {
+      "id": "960",
+      "name": "Vàng 96",
+      "buy": 13460000,
+      "sell": 13650000
+    },
+    {
+      "id": "NT980",
+      "name": "Nữ Trang 98",
+      "buy": 13760000,
+      "sell": 14050000
+    },
+    {
+      "id": "610",
+      "name": "Vàng 610",
+      "buy": 8580000,
+      "sell": 9000000
+    }
+  ],
+  "SILVER_PRICES": [
+    {
+      "id": "AG925",
+      "name": "Bạc trang sức 925 (bạc Ý)",
+      "buy": 174000,
+      "sell": 177000
+    },
+    {
+      "id": "AG999TS",
+      "name": "Bạc trang sức 999 (bạc ta)",
+      "buy": 189000,
+      "sell": 192000
+    }
+  ],
+  "PRICES_UPDATED_AT": "09:15 28/08/2026",
+  "SILVER_UPDATED_AT": "18:00 06/10/2026"
+}

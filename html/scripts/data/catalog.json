@@ -1,0 +1,549 @@
+[
+ {
+  "id": "ND-TT01",
+  "img": "nhan-tron-24k",
+  "cat": "vang-tich-tru",
+  "sub": "Nhẫn Tròn Trơn",
+  "gold": "Vàng 24K",
+  "featured": true,
+  "name": "Nhẫn tròn trơn vàng 24K",
+  "desc": "Nhẫn tròn trơn vàng 24K đủ các trọng lượng, có tem nhãn rõ ràng. Lựa chọn tích luỹ an toàn, dễ mua bán lại."
+ },
+ {
+  "id": "ND-TT02",
+  "img": "nhan-tron-ban-day",
+  "cat": "vang-tich-tru",
+  "sub": "Nhẫn Tròn Trơn",
+  "gold": "Vàng 24K",
+  "name": "Nhẫn tròn bản dày vàng 24K",
+  "desc": "Nhẫn tròn bản dày, đánh bóng sáng, phù hợp tích trữ hoặc làm quà biếu, quà mừng."
+ },
+ {
+  "id": "ND-TT03",
+  "img": "dong-vang-999",
+  "cat": "vang-tich-tru",
+  "sub": "Đồng Vàng",
+  "gold": "Vàng 999.9",
+  "featured": true,
+  "name": "Đồng vàng 999.9 hộp nhung",
+  "desc": "Đồng vàng nguyên chất đặt trong hộp nhung đỏ sang trọng — món quà tài lộc cho dịp khai trương, mừng thọ, lễ Tết."
+ },
+ {
+  "id": "ND-TT04",
+  "img": "dong-vang-tai-loc",
+  "cat": "vang-tich-tru",
+  "sub": "Đồng Vàng",
+  "gold": "Vàng 999.9",
+  "name": "Đồng vàng Tài Lộc",
+  "desc": "Đồng vàng hoạ tiết cát tường, ép vỉ trong hộp quà, vừa tích luỹ vừa mang ý nghĩa may mắn."
+ },
+ {
+  "id": "ND-TT05",
+  "img": "vang-than-tai-999",
+  "cat": "vang-tich-tru",
+  "sub": "Vàng Ép Vỉ",
+  "gold": "Vàng 999.9",
+  "isNew": true,
+  "name": "Vàng ép vỉ Thần Tài 999.9",
+  "desc": "Vàng Thần Tài ép vỉ niêm phong — lựa chọn được ưa chuộng trong ngày vía Thần Tài để cầu tài lộc cả năm."
+ },
+ {
+  "id": "ND-TT06",
+  "img": "vang-hoa-mai-5li",
+  "cat": "vang-tich-tru",
+  "sub": "Vàng Ép Vỉ",
+  "gold": "Vàng 999.9",
+  "weight": "5 li",
+  "name": "Vàng ép vỉ hoa mai 999.9 – 5 li",
+  "desc": "Vàng 999.9 ép vỉ hình hoa mai, trọng lượng 5 li, kèm bao lì xì đỏ — quà Tết nhỏ xinh mà ý nghĩa."
+ },
+ {
+  "id": "ND-C01",
+  "img": "day-co-cuoi-5-tang",
+  "cat": "trang-suc-cuoi",
+  "sub": "Dây Cổ Cưới",
+  "featured": true,
+  "name": "Dây cổ cưới heo vàng 5 tầng",
+  "desc": "Dây cổ cưới truyền thống với 5 tầng heo vàng sung túc, tua chuông rủ — điểm nhấn rực rỡ cho cô dâu ngày vu quy."
+ },
+ {
+  "id": "ND-C02",
+  "img": "day-co-cuoi-may-3-tang",
+  "cat": "trang-suc-cuoi",
+  "sub": "Dây Cổ Cưới",
+  "name": "Dây cổ cưới mây cát tường 3 tầng",
+  "desc": "Bản mây cát tường chạm nổi kết hợp ba tầng heo vàng, tượng trưng cho hạnh phúc viên mãn, con cháu đầy đàn."
+ },
+ {
+  "id": "ND-C03",
+  "img": "day-co-cuoi-phuong",
+  "cat": "trang-suc-cuoi",
+  "sub": "Dây Cổ Cưới",
+  "isNew": true,
+  "name": "Dây cổ cưới phượng hoàng",
+  "desc": "Phượng hoàng dang cánh phía trên, heo vàng xếp tầng phía dưới — bộ dây cổ cưới bề thế, sang trọng."
+ },
+ {
+  "id": "ND-C04",
+  "img": "day-co-doi-heo",
+  "cat": "trang-suc-cuoi",
+  "sub": "Dây Cổ Cưới",
+  "name": "Dây cổ cưới đôi heo tua chuông",
+  "desc": "Hai tầng heo vàng nối bằng dây mảnh, tua chuông leng keng — vừa truyền thống vừa thanh thoát."
+ },
+ {
+  "id": "ND-C05",
+  "img": "day-co-cuoi-2-tang",
+  "cat": "trang-suc-cuoi",
+  "sub": "Dây Cổ Cưới",
+  "name": "Dây cổ cưới heo vàng 2 tầng",
+  "desc": "Kiểu dáng gọn gàng với hai tầng heo vàng, phù hợp cô dâu yêu thích sự nhẹ nhàng."
+ },
+ {
+  "id": "ND-C06",
+  "img": "day-co-hoa-heo",
+  "cat": "trang-suc-cuoi",
+  "sub": "Dây Cổ Cưới",
+  "featured": true,
+  "name": "Dây cổ cưới hoa sen – heo vàng",
+  "desc": "Cụm hoa chạm tinh xảo kết hợp heo vàng và tua rủ, mang lời chúc an khang, sung túc cho đôi uyên ương."
+ },
+ {
+  "id": "ND-C07",
+  "img": "day-co-hoa-phuong",
+  "cat": "trang-suc-cuoi",
+  "sub": "Dây Cổ Cưới",
+  "name": "Dây cổ cưới hoa phượng",
+  "desc": "Mặt hoa phượng nổi khối điểm xuyết sao vàng nhỏ, đường nét mềm mại, nữ tính."
+ },
+ {
+  "id": "ND-C08",
+  "img": "mat-khoa-heo",
+  "cat": "trang-suc-cuoi",
+  "sub": "Mặt Khoá",
+  "name": "Dây chuyền mặt khoá heo vàng",
+  "desc": "Mặt khoá trường mệnh hình heo vàng — quà cưới, quà đầy tháng mang ý nghĩa bình an, no đủ."
+ },
+ {
+  "id": "ND-C09",
+  "img": "mat-khoa-heo-tua",
+  "cat": "trang-suc-cuoi",
+  "sub": "Mặt Khoá",
+  "name": "Mặt khoá heo tua chuông",
+  "desc": "Mặt khoá heo vàng nằm phúc hậu với tua chuông nhỏ, đeo hằng ngày hoặc trong dịp lễ cưới hỏi."
+ },
+ {
+  "id": "ND-C10",
+  "img": "vong-cuoi-tron",
+  "cat": "trang-suc-cuoi",
+  "sub": "Vòng Cưới",
+  "featured": true,
+  "name": "Vòng tay cưới trơn vàng",
+  "desc": "Vòng tay trơn bóng, đủ cỡ tay, có tem nhãn từng chiếc — món trang sức không thể thiếu trong bộ cưới."
+ },
+ {
+  "id": "ND-C11",
+  "img": "vong-tron-tron",
+  "cat": "trang-suc-cuoi",
+  "sub": "Vòng Cưới",
+  "name": "Vòng tròn trơn vàng (nhiều cỡ)",
+  "desc": "Vòng tròn trơn nhiều kích cỡ và trọng lượng để Quý khách dễ dàng lựa chọn tại cửa hàng."
+ },
+ {
+  "id": "ND-C12",
+  "img": "vong-xi-men",
+  "cat": "trang-suc-cuoi",
+  "sub": "Vòng Cưới",
+  "isNew": true,
+  "name": "Vòng ximen chạm hoa văn",
+  "desc": "Vòng ximen bản lớn chạm hoa văn tinh tế, bắt sáng lấp lánh — sang trọng khi đeo đôi hoặc phối nhiều chiếc."
+ },
+ {
+  "id": "ND-D01",
+  "img": "day-chuyen-co-4-la-vang",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Cỏ 4 Lá",
+  "featured": true,
+  "name": "Dây chuyền cỏ 4 lá vàng",
+  "desc": "Chuỗi cỏ bốn lá vàng nối liền — biểu tượng của may mắn, phong cách sang trọng hiện đại."
+ },
+ {
+  "id": "ND-D02",
+  "img": "day-chuyen-co-4-la-den",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Cỏ 4 Lá",
+  "name": "Dây chuyền cỏ 4 lá đá đen",
+  "desc": "Cỏ bốn lá đá đen viền vàng tương phản nổi bật, dễ phối cùng trang phục công sở lẫn dạo phố."
+ },
+ {
+  "id": "ND-D03",
+  "img": "day-chuyen-co-4-la-xa-cu",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Cỏ 4 Lá",
+  "name": "Dây chuyền cỏ 4 lá xà cừ",
+  "desc": "Cỏ bốn lá xà cừ trắng ánh ngọc, nhẹ nhàng và thanh lịch."
+ },
+ {
+  "id": "ND-D04",
+  "img": "day-chuyen-co-4-la-manh",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Cỏ 4 Lá",
+  "name": "Dây chuyền cỏ 4 lá mảnh",
+  "desc": "Dây mảnh điểm những bông cỏ bốn lá nhỏ xinh, tối giản mà tinh tế."
+ },
+ {
+  "id": "ND-D05",
+  "img": "day-chuyen-co-4-la-den-manh",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Cỏ 4 Lá",
+  "name": "Dây chuyền cỏ 4 lá đen dáng mảnh",
+  "desc": "Phiên bản mảnh của dòng cỏ bốn lá đá đen, phù hợp đeo hằng ngày."
+ },
+ {
+  "id": "ND-D06",
+  "img": "day-chuyen-co-4-la-do",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Cỏ 4 Lá",
+  "isNew": true,
+  "name": "Dây chuyền mặt cỏ 4 lá đỏ",
+  "desc": "Một bông cỏ bốn lá đỏ trầm làm điểm nhấn, sắc màu may mắn và rạng rỡ."
+ },
+ {
+  "id": "ND-D07",
+  "img": "day-chuyen-co-4-la-nho",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Cỏ 4 Lá",
+  "name": "Dây chuyền mặt cỏ 4 lá vàng nhỏ",
+  "desc": "Mặt cỏ bốn lá vàng nhỏ nhắn trên dây mảnh, món quà ý nghĩa cho người thương."
+ },
+ {
+  "id": "ND-D08",
+  "img": "day-chuyen-bo-rua",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Mặt Charm",
+  "featured": true,
+  "name": "Dây chuyền mặt bọ rùa",
+  "desc": "Mặt bọ rùa đỏ đáng yêu — biểu tượng của may mắn, trẻ trung và năng động."
+ },
+ {
+  "id": "ND-D09",
+  "img": "day-chuyen-mat-bo-rua",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Mặt Charm",
+  "name": "Dây chuyền bọ rùa dáng mảnh",
+  "desc": "Charm bọ rùa nhỏ xinh trên dây mảnh, hợp với các bạn gái yêu phong cách nhẹ nhàng."
+ },
+ {
+  "id": "ND-D10",
+  "img": "day-chuyen-vong-tron",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Mặt Charm",
+  "name": "Dây chuyền mặt vòng tròn",
+  "desc": "Mặt vòng tròn lồng nhau tượng trưng cho sự gắn kết, thiết kế hiện đại, dễ đeo."
+ },
+ {
+  "id": "ND-D11",
+  "img": "day-chuyen-mat-roi",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Mặt Charm",
+  "name": "Dây chuyền mặt rơi cỏ 4 lá",
+  "desc": "Kiểu dáng chữ Y với các bông cỏ bốn lá rơi nhẹ, tôn dáng cổ thanh mảnh."
+ },
+ {
+  "id": "ND-D12",
+  "img": "day-chuyen-bac-thoi-trang",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Mặt Charm",
+  "name": "Dây chuyền mặt charm thời trang (nhiều mẫu)",
+  "desc": "Bộ sưu tập dây chuyền mặt charm màu trắng với nhiều kiểu: nơ, trái tim, hoa… Quý khách chọn mẫu tại cửa hàng."
+ },
+ {
+  "id": "ND-D13",
+  "img": "day-chuyen-bac-nu",
+  "cat": "day-chuyen",
+  "sub": "Dây Chuyền Mặt Charm",
+  "name": "Dây chuyền nữ mặt charm trắng",
+  "desc": "Dây chuyền nữ mặt charm trắng tinh tế, nhiều mẫu mặt để lựa chọn."
+ },
+ {
+  "id": "ND-D14",
+  "img": "day-hoa-men",
+  "cat": "day-chuyen",
+  "sub": "Dây Hoa Men",
+  "weight": "1 chỉ 7",
+  "name": "Dây hoa men nhiều màu",
+  "desc": "Dây vàng kết hoa men nhiều màu sắc rực rỡ, nổi bật và đầy cá tính."
+ },
+ {
+  "id": "ND-L01",
+  "img": "lac-co-4-la-xanh",
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "featured": true,
+  "name": "Lắc tay cỏ 4 lá xanh – trắng",
+  "desc": "Cỏ bốn lá xanh lục bảo xen xà cừ trắng, phối màu tươi mát và sang trọng."
+ },
+ {
+  "id": "ND-L02",
+  "img": "lac-co-4-la-den",
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "name": "Lắc tay cỏ 4 lá đen",
+  "desc": "Lắc tay cỏ bốn lá đá đen viền vàng — cổ điển, dễ phối đồ."
+ },
+ {
+  "id": "ND-L03",
+  "img": "lac-co-4-la-vang",
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "name": "Lắc tay cỏ 4 lá vàng",
+  "desc": "Toàn bộ cỏ bốn lá bằng vàng, ánh kim rực rỡ trên cổ tay."
+ },
+ {
+  "id": "ND-L04",
+  "img": "lac-co-4-la-trang",
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "name": "Lắc tay cỏ 4 lá xà cừ",
+  "desc": "Cỏ bốn lá xà cừ trắng trên dây vàng mảnh, thanh lịch và nữ tính."
+ },
+ {
+  "id": "ND-L05",
+  "img": "lac-bo-rua",
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "isNew": true,
+  "name": "Lắc tay bọ rùa",
+  "desc": "Charm bọ rùa đỏ dễ thương, có thể điều chỉnh độ dài phù hợp cổ tay."
+ },
+ {
+  "id": "ND-L06",
+  "img": "lac-mix-bo-rua",
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "name": "Lắc tay mix bọ rùa – hoa",
+  "desc": "Phối bọ rùa và hoa xà cừ trên cùng một dây, trẻ trung và nổi bật."
+ },
+ {
+  "id": "ND-L07",
+  "img": "bo-lac-nhan-co-4-la",
+  "cat": "lac-vong",
+  "sub": "Bộ Lắc & Nhẫn",
+  "name": "Bộ lắc tay & nhẫn cỏ 4 lá",
+  "desc": "Bộ lắc tay và nhẫn cỏ bốn lá đồng điệu, hoàn thiện vẻ đẹp đôi bàn tay."
+ },
+ {
+  "id": "ND-N01",
+  "img": "nhan-hoa-dinh-da",
+  "cat": "nhan",
+  "sub": "Nhẫn Nữ",
+  "featured": true,
+  "name": "Nhẫn hoa đính đá",
+  "desc": "Nhẫn nữ hình hoa đính đá lấp lánh, nổi bật trên ngón tay."
+ },
+ {
+  "id": "ND-N02",
+  "img": "nhan-da-do",
+  "cat": "nhan",
+  "sub": "Nhẫn Nữ",
+  "name": "Nhẫn đá đỏ",
+  "desc": "Viên đá đỏ nổi bật ôm trong thiết kế uốn lượn, sang trọng và quý phái."
+ },
+ {
+  "id": "ND-N03",
+  "img": "nhan-hoa-hong",
+  "cat": "nhan",
+  "sub": "Nhẫn Nữ",
+  "name": "Nhẫn hoa hồng",
+  "desc": "Đoá hồng vàng nhỏ xinh, ngọt ngào và nữ tính."
+ },
+ {
+  "id": "ND-N04",
+  "img": "nhan-ban-luoi",
+  "cat": "nhan",
+  "sub": "Nhẫn Nữ",
+  "isNew": true,
+  "name": "Nhẫn bản lưới",
+  "desc": "Bản nhẫn đan lưới bắt sáng, cá tính và hiện đại."
+ },
+ {
+  "id": "ND-N05",
+  "img": "nhan-mat-xich",
+  "cat": "nhan",
+  "sub": "Nhẫn Nữ",
+  "name": "Nhẫn mắt xích",
+  "desc": "Thiết kế mắt xích nối tiếp, mạnh mẽ mà vẫn thanh lịch."
+ },
+ {
+  "id": "ND-N06",
+  "img": "nhan-xoan",
+  "cat": "nhan",
+  "sub": "Nhẫn Nữ",
+  "name": "Nhẫn xoắn",
+  "desc": "Đường xoắn mềm mại uốn quanh ngón tay, đơn giản mà tinh tế."
+ },
+ {
+  "id": "ND-N07",
+  "img": "nhan-vong-tron",
+  "cat": "nhan",
+  "sub": "Nhẫn Nữ",
+  "name": "Nhẫn vòng tròn nối",
+  "desc": "Các vòng tròn nhỏ nối liền tượng trưng cho sự gắn kết bền lâu."
+ },
+ {
+  "id": "ND-Q01",
+  "img": "tuong-tai-than-cuoi-ngua",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "featured": true,
+  "name": "Tượng Tài Thần cưỡi ngựa",
+  "desc": "Tượng vàng Tài Thần cưỡi ngựa trong hộp mica \"Chiêu Tài Tiến Bảo\" — quà khai trương, tân gia mang ý nghĩa phát tài."
+ },
+ {
+  "id": "ND-Q02",
+  "img": "tuong-than-tai",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Tượng Thần Tài",
+  "desc": "Tượng Thần Tài vàng đặt trong hộp mica sang trọng, thích hợp đặt bàn thờ, bàn làm việc."
+ },
+ {
+  "id": "ND-Q03",
+  "img": "tuong-than-tai-dung",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Tượng Thần Tài đứng",
+  "desc": "Tượng Thần Tài đứng cầm thỏi vàng, mang lời chúc tài lộc dồi dào."
+ },
+ {
+  "id": "ND-Q04",
+  "img": "tuong-ong-dia",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Tượng Ông Địa",
+  "desc": "Tượng Ông Địa phúc hậu, đi đôi cùng Thần Tài để cầu buôn may bán đắt."
+ },
+ {
+  "id": "ND-Q05",
+  "img": "tuong-di-lac",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Tượng Di Lặc",
+  "desc": "Tượng Phật Di Lặc tươi cười, mang lại niềm vui và sự an lạc cho gia chủ."
+ },
+ {
+  "id": "ND-Q06",
+  "img": "ngua-vang",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "isNew": true,
+  "name": "Ngựa vàng phi nước đại",
+  "desc": "Ngựa vàng tung vó — biểu tượng \"mã đáo thành công\", món quà ý nghĩa cho người làm ăn."
+ },
+ {
+  "id": "ND-Q07",
+  "img": "rong-vang",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Rồng vàng phong thuỷ",
+  "desc": "Linh vật rồng vàng uy nghi, tượng trưng cho quyền lực và thịnh vượng."
+ },
+ {
+  "id": "ND-Q08",
+  "img": "ran-vang",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Rắn vàng cuộn tiền",
+  "desc": "Linh vật rắn vàng — quà tặng cầu may cho người tuổi Tỵ."
+ },
+ {
+  "id": "ND-Q09",
+  "img": "heo-vang",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Heo vàng phú quý",
+  "desc": "Heo vàng tròn trịa đáng yêu, biểu tượng của sự đủ đầy và sung túc."
+ },
+ {
+  "id": "ND-Q10",
+  "img": "cay-tai-loc",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Cây tài lộc",
+  "desc": "Cây tài lộc vàng điểm đá màu, đặt bàn làm việc hoặc quầy thu ngân để thu hút tài khí."
+ },
+ {
+  "id": "ND-Q11",
+  "img": "nen-vang",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Nén vàng phong thuỷ",
+  "desc": "Nén vàng (thỏi nguyên bảo) trong hộp mica — tượng trưng cho tiền tài và sự giàu sang."
+ },
+ {
+  "id": "ND-Q12",
+  "img": "ho-lo-vang",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
+  "name": "Hồ lô vàng",
+  "desc": "Hồ lô vàng mang ý nghĩa bình an, sức khoẻ và hoá giải điều không may."
+ },
+ {
+  "id": "ND-Q13",
+  "img": "hoa-hong-vang",
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "featured": true,
+  "name": "Hoa hồng vàng",
+  "desc": "Đoá hồng vàng 24K — món quà tình yêu bất tử cho dịp kỷ niệm, Valentine, 8/3, 20/10."
+ },
+ {
+  "id": "ND-Q14",
+  "img": "bo-hoa-hong-vang",
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "name": "Bó hoa hồng vàng",
+  "desc": "Bó nhiều đoá hồng vàng rực rỡ, gửi trọn yêu thương đến người quan trọng."
+ },
+ {
+  "id": "ND-Q15",
+  "img": "hoa-hong-hop-qua",
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "name": "Hoa hồng vàng hộp quà",
+  "desc": "Cành hồng vàng ép vỉ trong hộp quà hồng pastel, sẵn sàng để trao tặng."
+ },
+ {
+  "id": "ND-Q16",
+  "img": "bo-hoa-vang-hop-nhung",
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "isNew": true,
+  "name": "Bó hoa vàng hộp nhung",
+  "desc": "Bó hoa vàng chạm nổi đặt trong hộp nhung đỏ, sang trọng và trang nhã."
+ },
+ {
+  "id": "ND-Q17",
+  "img": "muong-vang-cho-be",
+  "cat": "qua-tang",
+  "sub": "Quà Tặng Bé",
+  "name": "Muỗng vàng cho bé",
+  "desc": "Muỗng vàng nhỏ xinh — quà đầy tháng, thôi nôi mang lời chúc bé ăn ngoan, chóng lớn."
+ },
+ {
+  "id": "ND-Q18",
+  "img": "thiep-vang-sinh-nhat",
+  "cat": "qua-tang",
+  "sub": "Quà Tặng Bé",
+  "name": "Thiệp vàng sinh nhật",
+  "desc": "Thiệp sinh nhật gắn vàng ép hình bánh kem, món quà độc đáo cho bé và người thân."
+ },
+ {
+  "id": "ND-Q19",
+  "img": "thiep-vang-gau-bong",
+  "cat": "qua-tang",
+  "sub": "Quà Tặng Bé",
+  "name": "Thiệp vàng gấu bông",
+  "desc": "Thiệp quà tặng gắn vàng ép hình gấu bông đáng yêu."
+ }
+]
