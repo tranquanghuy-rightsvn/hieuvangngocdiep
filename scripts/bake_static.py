@@ -8,6 +8,7 @@ Dữ liệu:
 
 Sửa dữ liệu xong chạy:  python3 scripts/bake_static.py
 (Nếu chạy scripts/build_pages.py thì chạy lại file này sau đó.)
+Cũng sinh: canonical/og/twitter/JSON-LD từng trang, dòng credit cuối trang, html/sitemap.xml, html/robots.txt.
 """
 import html
 import json
@@ -16,8 +17,9 @@ import re
 import subprocess
 import unicodedata
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, 'scripts', 'data')
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(REPO, 'html')          # thư mục web (được deploy)
+DATA = os.path.join(REPO, 'scripts', 'data')
 SITE = json.load(open(os.path.join(DATA, 'site.json'), encoding='utf-8'))
 CATALOG = json.load(open(os.path.join(DATA, 'catalog.json'), encoding='utf-8'))
 CONTACT, PRODUCTS = SITE['CONTACT'], SITE['PRODUCTS']
@@ -327,24 +329,210 @@ def bake_shared(src):
     return src
 
 
-def main():
-    for dirpath, dirs, files in os.walk(ROOT):
-        dirs[:] = [d for d in dirs if d not in ('.git', 'docs', 'scripts', 'assets', 'node_modules', '.vercel')]
-        if 'index.html' not in files:
+# ---------------------------------------------------------------- SEO: canonical, meta, JSON-LD, sitemap, robots
+SITE_URL = 'https://hieuvangngocdiep.vn'
+STORE_ID = SITE_URL + '/#store'
+SITE_ID = SITE_URL + '/#website'
+PAGE_TYPE = {'': 'WebPage', 'gioi-thieu/': 'AboutPage', 'lien-he/': 'ContactPage', 'san-pham/': 'CollectionPage', 'tin-tuc/': 'CollectionPage'}
+CREDIT = '<span class="site-credit"> · Website creator by <a href="https://web100.vn" target="_blank" rel="noopener">web100.vn</a></span>'
+RATES = '<span class="site-credit"> · Tỷ giá: <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">Rates By Exchange Rate API</a></span>'
+
+
+def img_size(rel):
+    out = subprocess.check_output(['sips', '-g', 'pixelWidth', '-g', 'pixelHeight', os.path.join(ROOT, rel.lstrip('/'))]).decode()
+    return re.search(r'pixelWidth: (\d+)', out).group(1), re.search(r'pixelHeight: (\d+)', out).group(1)
+
+
+def meta_get(src, attr, name):
+    m = re.search(r'<meta %s="%s" content="([^"]*)"' % (attr, re.escape(name)), src)
+    return html.unescape(m.group(1)) if m else ''
+
+
+def meta_set(head, attr, name, value, after=None):
+    tag = '<meta %s="%s" content="%s" />' % (attr, name, e(value))
+    pat = r'<meta %s="%s" content="[^"]*" />' % (attr, re.escape(name))
+    if re.search(pat, head):
+        return re.sub(pat, lambda m: tag, head, count=1)
+    anchor = after or '<meta name="theme-color"'
+    i = head.index(anchor)
+    j = head.index('\n', i) + 1
+    return head[:j] + '  ' + tag + '\n' + head[j:]
+
+
+def text_of(fragment):
+    return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', fragment))).strip()
+
+
+def iso_date(dmy):
+    d, m, y = dmy.split('/')
+    return '%s-%s-%sT08:00:00+07:00' % (y, m, d)
+
+
+def store_node():
+    c = CONTACT
+    return {
+        '@type': 'JewelryStore', '@id': STORE_ID,
+        'name': 'Hiệu Vàng Ngọc Diệp', 'legalName': 'Công Ty TNHH MTV Hiệu Vàng Ngọc Diệp',
+        'alternateName': 'Ngọc Diệp Jewelry', 'url': SITE_URL + '/',
+        'logo': {'@type': 'ImageObject', 'url': SITE_URL + '/assets/img/logo.png'},
+        'image': SITE_URL + '/assets/img/og-image.jpg',
+        'description': 'Hiệu vàng tại Đà Nẵng từ năm 1990: mua bán vàng 24K, 18K, trang sức cưới, quà tặng vàng và gia công trang sức vàng bạc theo yêu cầu.',
+        'telephone': '+84' + digits(c['hotline'])[1:], 'email': c['email'],
+        'address': {'@type': 'PostalAddress', 'streetAddress': '94-96 Lý Thái Tổ', 'addressLocality': 'Phường Thanh Khê',
+                    'addressRegion': 'TP. Đà Nẵng', 'addressCountry': 'VN'},
+        'hasMap': HREF['address'](c['address']),
+        'foundingDate': '1990', 'areaServed': 'Đà Nẵng', 'currenciesAccepted': 'VND',
+        'sameAs': [c['facebook']],
+    }
+
+
+def crumbs_of(src, url, title):
+    nav = re.search(r'<nav class="crumb"[^>]*>(.*?)</nav>', src, re.S)
+    items = []
+    if nav:
+        for m in re.finditer(r'<a href="([^"]+)"[^>]*>(.*?)</a>|<span>([^<]+)</span>', nav.group(1)):
+            if m.group(1):
+                items.append((text_of(m.group(2)), SITE_URL + m.group(1)))
+            else:
+                items.append((text_of(m.group(3)), None))
+    else:
+        items = [('Trang chủ', SITE_URL + '/'), (title, None)]
+    h1 = re.search(r'<h1 class="post__title">(.*?)</h1>', src, re.S)
+    if 'data-page="post"' in src and h1:  # bài viết: Trang chủ > Tin tức > tên bài (bỏ nhãn chuyên mục)
+        items = [x for x in items if x[1]] + [(text_of(h1.group(1)), None)]
+    out = []
+    for i, (name, href) in enumerate(items, 1):
+        if href == url:  # mục cuối trùng trang đang xem
+            href = None
+        node = {'@type': 'ListItem', 'position': i, 'name': name}
+        node['item'] = href or url
+        out.append(node)
+    return {'@type': 'BreadcrumbList', '@id': url + '#breadcrumb', 'itemListElement': out}
+
+
+def faq_node(src, url):
+    qs = []
+    for m in re.finditer(r'<details class="tv-faq-item">\s*<summary>.*?<h3>(.*?)</h3>.*?</summary>\s*<div class="tv-faq-a">(.*?)</div>\s*</details>', src, re.S):
+        qs.append({'@type': 'Question', 'name': text_of(m.group(1)), 'acceptedAnswer': {'@type': 'Answer', 'text': text_of(m.group(2))}})
+    return {'@type': 'FAQPage', '@id': url + '#faq', 'mainEntity': qs} if qs else None
+
+
+def bake_seo(src, rel):
+    """rel: đường dẫn trang ('' = trang chủ, 'tin-tuc/abc/', '404.html')."""
+    is404 = rel == '404.html'
+    url = SITE_URL + '/' + ('' if is404 else rel)
+    hi = src.index('</head>')
+    head, body = src[:hi], src[hi:]
+    head = head.replace('  <!-- Ảnh xem trước khi chia sẻ link (Zalo/Facebook). Khi có tên miền, đổi og:image/og:url sang URL tuyệt đối -->\n', '')
+    title = html.unescape(re.search(r'<title>(.*?)</title>', head, re.S).group(1))
+    desc = meta_get(head, 'name', 'description')
+    is_post = 'data-page="post"' in body
+    # ảnh chia sẻ
+    og = meta_get(head, 'property', 'og:image').replace(SITE_URL, '')
+    w, h = img_size(og)
+    head = meta_set(head, 'name', 'robots', 'noindex, follow' if is404 else 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')
+    if not is404:
+        link = '<link rel="canonical" href="%s" />' % url
+        if '<link rel="canonical"' in head:
+            head = re.sub(r'<link rel="canonical" href="[^"]*" />', link, head)
+        else:
+            i = head.index('<meta name="description"'); j = head.index('\n', i) + 1
+            head = head[:j] + '  ' + link + '\n' + head[j:]
+        head = meta_set(head, 'property', 'og:url', url, after='<meta property="og:type"')
+    head = meta_set(head, 'property', 'og:type', 'article' if is_post else 'website')
+    head = meta_set(head, 'property', 'og:image', SITE_URL + og)
+    head = meta_set(head, 'property', 'og:image:width', w)
+    head = meta_set(head, 'property', 'og:image:height', h)
+    head = meta_set(head, 'property', 'og:image:alt', meta_get(head, 'property', 'og:title') or title, after='<meta property="og:image:height"')
+    head = meta_set(head, 'name', 'twitter:title', meta_get(head, 'property', 'og:title') or title, after='<meta name="twitter:card"')
+    head = meta_set(head, 'name', 'twitter:description', meta_get(head, 'property', 'og:description') or desc, after='<meta name="twitter:title"')
+    head = meta_set(head, 'name', 'twitter:image', SITE_URL + og, after='<meta name="twitter:description"')
+    # JSON-LD
+    graph = [store_node(), {'@type': 'WebSite', '@id': SITE_ID, 'url': SITE_URL + '/', 'name': 'Hiệu Vàng Ngọc Diệp',
+                            'inLanguage': 'vi-VN', 'publisher': {'@id': STORE_ID}}]
+    if not is404:
+        page = {'@type': PAGE_TYPE.get(rel, 'WebPage'), '@id': url + '#webpage', 'url': url, 'name': title, 'description': desc,
+                'inLanguage': 'vi-VN', 'isPartOf': {'@id': SITE_ID}, 'primaryImageOfPage': SITE_URL + og}
+        if rel:
+            graph.append(crumbs_of(body, url, title.split(' | ')[0]))
+            page['breadcrumb'] = {'@id': url + '#breadcrumb'}
+        else:
+            page['about'] = {'@id': STORE_ID}
+        graph.append(page)
+        if is_post:
+            h1 = text_of(re.search(r'<h1 class="post__title">(.*?)</h1>', body, re.S).group(1))
+            date = iso_date(re.search(r'#i-calendar"/></svg>(\d\d/\d\d/\d{4})', body).group(1))
+            article = {'@type': 'BlogPosting', '@id': url + '#article', 'headline': h1, 'description': desc,
+                       'image': {'@type': 'ImageObject', 'url': SITE_URL + og, 'width': int(w), 'height': int(h)},
+                       'datePublished': date, 'dateModified': date, 'inLanguage': 'vi-VN',
+                       'author': {'@id': STORE_ID}, 'publisher': {'@id': STORE_ID},
+                       'mainEntityOfPage': {'@id': url + '#webpage'}, 'isPartOf': {'@id': SITE_ID}}
+            graph.append(article)
+            head = meta_set(head, 'property', 'article:published_time', date, after='<meta property="og:image:alt"')
+            faq = faq_node(body, url)
+            if faq:
+                graph.append(faq)
+    ld = '<script type="application/ld+json" id="seo-jsonld">%s</script>' % json.dumps(
+        {'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+    if 'id="seo-jsonld"' in head:
+        head = re.sub(r'<script type="application/ld\+json" id="seo-jsonld">.*?</script>', lambda m: ld, head, flags=re.S)
+    else:
+        head = head.rstrip() + '\n  ' + ld + '\n'
+    # dòng credit cuối trang (+ ghi nguồn tỷ giá ở trang có bảng giá — điều khoản của exchangerate-api)
+    extra = CREDIT + (RATES if ('id="ptable-d"' in body or 'id="stable-d"' in body) else '')
+    def foot(m):
+        inner = re.sub(r'<span class="site-credit">.*?</a></span>', '', m.group(2))
+        return m.group(1) + inner + extra + '</div>'
+    body = re.sub(r'(<div class="(?:footer__copy|afooter__inner)">)(.*?)</div>', foot, body, count=1, flags=re.S)
+    return head + body
+
+
+def write_sitemap(pages):
+    import datetime
+    today = datetime.date.today().isoformat()
+    rows = []
+    for rel, src in sorted(pages.items(), key=lambda x: (x[0].count('/'), x[0])):
+        if rel == '404.html':
             continue
-        path = os.path.join(dirpath, 'index.html')
-        src = old = open(path, encoding='utf-8').read()
-        src = bake_shared(src)
-        src = fill(src, 'mega-products', mega())
-        src = fill(src, 'nav-products', drawer_products())
-        src = bake_home_cats(src)
-        src = bake_featured(src)
-        src = bake_shop(src)
-        src = bake_prices(src)
-        src = bake_contact(src)
-        if src != old:
-            open(path, 'w', encoding='utf-8').write(src)
-            print('  ✓', os.path.relpath(path, ROOT))
+        m = re.search(r'"dateModified":"(\d{4}-\d\d-\d\d)', src)
+        pri = '1.0' if rel == '' else '0.9' if rel in ('bang-gia/', 'san-pham/') else '0.7' if rel.startswith('tin-tuc/') and rel != 'tin-tuc/' else '0.8'
+        rows.append('  <url><loc>%s/%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>' % (SITE_URL, rel, m.group(1) if m else today, pri))
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s\n</urlset>\n' % '\n'.join(rows)
+    old = os.path.join(ROOT, 'sitemap.xml')
+    if os.path.exists(old):  # giữ lastmod cũ nếu trang không đổi -> không đổi file khi chạy lại
+        prev = dict(re.findall(r'<loc>([^<]+)</loc><lastmod>([^<]+)</lastmod>', open(old, encoding='utf-8').read()))
+        xml = re.sub(r'<loc>([^<]+)</loc><lastmod>%s</lastmod>' % today,
+                     lambda m: '<loc>%s</loc><lastmod>%s</lastmod>' % (m.group(1), prev.get(m.group(1), today)), xml)
+    open(old, 'w', encoding='utf-8').write(xml)
+    open(os.path.join(ROOT, 'robots.txt'), 'w', encoding='utf-8').write(
+        'User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % SITE_URL)
+
+
+def main():
+    pages = {}
+    for dirpath, dirs, files in os.walk(ROOT):
+        dirs[:] = [d for d in dirs if d not in ('.git', 'assets', 'node_modules', '.vercel')]
+        for name in files:
+            if name != 'index.html' and not (name == '404.html' and dirpath == ROOT):
+                continue
+            path = os.path.join(dirpath, name)
+            rel = os.path.relpath(path, ROOT).replace('\\', '/')
+            rel = '404.html' if rel == '404.html' else ('' if rel == 'index.html' else rel[:-len('index.html')])
+            src = old = open(path, encoding='utf-8').read()
+            src = bake_shared(src)
+            src = fill(src, 'mega-products', mega())
+            src = fill(src, 'nav-products', drawer_products())
+            src = bake_home_cats(src)
+            src = bake_featured(src)
+            src = bake_shop(src)
+            src = bake_prices(src)
+            src = bake_contact(src)
+            src = bake_seo(src, rel)
+            pages[rel] = src
+            if src != old:
+                open(path, 'w', encoding='utf-8').write(src)
+                print('  ✓', os.path.relpath(path, ROOT))
+    write_sitemap(pages)
 
 
 if __name__ == '__main__':

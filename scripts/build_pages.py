@@ -11,7 +11,8 @@ import html
 import os
 import re
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(REPO, 'html')  # thư mục web (được deploy)
 read = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
 
 SHOP = read('san-pham/index.html')
@@ -36,6 +37,9 @@ def page(path, title, desc, main, active=None, og_image=None, page_id='page'):
     body = SPRITE_AND_HEADERS.replace('class="topnav__link dd__trigger is-active"', 'class="topnav__link dd__trigger"')
     if active:  # đánh dấu mục menu đang xem
         body = body.replace('<a href="%s" class="topnav__link">' % active, '<a href="%s" class="topnav__link is-active" aria-current="page">' % active)
+    if 'class="tv-' in main:  # bài Smart content: nạp CSS các khối thiết kế
+        head = head.replace('<link rel="stylesheet" href="/assets/css/style.css" />',
+                            '<link rel="stylesheet" href="/assets/css/style.css" />\n  <link rel="stylesheet" href="/assets/css/blocks.css" />')
     out = head + '<body data-page="%s">' % page_id + body + main + '\n' + FOOTER + TAIL
     full = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
@@ -313,6 +317,14 @@ POSTS = [
 '''),
 ]
 
+# Bài Smart content: thân bài thiết kế sẵn (khối tv-) ở scripts/content/tin-tuc/<slug>.html, thay cho body trong POSTS
+SMART_DIR = os.path.join(REPO, 'scripts', 'content', 'tin-tuc')  # bản đã duyệt; bản nháp để ở content/_drafts/
+for _p in POSTS:
+    _f = os.path.join(SMART_DIR, _p['slug'] + '.html')
+    if os.path.exists(_f):
+        _p['body'] = open(_f, encoding='utf-8').read()
+        _p['smart'] = True
+
 
 def reading_time(body):
     words = len(re.sub(r'<[^>]+>', ' ', body).split())
@@ -330,6 +342,20 @@ def post_card(p, cls='ncard'):
             </div>
           </article>
 ''' % dict(p, cls=cls, catname=CATS[p['cat']], alt=html.escape(p['title']))
+
+
+POST_CTA = '''          <aside class="post-cta">
+            <img src="/assets/img/logo-mark.png" alt="" width="408" height="288" />
+            <div class="post-cta__body">
+              <b>Cần tư vấn thêm?</b>
+              <p>Đội ngũ Hiệu Vàng Ngọc Diệp luôn sẵn sàng hỗ trợ Quý khách — 94-96 Lý Thái Tổ, Thanh Khê, Đà Nẵng.</p>
+            </div>
+            <div class="post-cta__actions">
+              <a href="tel:0905887044" class="btn-gold"><svg class="i i-16" stroke-width="2"><use href="#i-phone"/></svg>&nbsp;0905 887 044</a>
+              <button type="button" class="btn-outline js-open-chat">Nhắn tin tư vấn</button>
+            </div>
+          </aside>
+'''
 
 
 def build_news():
@@ -375,18 +401,7 @@ def build_news():
             <a class="share-btn js-share-fb" href="https://www.facebook.com/sharer/sharer.php" target="_blank" rel="noopener noreferrer" aria-label="Chia sẻ lên Facebook"><svg class="i i-18" stroke-width="2"><use href="#i-facebook"/></svg></a>
             <button type="button" class="share-btn js-copy-link" aria-label="Sao chép liên kết"><svg class="i i-18" stroke-width="2"><use href="#i-link"/></svg></button>
           </div>
-          <aside class="post-cta">
-            <img src="/assets/img/logo-mark.png" alt="" width="408" height="288" />
-            <div class="post-cta__body">
-              <b>Cần tư vấn thêm?</b>
-              <p>Đội ngũ Hiệu Vàng Ngọc Diệp luôn sẵn sàng hỗ trợ Quý khách — 94-96 Lý Thái Tổ, Thanh Khê, Đà Nẵng.</p>
-            </div>
-            <div class="post-cta__actions">
-              <a href="tel:0905887044" class="btn-gold"><svg class="i i-16" stroke-width="2"><use href="#i-phone"/></svg>&nbsp;0905 887 044</a>
-              <button type="button" class="btn-outline js-open-chat">Nhắn tin tư vấn</button>
-            </div>
-          </aside>
-        </div>
+%(cta)s        </div>
       </article>
       <section class="post-related">
         <div class="container">
@@ -398,7 +413,8 @@ def build_news():
     </main>
 ''' % dict(p, catname=CATS[p['cat']], alt=html.escape(p['title']), rt=reading_time(p['body']),
            body='\n'.join('          ' + l if l.strip() else '' for l in p['body'].strip().split('\n')),
-           related=''.join(post_card(x) for x in related[:3]))
+           related=''.join(post_card(x) for x in related[:3]),
+           cta='' if p.get('smart') else POST_CTA)
         page('tin-tuc/%s/index.html' % p['slug'], '%s | Hiệu Vàng Ngọc Diệp' % p['title'], p['excerpt'], main,
              active='/tin-tuc/', og_image='/assets/img/news/' + p['cover'], page_id='post')
 
@@ -568,9 +584,28 @@ def build_privacy():
          main, page_id='privacy')
 
 
+def build_404():
+    main = """    <main class="post-page">
+      <article class="post">
+        <header class="post__head container">
+          <h1 class="post__title">Không tìm thấy <span class="gold-text">trang</span></h1>
+          <p class="post__lead">Trang Quý khách tìm có thể đã được đổi địa chỉ hoặc không còn tồn tại.</p>
+          <div class="notfound__actions">
+            <a href="/" class="btn-gold">Về trang chủ</a>
+            <a href="/bang-gia/" class="btn-outline">Xem bảng giá vàng</a>
+            <a href="/san-pham/" class="btn-outline">Xem sản phẩm</a>
+          </div>
+        </header>
+      </article>
+    </main>
+"""
+    page('404.html', 'Không tìm thấy trang | Hiệu Vàng Ngọc Diệp', 'Trang không tồn tại. Quay về trang chủ Hiệu Vàng Ngọc Diệp Đà Nẵng.', main, page_id='404')
+
+
 if __name__ == '__main__':
     print('Dựng trang:')
     build_prices()
     build_contact()
     build_news()
     build_privacy()
+    build_404()
