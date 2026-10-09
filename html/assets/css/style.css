@@ -218,7 +218,7 @@ input::placeholder { color: hsl(var(--muted-foreground)); opacity: 1; }
 /* Mega menu sản phẩm */
 .dd__panel--mega {
   width: min(1120px, calc(100vw - 48px)); padding: 20px;
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
 }
 .mega__col { display: flex; flex-direction: column; border-radius: 12px; padding: 10px; transition: background-color .2s var(--ease); }
 .mega__col:hover { background: rgb(212 175 55 / .07); }

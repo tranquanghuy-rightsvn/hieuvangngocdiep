@@ -164,7 +164,9 @@ def cat_card(p):
 
 
 def bake_home_cats(src):
-    split = 3 if len(PRODUCTS) == 5 else len(PRODUCTS)
+    # hàng 3 cột trước, phần lẻ dồn xuống hàng 2 cột (5 → 3+2, 7 → 3+2+2)
+    n = len(PRODUCTS)
+    split = n - {0: 0, 1: 4, 2: 2}[n % 3] if n > 4 else n
     src = fill(src, 'pgrid-3', ''.join('<div>%s</div>' % cat_card(p) for p in PRODUCTS[:split]))
     src = fill(src, 'pgrid-2', ''.join('<div>%s</div>' % cat_card(p) for p in PRODUCTS[split:]))
     src = re.sub(r'(<div[^>]*id="pgrid-2")( hidden)?', r'\1' + (' hidden' if split == len(PRODUCTS) else ''), src)

@@ -545,5 +545,87 @@
   "sub": "Quà Tặng Bé",
   "name": "Thiệp vàng gấu bông",
   "desc": "Thiệp quà tặng gắn vàng ép hình gấu bông đáng yêu."
+ },
+ {
+  "id": "ND-B01",
+  "img": "lac-bac-co-4-la-dinh-da",
+  "cat": "trang-suc-bac",
+  "sub": "Lắc Tay Bạc",
+  "gold": "Bạc 925",
+  "featured": true,
+  "isNew": true,
+  "name": "Lắc tay bạc cỏ 4 lá đính đá",
+  "desc": "Lắc tay bạc dây mảnh, điểm nhấn cỏ 4 lá ở giữa kèm hàng đá trắng hai bên. Có nhiều màu cỏ: xanh dương, trắng xà cừ, đen, xanh malachite."
+ },
+ {
+  "id": "ND-B02",
+  "img": "lac-bac-5-co-4-la",
+  "cat": "trang-suc-bac",
+  "sub": "Lắc Tay Bạc",
+  "gold": "Bạc 925",
+  "isNew": true,
+  "name": "Lắc tay bạc 5 cỏ 4 lá",
+  "desc": "Lắc tay bạc gắn 5 bông cỏ 4 lá dọc dây, có dây nối điều chỉnh độ dài. Nhiều màu: trắng, xanh lá, đen, xanh dương, đỏ mận."
+ },
+ {
+  "id": "ND-B03",
+  "img": "lac-bac-co-4-la-xa-cu",
+  "cat": "trang-suc-bac",
+  "sub": "Lắc Tay Bạc",
+  "gold": "Bạc 925",
+  "isNew": true,
+  "name": "Lắc tay bạc cỏ 4 lá xà cừ",
+  "desc": "Lắc tay bạc cỏ 4 lá mặt xà cừ và đá màu, sáng nhẹ nhàng, dễ phối đồ. Màu xanh lá, đen, hồng, trắng, nâu."
+ },
+ {
+  "id": "ND-B04",
+  "img": "lac-bac-co-4-la-mat-xich",
+  "cat": "trang-suc-bac",
+  "sub": "Lắc Tay Bạc",
+  "gold": "Bạc 925",
+  "isNew": true,
+  "name": "Lắc tay bạc cỏ 4 lá mắt xích",
+  "desc": "Lắc tay bạc dây mắt xích đan đá trắng, cỏ 4 lá lớn ở giữa và hai cỏ nhỏ đính đá hai bên — nữ tính, thanh lịch."
+ },
+ {
+  "id": "ND-B05",
+  "img": "mat-day-bac-co-4-la-vien-da",
+  "cat": "trang-suc-bac",
+  "sub": "Mặt Dây Chuyền Bạc",
+  "gold": "Bạc 925",
+  "featured": true,
+  "isNew": true,
+  "name": "Mặt dây chuyền bạc cỏ 4 lá viền đá",
+  "desc": "Mặt dây chuyền bạc cỏ 4 lá viền đá trắng lấp lánh, đính hoa nhỏ phía trên. Màu đỏ, trắng xà cừ, đen."
+ },
+ {
+  "id": "ND-B06",
+  "img": "mat-day-bac-co-4-la-doi",
+  "cat": "trang-suc-bac",
+  "sub": "Mặt Dây Chuyền Bạc",
+  "gold": "Bạc 925",
+  "isNew": true,
+  "name": "Mặt dây chuyền bạc cỏ 4 lá đôi",
+  "desc": "Mặt dây chuyền bạc hai tầng: cỏ nhỏ đính đá phía trên, cỏ 4 lá màu phía dưới. Màu đỏ, đen, xanh dương, hồng, trắng."
+ },
+ {
+  "id": "ND-B07",
+  "img": "mat-day-bac-hoa-co-4-la",
+  "cat": "trang-suc-bac",
+  "sub": "Mặt Dây Chuyền Bạc",
+  "gold": "Bạc 925",
+  "isNew": true,
+  "name": "Mặt dây chuyền bạc hoa cỏ 4 lá",
+  "desc": "Mặt dây chuyền bạc dáng hoa cỏ 4 lá viền đá, treo dưới bông hoa nhỏ đính đá. Màu trắng, đen, xanh lá, đỏ, hồng."
+ },
+ {
+  "id": "ND-B08",
+  "img": "mat-day-bac-co-4-la-long-doi",
+  "cat": "trang-suc-bac",
+  "sub": "Mặt Dây Chuyền Bạc",
+  "gold": "Bạc 925",
+  "isNew": true,
+  "name": "Mặt dây chuyền bạc cỏ 4 lá lồng đôi",
+  "desc": "Mặt dây chuyền bạc hai cỏ 4 lá lồng vào nhau — một cỏ màu, một cỏ đính đá — độc đáo, ý nghĩa gắn kết."
  }
 ]

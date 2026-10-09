@@ -72,6 +72,16 @@
         "Hoa Vàng",
         "Quà Tặng Bé"
       ]
+    },
+    {
+      "slug": "trang-suc-bac",
+      "title": "Trang Sức Bạc",
+      "desc": "Lắc tay, mặt dây chuyền bạc cỏ 4 lá",
+      "img": "mat-day-bac-co-4-la-doi.jpg",
+      "children": [
+        "Lắc Tay Bạc",
+        "Mặt Dây Chuyền Bạc"
+      ]
     }
   ],
   "MENU_ORDER": [
@@ -80,7 +90,8 @@
     2,
     3,
     4,
-    5
+    5,
+    6
   ],
   "PRICES": [
     {
