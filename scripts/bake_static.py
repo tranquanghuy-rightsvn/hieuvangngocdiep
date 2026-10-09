@@ -383,6 +383,8 @@ def store_node():
         'address': {'@type': 'PostalAddress', 'streetAddress': '94-96 Lý Thái Tổ', 'addressLocality': 'Phường Thanh Khê',
                     'addressRegion': 'TP. Đà Nẵng', 'addressCountry': 'VN'},
         'hasMap': HREF['address'](c['address']),
+        'openingHoursSpecification': {'@type': 'OpeningHoursSpecification', 'opens': '07:00', 'closes': '21:00',
+                                      'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']},
         'foundingDate': '1990', 'areaServed': 'Đà Nẵng', 'currenciesAccepted': 'VND',
         'sameAs': [c['facebook']],
     }

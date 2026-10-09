@@ -512,7 +512,7 @@ def build_contact():
       </div>
     </main>
 ''' % dict(hero=hero([('Liên hệ', None)], 'Liên Hệ <span class="gold-text">Ngọc Diệp</span>',
-                        '94-96 Lý Thái Tổ, phường Thanh Khê, TP. Đà Nẵng · Mở cửa tất cả các ngày trong tuần.', 'shop-hero--compact'),
+                        '94-96 Lý Thái Tổ, phường Thanh Khê, TP. Đà Nẵng · Mở cửa 7h00 – 21h00 tất cả các ngày trong tuần.', 'shop-hero--compact'),
               cards=cards, mapq=MAP_Q, mapenc=quote_plus('Hiệu Vàng Ngọc Diệp, ' + MAP_Q))
     page('lien-he/index.html', 'Liên Hệ | Hiệu Vàng Ngọc Diệp',
          'Liên hệ Hiệu Vàng Ngọc Diệp – 94-96 Lý Thái Tổ, Thanh Khê, Đà Nẵng. Hotline / Zalo 0905 887 044.',
