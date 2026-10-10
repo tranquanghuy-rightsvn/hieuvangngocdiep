@@ -646,5 +646,15 @@
   "isNew": true,
   "name": "Lắc charm",
   "desc": ""
+ },
+ {
+  "id": "ND-Q20",
+  "img": "nd-q20__1",
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "gold": "Vàng 610",
+  "isNew": true,
+  "name": "Cành Hồng quà tặng cho người thương",
+  "desc": ""
  }
 ]
