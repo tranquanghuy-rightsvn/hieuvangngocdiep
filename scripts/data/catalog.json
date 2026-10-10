@@ -4,10 +4,11 @@
   "img": "nhan-tron-24k",
   "cat": "vang-tich-tru",
   "sub": "Nhẫn Tròn Trơn",
-  "gold": "Vàng 24K",
+  "gold": "Vàng 9999",
   "featured": true,
-  "name": "Nhẫn tròn trơn vàng 24K",
-  "desc": "Nhẫn tròn trơn vàng 24K đủ các trọng lượng, có tem nhãn rõ ràng. Lựa chọn tích luỹ an toàn, dễ mua bán lại."
+  "name": "Nhẫn tròn trơn vàng 9999",
+  "desc": "Nhẫn tròn trơn vàng 24K đủ các trọng lượng, có tem nhãn rõ ràng. Lựa chọn tích luỹ an toàn, dễ mua bán lại.",
+  "price": 10000
  },
  {
   "id": "ND-TT02",
