@@ -96,11 +96,14 @@
  },
  {
   "id": "ND-C05",
-  "img": "day-co-cuoi-2-tang",
+  "img": "nd-c05__1",
   "cat": "trang-suc-cuoi",
   "sub": "Dây Cổ Cưới",
   "name": "Dây cổ cưới heo vàng 2 tầng",
-  "desc": "Kiểu dáng gọn gàng với hai tầng heo vàng, phù hợp cô dâu yêu thích sự nhẹ nhàng."
+  "desc": "Kiểu dáng gọn gàng với hai tầng heo vàng, phù hợp cô dâu yêu thích sự nhẹ nhàng.",
+  "gold": "Vàng 980",
+  "featured": true,
+  "isNew": true
  },
  {
   "id": "ND-C06",
