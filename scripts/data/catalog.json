@@ -701,5 +701,22 @@
   "isNew": true,
   "name": "Charm bánh kem sinh nhật",
   "desc": "Món quà cho ngày sinh nhật thật ý nghĩa"
+ },
+ {
+  "id": "ND-Q23",
+  "img": "nd-q23__1",
+  "gallery": [
+   "nd-q23__2",
+   "nd-q23__3",
+   "nd-q23__4"
+  ],
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "gold": "Vàng 24K",
+  "weight": "5ly",
+  "featured": true,
+  "isNew": true,
+  "name": "Cành hồng",
+  "desc": "Quà tặng ý nghĩa cho ngày 20/10\nCành hồng vàng phối lên bó hoa tạo nên sự tinh tế , mang lại cho người được tặng cảm giác thích thú"
  }
 ]
