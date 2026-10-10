@@ -495,11 +495,13 @@
  },
  {
   "id": "ND-Q17",
-  "img": "muong-vang-cho-be",
+  "img": "nd-q17__1",
   "cat": "qua-tang",
   "sub": "Quà Tặng Bé",
   "name": "Muỗng vàng cho bé",
-  "desc": "Muỗng vàng nhỏ xinh — quà đầy tháng, thôi nôi mang lời chúc bé ăn ngoan, chóng lớn."
+  "desc": "Muỗng vàng nhỏ xinh — quà đầy tháng, thôi nôi mang lời chúc bé ăn ngoan, chóng lớn.",
+  "gold": "Vàng 999.9",
+  "featured": true
  },
  {
   "id": "ND-Q18",
