@@ -21,12 +21,13 @@
  {
   "id": "ND-TT03",
   "img": "dong-vang-999",
-  "cat": "vang-tich-tru",
-  "sub": "Đồng Vàng",
+  "cat": "qua-tang",
+  "sub": "Tượng Vàng Phong Thuỷ",
   "gold": "Vàng 999.9",
   "featured": true,
   "name": "Đồng vàng 999.9 hộp nhung",
-  "desc": "Đồng vàng nguyên chất đặt trong hộp nhung đỏ sang trọng — món quà tài lộc cho dịp khai trương, mừng thọ, lễ Tết."
+  "desc": "Đồng vàng nguyên chất đặt trong hộp nhung đỏ sang trọng — món quà tài lộc cho dịp khai trương, mừng thọ, lễ Tết.",
+  "weight": "3 phân"
  },
  {
   "id": "ND-TT04",
