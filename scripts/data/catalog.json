@@ -81,11 +81,13 @@
  },
  {
   "id": "ND-C04",
-  "img": "day-co-doi-heo",
+  "img": "nd-c04__1",
   "cat": "trang-suc-cuoi",
   "sub": "Dây Cổ Cưới",
   "name": "Dây cổ cưới đôi heo tua chuông",
-  "desc": "Hai tầng heo vàng nối bằng dây mảnh, tua chuông leng keng — vừa truyền thống vừa thanh thoát."
+  "desc": "Hai tầng heo vàng nối bằng dây mảnh, tua chuông leng keng — vừa truyền thống vừa thanh thoát.",
+  "gold": "Vàng 980",
+  "featured": true
  },
  {
   "id": "ND-C05",
