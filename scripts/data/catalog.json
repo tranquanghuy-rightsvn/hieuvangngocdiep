@@ -140,7 +140,9 @@
   "cat": "trang-suc-cuoi",
   "sub": "Vòng Cưới",
   "name": "Vòng tròn trơn vàng (nhiều cỡ)",
-  "desc": "Vòng tròn trơn nhiều kích cỡ và trọng lượng để Quý khách dễ dàng lựa chọn tại cửa hàng."
+  "desc": "Vòng tròn trơn nhiều kích cỡ và trọng lượng để Quý khách dễ dàng lựa chọn tại cửa hàng.",
+  "gold": "Vàng 980",
+  "featured": true
  },
  {
   "id": "ND-C12",
