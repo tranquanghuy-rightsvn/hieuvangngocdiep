@@ -73,7 +73,9 @@
   "cat": "trang-suc-cuoi",
   "sub": "Dây Cổ Cưới",
   "name": "Dây cổ cưới mây cát tường 3 tầng",
-  "desc": "Bản mây cát tường chạm nổi kết hợp ba tầng heo vàng, tượng trưng cho hạnh phúc viên mãn, con cháu đầy đàn."
+  "desc": "Bản mây cát tường chạm nổi kết hợp ba tầng heo vàng, tượng trưng cho hạnh phúc viên mãn, con cháu đầy đàn.",
+  "gold": "Vàng 980",
+  "featured": true
  },
  {
   "id": "ND-C03",
