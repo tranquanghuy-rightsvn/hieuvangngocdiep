@@ -651,5 +651,37 @@
   "isNew": true,
   "name": "Lắc phối charm hồ ly",
   "desc": "Chiếc vòng mảnh mai phối chả hồ ly màu sắc đa dạng, giúp đôi tay trở nên đẹp hơn"
+ },
+ {
+  "id": "NN-001",
+  "img": "nn-001__1",
+  "gallery": [
+   "nn-001__2",
+   "nn-001__3",
+   "nn-001__4",
+   "nn-001__5",
+   "nn-001__6",
+   "nn-001__7",
+   "nn-001__8",
+   "nn-001__9",
+   "nn-001__10",
+   "nn-001__11",
+   "nn-001__12",
+   "nn-001__13",
+   "nn-001__14",
+   "nn-001__15",
+   "nn-001__16",
+   "nn-001__17",
+   "nn-001__18",
+   "nn-001__19",
+   "nn-001__20"
+  ],
+  "cat": "trang-suc-nam",
+  "sub": "Nhẫn Nam",
+  "gold": "Vàng 610",
+  "featured": true,
+  "isNew": true,
+  "name": "Nhẫn nam phối đá trắng sang trọng",
+  "desc": "1 chiếc nhẫn khiến cho nam giới trở nên cuốn hút, sang trọng hơn"
  }
 ]
