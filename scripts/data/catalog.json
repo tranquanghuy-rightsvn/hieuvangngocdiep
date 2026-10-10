@@ -627,5 +627,24 @@
   "isNew": true,
   "name": "Mặt dây chuyền bạc cỏ 4 lá lồng đôi",
   "desc": "Mặt dây chuyền bạc hai cỏ 4 lá lồng vào nhau — một cỏ màu, một cỏ đính đá — độc đáo, ý nghĩa gắn kết."
+ },
+ {
+  "id": "ND-L08",
+  "img": "nd-l08__1",
+  "gallery": [
+   "nd-l08__2",
+   "nd-l08__3",
+   "nd-l08__4",
+   "nd-l08__5",
+   "nd-l08__6",
+   "nd-l08__7"
+  ],
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "gold": "Vàng 610",
+  "featured": true,
+  "isNew": true,
+  "name": "Lắc charm",
+  "desc": ""
  }
 ]
