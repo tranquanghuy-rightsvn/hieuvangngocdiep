@@ -268,11 +268,14 @@
  },
  {
   "id": "ND-D13",
-  "img": "day-chuyen-bac-nu",
+  "img": "nd-d13__1",
   "cat": "day-chuyen",
   "sub": "Dây Chuyền Mặt Charm",
   "name": "Dây chuyền nữ mặt charm trắng",
-  "desc": "Dây chuyền nữ mặt charm trắng tinh tế, nhiều mẫu mặt để lựa chọn."
+  "desc": "Dây chuyền nữ mặt charm trắng tinh tế, nhiều mẫu mặt để lựa chọn.",
+  "gold": "Vàng 610 trắng",
+  "featured": true,
+  "isNew": true
  },
  {
   "id": "ND-D14",
