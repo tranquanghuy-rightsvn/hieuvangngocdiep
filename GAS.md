@@ -7,7 +7,7 @@
 > Playbook chung: skill `free-cms-static-site-pipeline`. Dự án mẫu: xevip (bản sao nằm trong
 > skill, `references/samples/xevip-gas/`).
 
-## 0. Phạm vi (ĐÚNG 6 mục, không làm rộng hơn)
+## 0. Phạm vi (ĐÚNG 8 mục, không làm rộng hơn)
 
 0. **Cập nhật giá vàng** (tab ĐẦU TIÊN, mở mặc định) — bảng giá vàng + giá bạc (mục II-A).
 1. Quản lý sản phẩm — mặc định mọi sản phẩm là **Giá: Liên hệ**.
@@ -15,9 +15,11 @@
 3. Quản lý tin tức.
 4. Quản lý liên hệ (khách gửi form `/lien-he/`).
 5. Quản lý người dùng (root / admin / editor).
+6. Quản lý danh mục sản phẩm (mục II-B).
+7. Quản lý nhóm sản phẩm (mục II-B).
 
-KHÔNG quản lý qua CMS (vẫn sửa trong repo như cũ): thông tin liên hệ cửa hàng, danh mục sản
-phẩm + menu (`scripts/data/site.json`).
+KHÔNG quản lý qua CMS (vẫn sửa trong repo như cũ): thông tin liên hệ cửa hàng + chuyên mục tin tức
+(`scripts/data/site.json`).
 
 ---
 
@@ -37,6 +39,7 @@ phẩm + menu (`scripts/data/site.json`).
    | Sản phẩm (xem/thêm/sửa/xoá) | ✅ | ✅ | ✅ |
    | Cập nhật giá vàng (vàng + bạc) | ✅ | ✅ | ✅ |
    | Cập nhật giá nhanh | ✅ | ✅ | ✅ |
+   | Danh mục + Nhóm sản phẩm | ✅ | ✅ | ✅ |
    | Tin tức (xem/thêm/sửa/xoá) | ✅ | ✅ | ✅ |
    | Liên hệ (xem/đổi trạng thái/xoá) | ❌ | ✅ | ✅ |
    | Người dùng (thêm/đổi quyền/xoá) | ❌ | ✅ | ✅ |
@@ -72,6 +75,32 @@ phẩm + menu (`scripts/data/site.json`).
 - ⛔ ĐÃ BỎ việc site tự lấy giá thế giới qua API (gold-api.com) rồi quy đổi đè lên bảng — giá trên
   site là giá ADMIN NHẬP. Nút "↻ Cập nhật lúc" thành dòng chữ thường (không bấm làm mới được nữa).
 
+## II-B. Danh mục & Nhóm sản phẩm (chốt 10/10/2026)
+
+Nguồn DUY NHẤT: `scripts/data/categories.json` (tách khỏi `site.json` để CMS không ghi đè phần sửa
+tay của file đó) — mảng ĐÚNG THỨ TỰ hiển thị (menu, ô danh mục trang chủ, chip lọc `/san-pham/`):
+`{slug, title, desc, img, children: [tên nhóm...]}`. Chuyển nguyên trạng từ `PRODUCTS` theo
+`MENU_ORDER` cũ — dữ liệu sẵn có trên web GIỮ NGUYÊN.
+
+**Tab "Danh mục"** — sửa trực tiếp trong bảng, 1 nút **Lưu lại** (1 commit), giống tab giá vàng:
+- Tên (`title`), Mô tả ngắn (`desc` — hiện ở menu + ô danh mục), Ảnh đại diện (`img`), thứ tự (↑ ↓).
+- `slug` (= `?cat=` trên URL, = khoá `cat` của sản phẩm): danh mục mới tự sinh từ tên, BẤT BIẾN sau
+  lần Lưu đầu (đổi là gãy link + mất liên kết sản phẩm). Không có ô nhập.
+- Ảnh đại diện: tải ảnh mới → `html/assets/img/catalog/<slug>.danh-muc.jpg` (dấu `.` trong tên → không
+  bao giờ trùng tên ảnh sản phẩm, vốn chỉ có `[a-z0-9_-]`). Ảnh cũ trỏ tới ảnh sản phẩm (vd
+  `dong-vang-999.jpg`) giữ nguyên tới khi tải ảnh khác. Ảnh đại diện LUÔN được bảo vệ khỏi việc dọn ảnh
+  sản phẩm.
+- Xoá danh mục: CHỈ khi không còn sản phẩm nào thuộc nó (máy chủ chặn, báo số sản phẩm). Xoá kèm ảnh
+  `*.danh-muc.jpg` của nó.
+- Danh mục mới chưa có nhóm → sang tab Nhóm thêm nhóm trước khi gán sản phẩm.
+
+**Tab "Nhóm sản phẩm"** — chọn danh mục, sửa danh sách nhóm (`children`), 1 nút **Lưu lại**:
+- Thêm, đổi tên, sắp xếp (↑ ↓), xoá. Tên nhóm không trùng trong cùng danh mục.
+- **Đổi tên nhóm = đổi luôn `sub` của mọi sản phẩm thuộc nhóm đó** (máy chủ làm trong cùng lượt Lưu:
+  ghi `catalog.json` trước, `categories.json` SAU CÙNG).
+- Xoá nhóm: CHỈ khi không còn sản phẩm nào thuộc nhóm (máy chủ chặn, báo số sản phẩm).
+- Mỗi dòng hiện số sản phẩm đang thuộc nhóm.
+
 ## II. Sản phẩm
 
 Site KHÔNG có trang riêng cho từng sản phẩm — sản phẩm hiện ở thẻ (trang chủ, `/san-pham/`) và
@@ -83,10 +112,9 @@ khung "Xem nhanh". Vì vậy sản phẩm KHÔNG có slug/URL; định danh là 
      được trước lần Lưu đầu. **Bất biến sau lần Lưu đầu** (chặn server + `disabled` client).
      Không trùng với sản phẩm khác (server kiểm).
    - **Tên sản phẩm** (`name`) — bắt buộc.
-   - **Danh mục** (`cat`) — chọn trong danh sách CỐ ĐỊNH lấy từ `PRODUCTS` của
-     `scripts/data/site.json` (server đọc file đó, client KHÔNG hard-code). Server tự chặn giá
-     trị lạ. Không quản lý danh mục qua CMS.
-   - **Nhóm** (`sub`) — chọn trong `children` của danh mục đã chọn (cùng nguồn `site.json`).
+   - **Danh mục** (`cat`) — chọn trong danh sách lấy từ `scripts/data/categories.json` (quản lý ở
+     tab Danh mục — mục II-B; client KHÔNG hard-code). Server tự chặn giá trị lạ.
+   - **Nhóm** (`sub`) — chọn trong `children` của danh mục đã chọn (cùng nguồn `categories.json`).
    - **Chất liệu** (`gold`) — gõ tự do, có gợi ý từ các giá trị đang dùng (`Vàng 24K`,
      `Vàng 999.9`, `Bạc 925`...). Để trống được (thẻ không hiện nhãn chất liệu).
    - **Trọng lượng** (`weight`) — tuỳ chọn, vd `5 li`.
@@ -117,7 +145,7 @@ khung "Xem nhanh". Vì vậy sản phẩm KHÔNG có slug/URL; định danh là 
    - Nén phía client (`<canvas>`): cạnh dài tối đa 1200px, JPEG q=0.85. Thẻ sản phẩm là khung
      VUÔNG (`object-fit: cover`) → nên dùng ảnh vuông. Hiện ảnh tạm ngay, upload chạy ngầm.
    - Ảnh thuộc riêng sản phẩm → xoá sản phẩm xoá kèm MỌI ảnh của nó, TRỪ ảnh đang làm ảnh đại diện
-     danh mục (`img` trong `PRODUCTS` của `site.json`) — khi đó giữ ảnh lại.
+     danh mục (`img` trong `scripts/data/categories.json`) — khi đó giữ ảnh lại.
    - Ngoài site: thẻ sản phẩm hiện ảnh chính + nhãn số ảnh; khung "Xem nhanh" là slide ảnh — vuốt
      (điện thoại), nút ← → và phím ← → để đổi ẢNH. Nút ← → KHÔNG còn đổi sang sản phẩm khác (chốt
      10/10/2026).
@@ -249,7 +277,8 @@ lưu lại) — tên sheet/cột CỐ ĐỊNH:
 - `scripts/data/catalog.json` — toàn bộ sản phẩm. **Commit CHỐT** của sản phẩm + giá.
 - `scripts/data/posts.json` — index tin tức. **Commit CHỐT** của tin tức.
 - `scripts/data/tin-tuc/<slug>.json` — bản ghi đầy đủ 1 bài.
-- `scripts/data/site.json` — CMS chỉ ĐỌC (danh mục sản phẩm, `NEWS_CATS`), không ghi.
+- `scripts/data/categories.json` — danh mục + nhóm sản phẩm. **Commit CHỐT** của tab Danh mục/Nhóm.
+- `scripts/data/site.json` — CMS chỉ ĐỌC (`CONTACT`, `NEWS_CATS`), không ghi.
 - `scripts/content/tin-tuc/<slug>.html` — thân bài smart content; CMS chỉ XOÁ khi xoá bài.
 - `html/assets/img/catalog/*.jpg`, `html/assets/img/news/*.jpg` — ảnh, ghi thẳng vị trí site.
 
@@ -291,6 +320,14 @@ cảnh báo bằng CSS), tự hiện nút "Mở ở tab riêng" (URL `/exec` th�
 - **[ĐÃ GẶP 10/10/2026 khi test] Rời tab "Cập nhật giá vàng" khi chưa lưu mà không được hỏi** —
   `isVisible_` chỉ đọc `style.display` inline, mà tab mở mặc định không có style inline. Đã đổi sang
   `getComputedStyle`.
+- **[ĐÃ GẶP 10/10/2026 trên production] F5 trang quản trị → "Cannot access 'METAL_LABEL' before
+  initialization"** — đoạn khởi động (`bootApp()`) đặt GIỮA `js.html`; có cache thì giao diện vẽ ĐỒNG
+  BỘ ngay lúc script chạy, đụng `const` khai báo phía dưới (cùng loại: `CONTACT_STATUSES`,
+  `MANAGEABLE_ROLES` — lỗi có sẵn từ bản mẫu). Vá: khởi động LUÔN ở CUỐI file. Test: đăng nhập, mở đủ
+  các tab, F5 — không được hiện khung lỗi đỏ.
+- **[ĐÃ GẶP 10/10/2026] Sửa số giữa ô giá (vd xoá số 4 trong "14.000.000") thì con trỏ nhảy ra cuối**
+  — `onPriceInput` ghi lại `value` để chèn dấu chấm. Vá: đếm chữ số trước con trỏ, định dạng xong đặt
+  lại con trỏ sau đúng chừng ấy chữ số; giá trị không đổi thì không ghi lại.
 - **Thẻ giá hiện khác giữa thẻ sản phẩm và khung Xem nhanh** → `price_html` (Python) và
   `priceHtml` (JS) lệch nhau. Sửa 1 chỗ phải sửa chỗ kia.
 - **Form Liên hệ "gửi được" mà không có gì lưu** → mất rule `.hp-field`. Sau mỗi lần đổi

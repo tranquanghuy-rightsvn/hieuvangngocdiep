@@ -1,0 +1,105 @@
+[
+ {
+  "slug": "vang-tich-tru",
+  "title": "Vàng Tích Trữ",
+  "desc": "Nhẫn tròn 24K, đồng vàng, vàng ép vỉ 999.9",
+  "img": "dong-vang-999.jpg",
+  "children": [
+   "Nhẫn Tròn Trơn",
+   "Đồng Vàng",
+   "Vàng Ép Vỉ"
+  ]
+ },
+ {
+  "slug": "trang-suc-cuoi",
+  "title": "Trang Sức Cưới",
+  "desc": "Dây cổ cưới, mặt khoá, vòng cưới truyền thống",
+  "img": "day-co-cuoi-5-tang.jpg",
+  "children": [
+   "Dây Cổ Cưới",
+   "Mặt Khoá",
+   "Vòng Cưới",
+   "Bông Tai Cưới",
+   "Còng Cổ Cưới",
+   "Còng Tay Cưới"
+  ]
+ },
+ {
+  "slug": "day-chuyen",
+  "title": "Dây Chuyền",
+  "desc": "Cỏ 4 lá, mặt charm, dây hoa men",
+  "img": "day-chuyen-co-4-la-vang.jpg",
+  "children": [
+   "Dây Chuyền Cỏ 4 Lá",
+   "Dây Chuyền Mặt Charm",
+   "Dây Hoa Men",
+   "Dây",
+   "Charm Vàng Thần Tài",
+   "Charm Vàng Con Giáp",
+   "Hạt Đậu"
+  ]
+ },
+ {
+  "slug": "lac-vong",
+  "title": "Lắc & Vòng Tay",
+  "desc": "Lắc tay cỏ 4 lá, bọ rùa, bộ lắc & nhẫn",
+  "img": "lac-co-4-la-xanh.jpg",
+  "children": [
+   "Lắc Tay",
+   "Bộ Lắc & Nhẫn",
+   "Lắc",
+   "Còng",
+   "Lắc Em Bé"
+  ]
+ },
+ {
+  "slug": "nhan",
+  "title": "Nhẫn Thời Trang",
+  "desc": "Nhẫn nữ đính đá, bản lưới, mắt xích",
+  "img": "nhan-hoa-dinh-da.jpg",
+  "children": [
+   "Nhẫn Nữ",
+   "Nhẫn Cặp"
+  ]
+ },
+ {
+  "slug": "qua-tang",
+  "title": "Quà Tặng Vàng",
+  "desc": "Tượng phong thuỷ, hoa hồng vàng, quà cho bé",
+  "img": "tuong-tai-than-cuoi-ngua.jpg",
+  "children": [
+   "Tượng Vàng Phong Thuỷ",
+   "Hoa Vàng",
+   "Quà Tặng Bé",
+   "Tượng"
+  ]
+ },
+ {
+  "slug": "trang-suc-bac",
+  "title": "Trang Sức Bạc",
+  "desc": "Lắc tay, mặt dây chuyền bạc cỏ 4 lá",
+  "img": "mat-day-bac-co-4-la-doi.jpg",
+  "children": [
+   "Lắc Tay Bạc",
+   "Mặt Dây Chuyền Bạc"
+  ]
+ },
+ {
+  "slug": "trang-suc-nu",
+  "title": "Trang Sức Nữ",
+  "desc": "Bông tai và trang sức dành cho phái nữ",
+  "img": "nd-d13__1.jpg",
+  "children": [
+   "Bông Tai"
+  ]
+ },
+ {
+  "slug": "trang-suc-nam",
+  "title": "Trang Sức Nam",
+  "desc": "Nhẫn nam và trang sức dành cho phái mạnh",
+  "img": "nhan-tron-ban-day.jpg",
+  "children": [
+   "Nhẫn Nam"
+  ]
+ }
+]

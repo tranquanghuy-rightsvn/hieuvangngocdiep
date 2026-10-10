@@ -2,7 +2,8 @@
 """In sẵn nội dung vào HTML (site tĩnh) — JS không còn dựng nội dung, chỉ lo tương tác + cập nhật giá vàng/bạc.
 
 Dữ liệu:
-  scripts/data/site.json     thông tin liên hệ (CONTACT), danh mục sản phẩm (PRODUCTS), thứ tự menu (MENU_ORDER)
+  scripts/data/site.json     thông tin liên hệ (CONTACT), chuyên mục tin tức (NEWS_CATS)
+  scripts/data/categories.json  danh mục + nhóm sản phẩm, ĐÚNG thứ tự hiển thị (do trang quản trị ghi — GAS.md mục II-B)
   scripts/data/catalog.json  toàn bộ sản phẩm (do CMS ghi — GAS.md mục II); có "price" (VND) thì hiện giá, không có thì "Giá: Liên hệ"
   scripts/data/prices.json   giá vàng + bạc (do trang quản trị ghi) — in sẵn vào bảng giá, ticker, máy tính giá
 
@@ -21,8 +22,8 @@ ROOT = os.path.join(REPO, 'html')          # thư mục web (được deploy)
 DATA = os.path.join(REPO, 'scripts', 'data')
 SITE = json.load(open(os.path.join(DATA, 'site.json'), encoding='utf-8'))
 CATALOG = json.load(open(os.path.join(DATA, 'catalog.json'), encoding='utf-8'))
-CONTACT, PRODUCTS = SITE['CONTACT'], SITE['PRODUCTS']
-MENU = [PRODUCTS[k] for k in SITE['MENU_ORDER']]
+CONTACT = SITE['CONTACT']
+PRODUCTS = MENU = json.load(open(os.path.join(DATA, 'categories.json'), encoding='utf-8'))  # thứ tự trong file = thứ tự menu
 CAT_BY_SLUG = {c['slug']: c for c in PRODUCTS}
 IMG = '/assets/img/catalog/'
 
@@ -222,7 +223,8 @@ def prod_card(p, idx, attrs='', hidden=False, delay=0):
 
 
 def bake_featured(src):
-    cats = [{'slug': '', 'title': 'Nổi bật'}] + MENU
+    # Danh mục chưa có sản phẩm thì không hiện chip (bấm vào chỉ ra lưới trống)
+    cats = [{'slug': '', 'title': 'Nổi bật'}] + [c for c in MENU if any(p['cat'] == c['slug'] for p in CATALOG)]
     src = fill(src, 'feat-chips', ''.join(
         '<button type="button" class="chip%s" data-cat="%s" aria-pressed="%s">%s</button>' % (
             '' if i else ' is-on', c['slug'], 'false' if i else 'true', e(c['title'])) for i, c in enumerate(cats)))
@@ -561,6 +563,8 @@ def main():
             src = old = open(path, encoding='utf-8').read()
             src = bake_shared(src)
             src = fill(src, 'mega-products', mega())
+            # Số cột mega menu theo số danh mục (danh mục quản lý qua CMS nên số lượng thay đổi): ~nửa số danh mục, 3-5 cột
+            src = re.sub(r'(<div class="dd__panel dd__panel--mega" id="mega-products")[^>]*>', r'\1 style="--mega-cols:%d">' % max(3, min(5, (len(MENU) + 1) // 2)), src)
             src = fill(src, 'nav-products', drawer_products())
             src = bake_home_cats(src)
             src = bake_featured(src)

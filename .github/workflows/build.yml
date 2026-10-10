@@ -6,12 +6,14 @@ name: Build site tĩnh từ scripts/data/
 #   scripts/data/catalog.json -> commit chốt của Lưu/Xoá sản phẩm + Lưu giá (1 file, tự nó là chốt)
 #   scripts/data/posts.json   -> commit chốt của Lưu/Xoá tin tức (ghi SAU CÙNG)
 #   scripts/data/prices.json  -> commit chốt của Lưu giá vàng/bạc (1 file, tự nó là chốt)
+#   scripts/data/categories.json -> commit chốt của tab Danh mục / Nhóm (ghi SAU CÙNG)
 on:
   push:
     branches: [master]
     paths:
       - "scripts/data/catalog.json"
       - "scripts/data/prices.json"
+      - "scripts/data/categories.json"
       - "scripts/data/posts.json"
       - "scripts/data/site.json"
       - "scripts/*.py"
