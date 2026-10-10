@@ -5,11 +5,13 @@ name: Build site tĩnh từ scripts/data/
 # trigger theo thư mục sẽ build ngay từ commit ĐẦU (lúc danh sách chưa cập nhật) -> deploy dở dang.
 #   scripts/data/catalog.json -> commit chốt của Lưu/Xoá sản phẩm + Lưu giá (1 file, tự nó là chốt)
 #   scripts/data/posts.json   -> commit chốt của Lưu/Xoá tin tức (ghi SAU CÙNG)
+#   scripts/data/prices.json  -> commit chốt của Lưu giá vàng/bạc (1 file, tự nó là chốt)
 on:
   push:
     branches: [master]
     paths:
       - "scripts/data/catalog.json"
+      - "scripts/data/prices.json"
       - "scripts/data/posts.json"
       - "scripts/data/site.json"
       - "scripts/*.py"
@@ -37,7 +39,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      # bake_static.py đọc giá vàng mặc định trong main.js bằng node (runner có sẵn node)
       - name: Build html/ từ scripts/data/
         run: |
           python3 scripts/build_pages.py

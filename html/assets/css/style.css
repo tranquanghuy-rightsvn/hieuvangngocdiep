@@ -348,9 +348,7 @@ input::placeholder { color: hsl(var(--muted-foreground)); opacity: 1; }
 .sec-sub { margin-top: 16px; font-size: 14px; line-height: 20px; color: hsl(var(--muted-foreground)); }
 @media (min-width: 640px) { .sec-sub { font-size: 16px; line-height: 24px; } }
 
-.refresh { display: inline-flex; align-items: center; gap: 8px; transition: opacity .15s var(--ease); }
-.refresh:hover { opacity: .8; }
-.refresh.is-loading .i { animation: spin 1s linear infinite; }
+.refresh { display: inline-flex; align-items: center; gap: 8px; }
 .refresh__text { color: hsl(var(--foreground)); }
 html:not(.light) .refresh__text { color: #fff; }
 

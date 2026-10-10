@@ -5,23 +5,14 @@
   'use strict';
 
   /* ---------------- DATA ---------------- */
-  // Bảng giá vàng (VNĐ / chỉ) — số mặc định; khi mở trang sẽ được thay bằng giá quy đổi từ API (loadPrices)
-  var PRICES = [
-    { id: '9999', name: 'Vàng 9999', buy: 14100000, sell: 14230000 },
-    { id: '980', name: 'Vàng 98', buy: 13760000, sell: 13950000 },
-    { id: '960', name: 'Vàng 96', buy: 13460000, sell: 13650000 },
-    { id: 'NT980', name: 'Nữ Trang 98', buy: 13760000, sell: 14050000 },
-    { id: '610', name: 'Vàng 610', buy: 8580000, sell: 9000000 }
-  ];
-  // Bảng giá bạc trang sức (VNĐ / chỉ 3,75g) — số mặc định; khi mở trang sẽ được thay bằng giá quy đổi từ API
-  var SILVER_PRICES = [
-    { id: 'AG925', name: 'Bạc trang sức 925 (bạc Ý)', buy: 174000, sell: 177000 },
-    { id: 'AG999TS', name: 'Bạc trang sức 999 (bạc ta)', buy: 189000, sell: 192000 }
-  ];
-  var SILVER_UPDATED_AT = '18:00 06/10/2026';
-
-  // Mốc giờ cập nhật của bảng giá (hiển thị ở "Cập nhật lúc ...")
-  var PRICES_UPDATED_AT = '09:15 28/08/2026';
+  // Giá vàng/bạc (VNĐ / chỉ) do trang quản trị nhập (scripts/data/prices.json). bake_static.py đã in sẵn
+  // số vào bảng giá + nhúng bản dữ liệu vào <script id="price-data"> để máy tính giá dùng.
+  var PRICE_DATA = (function () {
+    var el = document.getElementById('price-data');
+    try { return el ? JSON.parse(el.textContent) : {}; } catch (err) { return {}; }
+  })();
+  var PRICES = PRICE_DATA.gold || [];
+  var SILVER_PRICES = PRICE_DATA.silver || [];
 
   // Danh mục sản phẩm, thông tin liên hệ: scripts/data/site.json · Sản phẩm: scripts/data/catalog.json
   // -> sửa xong chạy: python3 scripts/bake_static.py
@@ -146,47 +137,6 @@
     });
   }, { threshold: 0.1 }) : null;
   $$('tr.reveal').forEach(function (tr) { if (rowObserver) rowObserver.observe(tr); else tr.classList.add('is-in'); });
-
-  function updatePrices() {
-    PRICES.concat(SILVER_PRICES).forEach(function (p) {
-      $$('tr[data-id="' + p.id + '"]').forEach(function (tr) {
-        $('[data-buy]', tr).textContent = fmt(p.buy);
-        $('[data-sell]', tr).textContent = fmt(p.sell);
-      });
-      $$('.ticker__val[data-id="' + p.id + '"]').forEach(function (v) { v.textContent = fmt(p.sell); });
-    });
-  }
-
-  function stamp() {
-    if ($('#updated-at')) $('#updated-at').textContent = PRICES_UPDATED_AT;
-    if ($('#silver-updated-at')) $('#silver-updated-at').textContent = SILVER_UPDATED_AT;
-  }
-  /* ---------------- GIÁ TỪ API (demo) ----------------
-   * Mở trang là lấy giá vàng & bạc thế giới (USD/ounce) + tỷ giá USD/VND rồi quy đổi đổ vào bảng.
-   * API miễn phí, không cần key: api.gold-api.com, open.er-api.com
-   */
-  function loadPrices() {
-    var get = function (u) { return fetch(u).then(function (r) { return r.json(); }); };
-    return Promise.all([
-      get('https://api.gold-api.com/price/XAU'),
-      get('https://api.gold-api.com/price/XAG'),
-      get('https://open.er-api.com/v6/latest/USD')
-    ]).then(function (r) {
-      var vnd = r[2].rates.VND, perGram = function (usdOz) { return usdOz * vnd / 31.1035; };
-      var round = function (n) { return Math.round(n / 1000) * 1000; };
-      var chi = perGram(r[0].price) * 3.75;   // 1 chỉ vàng 999.9
-      var chiBac = perGram(r[1].price) * 3.75; // 1 chỉ bạc nguyên chất
-      var row = function (p, base, k) { p.sell = round(base * k); p.buy = round(base * k * 0.985); };
-      var GOLD_K = { '9999': 1, '980': 0.98, '960': 0.96, 'NT980': 0.98, '610': 0.61 };
-      PRICES.forEach(function (p) { row(p, chi, GOLD_K[p.id] || 1); });
-      var SILVER_K = { AG925: 0.925, AG999TS: 0.999 }; // theo hàm lượng bạc
-      SILVER_PRICES.forEach(function (p) { row(p, chiBac, SILVER_K[p.id] || 1); });
-      var d = new Date(), pad = function (n) { return String(n).padStart(2, '0'); };
-      PRICES_UPDATED_AT = SILVER_UPDATED_AT = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ' ' + pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear();
-      updatePrices(); stamp(); renderCalc();
-    }).catch(function () { /* lỗi mạng: giữ giá mặc định */ });
-  }
-  $$('.js-refresh').forEach(function (b) { b.addEventListener('click', loadPrices); });
 
   /* ---------------- MÁY TÍNH GIÁ VÀNG / BẠC ---------------- */
   var calc = null;
@@ -928,7 +878,6 @@
   initQuickView();
   if ($('#ptable-d') || $('#stable-d')) {
     initCalc();
-    loadPrices();
   }
   initCarousel();
   // Mở trang kèm #mục (vd /bang-gia/#gia-bac) -> cuộn tới mục đó

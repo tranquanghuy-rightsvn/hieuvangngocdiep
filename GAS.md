@@ -7,8 +7,9 @@
 > Playbook chung: skill `free-cms-static-site-pipeline`. Dự án mẫu: xevip (bản sao nằm trong
 > skill, `references/samples/xevip-gas/`).
 
-## 0. Phạm vi (ĐÚNG 5 mục, không làm rộng hơn)
+## 0. Phạm vi (ĐÚNG 6 mục, không làm rộng hơn)
 
+0. **Cập nhật giá vàng** (tab ĐẦU TIÊN, mở mặc định) — bảng giá vàng + giá bạc (mục II-A).
 1. Quản lý sản phẩm — mặc định mọi sản phẩm là **Giá: Liên hệ**.
 2. Cập nhật giá nhanh — 1 bảng hiện TẤT CẢ sản phẩm, admin chỉ điền giá rồi bấm **Lưu giá**.
 3. Quản lý tin tức.
@@ -16,7 +17,7 @@
 5. Quản lý người dùng (root / admin / editor).
 
 KHÔNG quản lý qua CMS (vẫn sửa trong repo như cũ): thông tin liên hệ cửa hàng, danh mục sản
-phẩm + menu (`scripts/data/site.json`), giá vàng/bạc mặc định (`html/assets/js/main.js`).
+phẩm + menu (`scripts/data/site.json`).
 
 ---
 
@@ -34,6 +35,7 @@ phẩm + menu (`scripts/data/site.json`), giá vàng/bạc mặc định (`html/
    | Chức năng | editor | admin | root |
    |---|---|---|---|
    | Sản phẩm (xem/thêm/sửa/xoá) | ✅ | ✅ | ✅ |
+   | Cập nhật giá vàng (vàng + bạc) | ✅ | ✅ | ✅ |
    | Cập nhật giá nhanh | ✅ | ✅ | ✅ |
    | Tin tức (xem/thêm/sửa/xoá) | ✅ | ✅ | ✅ |
    | Liên hệ (xem/đổi trạng thái/xoá) | ❌ | ✅ | ✅ |
@@ -47,6 +49,28 @@ phẩm + menu (`scripts/data/site.json`), giá vàng/bạc mặc định (`html/
    Token phiên sống 30 ngày, lưu `localStorage`. `verifyOtp` gọi `purgeExpiredTokens_()`;
    Đăng xuất gọi `logout(token)` phía server để thu hồi token thật.
 6. Server tự `requireRole_` ở MỌI hàm — ẩn nút trên UI không phải là bảo mật.
+
+## II-A. Cập nhật giá vàng (chốt 10/10/2026)
+
+- Tab tên **"Cập nhật giá vàng"**, nằm ĐẦU TIÊN trong menu và là tab mở mặc định. 2 section trong
+  cùng tab: **Giá vàng** và **Giá bạc** (section riêng).
+- Mỗi dòng: **Loại** (`name`), **Mua vào** (`buy`), **Bán ra** (`sell`) — VNĐ/chỉ, số nguyên dương.
+  Thêm dòng, sửa, xoá, đổi thứ tự (↑ ↓). Mỗi section phải còn ÍT NHẤT 1 dòng (máy tính giá cần).
+- Nút **"Lưu lại"** cố định ở đầu vùng nội dung (giống tab giá nhanh) → 1 lần `saveMetalPrices`
+  ghi cả 2 section, 1 commit. Sửa/thêm/xoá/sắp xếp (↑ ↓) chỉ đổi BẢN NHÁP trên màn hình, KHÔNG
+  ghi gì cho tới khi bấm Lưu lại (chốt 10/10/2026: tránh commit nhiều lần). Lưu lại y hệt dữ liệu cũ
+  → không ghi. Rời tab khi chưa lưu → hỏi xác nhận.
+- `id` mỗi dòng (dùng làm `data-id` trên site): dòng cũ GIỮ NGUYÊN id; dòng mới máy chủ tự sinh từ
+  tên (chữ in hoa, không dấu). Không có ô nhập id.
+- `updated_at` ("HH:mm dd/MM/yyyy", giờ VN) mỗi section: máy chủ tự đặt khi section đó có thay đổi
+  — hiện ở dòng "Cập nhật lúc ..." trên site.
+- **Đồng bộ MỌI nơi hiển thị giá** từ 1 nguồn `scripts/data/prices.json`: bảng giá vàng/bạc (trang
+  chủ, `/bang-gia/`), dòng giá chạy (ticker), danh sách loại + đơn giá trong máy tính giá vàng
+  (`/may-tinh-gia-vang/`) và máy tính giá bạc (`/may-tinh-gia-bac/`), dòng "Cập nhật lúc".
+  `bake_static.py` in sẵn số vào HTML + nhúng `<script type="application/json" id="price-data">`
+  cho máy tính giá; `main.js` KHÔNG còn giá viết cứng.
+- ⛔ ĐÃ BỎ việc site tự lấy giá thế giới qua API (gold-api.com) rồi quy đổi đè lên bảng — giá trên
+  site là giá ADMIN NHẬP. Nút "↻ Cập nhật lúc" thành dòng chữ thường (không bấm làm mới được nữa).
 
 ## II. Sản phẩm
 
@@ -221,6 +245,7 @@ lưu lại) — tên sheet/cột CỐ ĐỊNH:
 - `Contacts` — `id`, `created_at`, `name`, `phone`, `need`, `message`, `status`.
 
 **GitHub repo `tranquanghuy-rightsvn/hieuvangngocdiep` (Contents API)** — đường dẫn CỐ ĐỊNH:
+- `scripts/data/prices.json` — giá vàng + bạc. 1 file, tự nó là **commit CHỐT** của Lưu giá vàng.
 - `scripts/data/catalog.json` — toàn bộ sản phẩm. **Commit CHỐT** của sản phẩm + giá.
 - `scripts/data/posts.json` — index tin tức. **Commit CHỐT** của tin tức.
 - `scripts/data/tin-tuc/<slug>.json` — bản ghi đầy đủ 1 bài.
@@ -260,6 +285,12 @@ cảnh báo bằng CSS), tự hiện nút "Mở ở tab riêng" (URL `/exec` th�
 - **[ĐÃ GẶP 10/10/2026 khi test] Tiêu đề/mô tả bài có `<`, `&` làm vỡ HTML trang bài** — trước đây
   tiêu đề viết tay trong code nên không ai escape; giờ dữ liệu đến từ CMS. Vá: `text_fields()` trong
   `build_pages.py` escape `title`/`excerpt` (giữ nguyên dấu nháy để trang cũ không đổi byte).
+- **[ĐÃ GẶP 10/10/2026 khi test] Gõ vào bảng giá vàng nổ lỗi JS, nút ↑ ↓ ✕ không chạy** — `attrJs_()`
+  sinh literal bằng NHÁY KÉP, đặt trong thuộc tính `oninput="..."` (cũng nháy kép) làm cắt cụt thuộc
+  tính. Quy tắc: thuộc tính handler có `attrJs_()` PHẢI bọc NHÁY ĐƠN (`onclick='fn(' + attrJs_(x) + ')'`).
+- **[ĐÃ GẶP 10/10/2026 khi test] Rời tab "Cập nhật giá vàng" khi chưa lưu mà không được hỏi** —
+  `isVisible_` chỉ đọc `style.display` inline, mà tab mở mặc định không có style inline. Đã đổi sang
+  `getComputedStyle`.
 - **Thẻ giá hiện khác giữa thẻ sản phẩm và khung Xem nhanh** → `price_html` (Python) và
   `priceHtml` (JS) lệch nhau. Sửa 1 chỗ phải sửa chỗ kia.
 - **Form Liên hệ "gửi được" mà không có gì lưu** → mất rule `.hp-field`. Sau mỗi lần đổi

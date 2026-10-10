@@ -4,7 +4,7 @@
 Dữ liệu:
   scripts/data/site.json     thông tin liên hệ (CONTACT), danh mục sản phẩm (PRODUCTS), thứ tự menu (MENU_ORDER)
   scripts/data/catalog.json  toàn bộ sản phẩm (do CMS ghi — GAS.md mục II); có "price" (VND) thì hiện giá, không có thì "Giá: Liên hệ"
-  assets/js/main.js          giá vàng/bạc mặc định (PRICES, SILVER_PRICES) — JS tự cập nhật giá mới khi mở trang
+  scripts/data/prices.json   giá vàng + bạc (do trang quản trị ghi) — in sẵn vào bảng giá, ticker, máy tính giá
 
 Sửa dữ liệu xong chạy:  python3 scripts/bake_static.py
 (Nếu chạy scripts/build_pages.py thì chạy lại file này sau đó.)
@@ -14,7 +14,6 @@ import html
 import json
 import os
 import re
-import subprocess
 import unicodedata
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,14 +26,10 @@ MENU = [PRODUCTS[k] for k in SITE['MENU_ORDER']]
 CAT_BY_SLUG = {c['slug']: c for c in PRODUCTS}
 IMG = '/assets/img/catalog/'
 
-# Giá mặc định lấy từ main.js (một nguồn duy nhất)
-_js = open(os.path.join(ROOT, 'assets', 'js', 'main.js'), encoding='utf-8').read()
-_data = _js[_js.index('/* ---------------- DATA'):_js.index('/* ---------------- HELPERS')]
-PRICE = json.loads(subprocess.check_output(['node', '-e', '''
-const vm = require('vm'), ctx = {}; vm.createContext(ctx);
-vm.runInContext(require('fs').readFileSync(0, 'utf8') + ';this.o = {PRICES, SILVER_PRICES, PRICES_UPDATED_AT, SILVER_UPDATED_AT}', ctx);
-process.stdout.write(JSON.stringify(ctx.o));
-'''], input=_data.encode()))
+# Giá vàng/bạc: 1 nguồn duy nhất scripts/data/prices.json (do trang quản trị ghi — GAS.md mục II-A)
+_P = json.load(open(os.path.join(DATA, 'prices.json'), encoding='utf-8'))
+PRICE = {'PRICES': _P['gold']['rows'], 'SILVER_PRICES': _P['silver']['rows'],
+         'PRICES_UPDATED_AT': _P['gold']['updated_at'], 'SILVER_UPDATED_AT': _P['silver']['updated_at']}
 
 e = lambda s: html.escape(str(s), quote=True)
 
@@ -289,6 +284,16 @@ def bake_prices(src):
     if 'id="calc-type"' in src:
         rows = PRICE['SILVER_PRICES'] if 'data-calc="silver"' in src else PRICE['PRICES']
         src = fill(src, 'calc-type', ''.join('<option value="%s">%s</option>' % (p['id'], e(p['name'])) for p in rows))
+    # Dữ liệu giá cho main.js (máy tính giá, cập nhật số trên bảng) — chỉ nhúng ở trang có hiển thị giá
+    if any(('id="%s"' % k) in src for k in ('ptable-d', 'stable-d', 'calc-type', 'ticker')):
+        data = json.dumps({'gold': PRICE['PRICES'], 'silver': PRICE['SILVER_PRICES'],
+                           'goldUpdatedAt': PRICE['PRICES_UPDATED_AT'], 'silverUpdatedAt': PRICE['SILVER_UPDATED_AT']},
+                          ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+        tag = '<script type="application/json" id="price-data">%s</script>' % data
+        if 'id="price-data"' in src:
+            src = re.sub(r'<script type="application/json" id="price-data">.*?</script>', lambda m: tag, src, flags=re.S)
+        else:
+            src = src.replace('  <script src="/assets/js/main.js" defer></script>', '  ' + tag + '\n  <script src="/assets/js/main.js" defer></script>', 1)
     return src
 
 

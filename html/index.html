@@ -176,10 +176,10 @@
           <div class="sec-head sec-head--prices">
             <h2 class="display-title"><span>Bảng Giá <span class="gold-text">Vàng</span></span></h2>
             <p class="sec-sub">
-              <button type="button" class="refresh js-refresh">
-                <svg class="i i-16" stroke-width="2"><use href="#i-rotate-cw"/></svg>
+              <span class="refresh">
+                <svg class="i i-16" stroke-width="2"><use href="#i-clock"/></svg>
                 <span class="refresh__text">Cập nhật lúc <span id="updated-at">09:15 28/08/2026</span></span>
-              </button>
+              </span>
             </p>
           </div>
 
@@ -241,10 +241,10 @@
           <div class="sec-head sec-head--prices">
             <h2 class="display-title"><span>Giá Bạc <span class="silver-text">Trang Sức</span></span></h2>
             <p class="sec-sub">
-              <button type="button" class="refresh js-refresh">
-                <svg class="i i-16" stroke-width="2"><use href="#i-rotate-cw"/></svg>
+              <span class="refresh">
+                <svg class="i i-16" stroke-width="2"><use href="#i-clock"/></svg>
                 <span class="refresh__text">Cập nhật lúc <span id="silver-updated-at">18:00 06/10/2026</span></span>
-              </button>
+              </span>
             </p>
           </div>
 
@@ -524,6 +524,7 @@
 
   <ol class="toasts" id="toasts" aria-live="polite"></ol>
 
+  <script type="application/json" id="price-data">{"gold":[{"id":"9999","name":"Vàng 9999","buy":14100000,"sell":14230000},{"id":"980","name":"Vàng 98","buy":13760000,"sell":13950000},{"id":"960","name":"Vàng 96","buy":13460000,"sell":13650000},{"id":"NT980","name":"Nữ Trang 98","buy":13760000,"sell":14050000},{"id":"610","name":"Vàng 610","buy":8580000,"sell":9000000}],"silver":[{"id":"AG925","name":"Bạc trang sức 925 (bạc Ý)","buy":174000,"sell":177000},{"id":"AG999TS","name":"Bạc trang sức 999 (bạc ta)","buy":189000,"sell":192000}],"goldUpdatedAt":"09:15 28/08/2026","silverUpdatedAt":"18:00 06/10/2026"}</script>
   <script src="/assets/js/main.js" defer></script>
 </body>
 </html>
