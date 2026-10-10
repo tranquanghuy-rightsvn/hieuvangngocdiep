@@ -257,11 +257,14 @@
  },
  {
   "id": "ND-D12",
-  "img": "day-chuyen-bac-thoi-trang",
+  "img": "nd-d12__1",
   "cat": "day-chuyen",
   "sub": "Dây Chuyền Mặt Charm",
   "name": "Dây chuyền mặt charm thời trang (nhiều mẫu)",
-  "desc": "Bộ sưu tập dây chuyền mặt charm màu trắng với nhiều kiểu: nơ, trái tim, hoa… Quý khách chọn mẫu tại cửa hàng."
+  "desc": "Bộ sưu tập dây chuyền mặt charm màu trắng với nhiều kiểu: nơ, trái tim, hoa… Quý khách chọn mẫu tại cửa hàng.",
+  "gold": "Vàng 610 trắng",
+  "featured": true,
+  "isNew": true
  },
  {
   "id": "ND-D13",
