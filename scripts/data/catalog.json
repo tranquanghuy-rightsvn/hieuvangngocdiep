@@ -667,5 +667,16 @@
   "isNew": true,
   "name": "Đoá Hồng",
   "desc": "Đoá hồng quà tặng 20/10 thật ý nghĩa"
+ },
+ {
+  "id": "ND-TT07",
+  "img": "nd-tt07__1",
+  "cat": "vang-tich-tru",
+  "sub": "Nhẫn Tròn Trơn",
+  "gold": "Vàng 9999",
+  "weight": "2phân",
+  "isNew": true,
+  "name": "Hạt đậu tích luỹ",
+  "desc": "Tích tiểu thành đại"
  }
 ]
