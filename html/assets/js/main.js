@@ -622,7 +622,7 @@
   // Thông tin sản phẩm đọc từ thẻ đã in sẵn trong HTML
   function productOf(card) {
     var d = card.dataset;
-    return { id: d.id, name: d.name, cat: d.cat, catTitle: d.catTitle, catDesc: d.catDesc, sub: d.sub, gold: d.gold, weight: d.weight, desc: d.desc, img: $('img', card).getAttribute('src') };
+    return { id: d.id, name: d.name, cat: d.cat, catTitle: d.catTitle, catDesc: d.catDesc, sub: d.sub, gold: d.gold, weight: d.weight, price: +d.price || 0, desc: d.desc, img: $('img', card).getAttribute('src') };
   }
 
   var qv = $('#qv'), qvList = [], qvIndex = 0, qvReturn = null, chatProduct = null;
@@ -652,12 +652,19 @@
       else if (e.key === 'ArrowLeft') stepQuickView(-1);
     }, true);
   }
+  // Giá: có số → giá cụ thể, không có → "Liên hệ" (cùng markup với price_html trong bake_static.py)
+  function priceHtml(price) {
+    if (price) return '<span class="price"><b class="price__num">' + price.toLocaleString('vi-VN') + '</b><span class="price__cur">₫</span></span>';
+    return '<span class="price price--contact"><svg class="i i-14" stroke-width="2"><use href="#i-phone"/></svg>Liên hệ</span>';
+  }
   function fillQuickView(p) {
     $('#qv-img').src = p.img; $('#qv-img').alt = p.name;
     $('#qv-cat').textContent = p.catTitle; $('#qv-cat').href = shopUrl({ cat: p.cat });
     $('#qv-sub').textContent = p.sub; $('#qv-sub').href = shopUrl({ cat: p.cat, sub: p.sub });
     $('#qv-title').textContent = p.name;
     $('#qv-sku').textContent = p.catDesc;
+    $('#qv-price').innerHTML = '<span class="qv__price-lbl">Giá</span>' + priceHtml(p.price) +
+      (p.price ? '' : '<span class="qv__price-note">Giá thay đổi theo thời giá — gọi hoặc nhắn để được báo giá</span>');
     $('#qv-gold').textContent = p.gold || 'Liên hệ tư vấn';
     $('#qv-weight').textContent = p.weight || 'Liên hệ tư vấn';
     $('#qv-subname').textContent = p.sub;

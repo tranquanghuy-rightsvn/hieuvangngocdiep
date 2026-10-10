@@ -3,7 +3,7 @@
 
 Dữ liệu:
   scripts/data/site.json     thông tin liên hệ (CONTACT), danh mục sản phẩm (PRODUCTS), thứ tự menu (MENU_ORDER)
-  scripts/data/catalog.json  toàn bộ sản phẩm
+  scripts/data/catalog.json  toàn bộ sản phẩm — thêm "price": 1250000 (VND) để hiện giá, bỏ trống thì hiện "Liên hệ"
   assets/js/main.js          giá vàng/bạc mặc định (PRICES, SILVER_PRICES) — JS tự cập nhật giá mới khi mở trang
 
 Sửa dữ liệu xong chạy:  python3 scripts/bake_static.py
@@ -183,13 +183,20 @@ def bake_home_cats(src):
 
 
 # ---------------------------------------------------------------- thẻ sản phẩm
+def price_html(p):
+    # có 'price' (VND) → giá cụ thể; không có → "Liên hệ" (main.js có hàm priceHtml tương ứng cho Xem nhanh)
+    if p.get('price'):
+        return '<span class="price"><b class="price__num">%s</b><span class="price__cur">₫</span></span>' % fmt(p['price'])
+    return '<span class="price price--contact">%sLiên hệ</span>' % icon('phone', 'i-14')
+
+
 def prod_card(p, idx, attrs='', hidden=False, delay=0):
     gold = p.get('gold') or ''
     badge = ('<span class="badge-gold%s">%s</span>' % (' badge-gold--24k' if re.search(r'999|24K', gold) else '', e(gold.replace('Vàng ', '')))) if gold else ''
     cat = CAT_BY_SLUG[p['cat']]
     q = fold(' '.join([p['name'], p['id'], p['sub'], p['desc'], cat['title'], gold]))
-    data = ('data-id="%s" data-idx="%d" data-cat="%s" data-cat-title="%s" data-cat-desc="%s" data-sub="%s" data-name="%s" data-gold="%s" data-weight="%s" data-desc="%s" data-q="%s"%s%s%s' % (
-        e(p['id']), idx, e(p['cat']), e(cat['title']), e(cat['desc']), e(p['sub']), e(p['name']), e(gold), e(p.get('weight') or ''), e(p['desc']), e(q),
+    data = ('data-id="%s" data-idx="%d" data-cat="%s" data-cat-title="%s" data-cat-desc="%s" data-sub="%s" data-name="%s" data-gold="%s" data-weight="%s" data-price="%s" data-desc="%s" data-q="%s"%s%s%s' % (
+        e(p['id']), idx, e(p['cat']), e(cat['title']), e(cat['desc']), e(p['sub']), e(p['name']), e(gold), e(p.get('weight') or ''), p.get('price') or '', e(p['desc']), e(q),
         ' data-featured' if p.get('featured') else '', ' data-new' if p.get('isNew') else '', attrs))
     return ('<article class="prod" %s%s style="animation-delay:%dms">'
             '<button type="button" class="prod__media js-qv" data-id="%s" aria-label="Xem nhanh %s">'
@@ -200,13 +207,14 @@ def prod_card(p, idx, attrs='', hidden=False, delay=0):
             '<div class="prod__body">'
             '<p class="prod__meta">%s · %s%s</p>'
             '<h3 class="prod__name"><button type="button" class="js-qv" data-id="%s">%s</button></h3>'
+            '<p class="prod__price">%s</p>'
             '<button type="button" class="prod__more js-qv" data-id="%s" tabindex="-1">Xem chi tiết%s</button>'
             '</div></article>') % (
         data, ' hidden' if hidden else '', min(delay, 12) * 45,
         e(p['id']), e(p['name']), IMG, p['img'], e(p['name']),
         badge, '<span class="badge-new">Mới</span>' if p.get('isNew') else '', icon('eye', 'i-16'),
         e(p['id']), e(p['sub']), ' · ' + e(p['weight']) if p.get('weight') else '',
-        e(p['id']), e(p['name']), e(p['id']), icon('arrow-right', 'i-16'))
+        e(p['id']), e(p['name']), price_html(p), e(p['id']), icon('arrow-right', 'i-16'))
 
 
 def bake_featured(src):
@@ -288,6 +296,7 @@ QUICKVIEW = '''  <!-- ============ XEM NHANH SẢN PHẨM ============ -->
       <div class="qv__info">
         <p class="qv__crumb"><a href="/san-pham/" id="qv-cat"></a> · <a href="/san-pham/" id="qv-sub"></a></p>
         <h2 class="qv__title" id="qv-title"></h2>
+        <div class="qv__price" id="qv-price"></div>
         <p class="qv__sku" id="qv-sku"></p>
         <dl class="qv__specs">
           <div><dt>Loại vàng</dt><dd id="qv-gold"></dd></div>
