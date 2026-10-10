@@ -363,8 +363,23 @@ RATES = '<span class="site-credit"> · Tỷ giá: <a href="https://www.exchanger
 
 
 def img_size(rel):
-    out = subprocess.check_output(['sips', '-g', 'pixelWidth', '-g', 'pixelHeight', os.path.join(ROOT, rel.lstrip('/'))]).decode()
-    return re.search(r'pixelWidth: (\d+)', out).group(1), re.search(r'pixelHeight: (\d+)', out).group(1)
+    # Đọc kích thước từ header JPEG/PNG bằng Python thuần — CI chạy Linux, không có lệnh sips của macOS
+    import struct
+    with open(os.path.join(ROOT, rel.lstrip('/')), 'rb') as f:
+        data = f.read()
+    if data[:8] == b'\x89PNG\r\n\x1a\n':
+        w, h = struct.unpack('>II', data[16:24])
+        return str(w), str(h)
+    i = 2  # JPEG: duyệt các marker tới khung SOF (chứa cao/rộng)
+    while i < len(data):
+        while data[i] == 0xFF:
+            i += 1
+        marker, seg = data[i], struct.unpack('>H', data[i + 1:i + 3])[0]
+        if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+            h, w = struct.unpack('>HH', data[i + 4:i + 8])
+            return str(w), str(h)
+        i += 1 + seg
+    raise ValueError('Không đọc được kích thước ảnh: ' + rel)
 
 
 def meta_get(src, attr, name):
