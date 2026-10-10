@@ -656,8 +656,7 @@
   function priceHtml(price) {
     var lbl = '<span class="price__lbl">Giá:</span>';
     if (price) return lbl + '<span class="price"><b class="price__num">' + price.toLocaleString('vi-VN') + '</b><span class="price__cur">₫</span></span>';
-    var tel = $('a[data-contact-link="hotline"]');
-    return lbl + '<a href="' + (tel ? tel.getAttribute('href') : '#') + '" class="price price--contact"><svg class="i i-14" stroke-width="2"><use href="#i-phone"/></svg>Liên hệ</a>';
+    return lbl + '<span class="price price--contact">Liên hệ</span>';
   }
   function fillQuickView(p) {
     $('#qv-img').src = p.img; $('#qv-img').alt = p.name;

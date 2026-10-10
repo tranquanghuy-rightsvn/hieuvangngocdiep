@@ -944,23 +944,15 @@ html:not(.light) .refresh__text { color: #fff; }
 .prod__name button { text-align: left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color .2s var(--ease); }
 .prod__name button:hover { color: hsl(var(--gold)); }
 
-/* Giá: "Giá:" + .price (số tiền cụ thể) | .price--contact (Liên hệ — link gọi hotline) */
+/* Giá: "Giá:" + .price (số tiền cụ thể) | .price--contact (Liên hệ — chữ thường) */
 .price__lbl { margin-right: 6px; font-size: 14px; font-weight: 600; color: hsl(var(--muted-foreground)); }
 .price { display: inline-flex; align-items: baseline; gap: 2px; font-family: var(--font-display); font-weight: 700; line-height: 1; color: #f0c75e; font-variant-numeric: tabular-nums; }
 .price__num { font-size: 1em; letter-spacing: .01em; }
 .price__cur { font-size: .7em; font-weight: 600; transform: translateY(-.35em); }
-.price--contact {
-  align-items: center; gap: 6px; height: 26px; padding: 0 11px; border-radius: 9999px;
-  font-family: inherit; font-size: 13px; font-weight: 700; color: #f5d57a; cursor: pointer; transition: background-color .2s var(--ease), border-color .2s var(--ease);
-  background: rgb(212 175 55 / .12); border: 1px solid rgb(212 175 55 / .35);
-}
-.price--contact .i { color: hsl(var(--gold)); }
-.price--contact:hover { background: rgb(212 175 55 / .22); border-color: rgb(212 175 55 / .6); }
-.light .price--contact:hover { background: rgb(212 175 55 / .2); }
+.price--contact { font-size: .8em; }
 .prod__price { display: flex; align-items: center; margin-top: 6px; font-size: 19px; }
 @media (min-width: 640px) { .prod__price { font-size: 21px; } }
 .light .price { color: #a5761a; }
-.light .price--contact { color: #8a6414; background: linear-gradient(135deg, rgb(245 213 122 / .22), rgb(212 175 55 / .12)); border-color: rgb(201 162 74 / .4); }
 .prod__more {
   margin-top: auto; padding-top: 8px; display: inline-flex; align-items: center; gap: 4px; width: fit-content;
   font-size: 13px; font-weight: 600; color: hsl(var(--gold)); transition: gap .2s var(--ease), color .2s var(--ease);
@@ -1002,13 +994,9 @@ html:not(.light) .refresh__text { color: #fff; }
 .qv__title { font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1.15; padding-right: 32px; }
 .qv__sku { margin-top: -6px; font-size: 14px; color: hsl(var(--muted-foreground)); }
 .qv__price { order: -1; display: none; }
-.qv__price:not(:empty) {
-  order: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 0; padding: 14px 16px; border-radius: 14px;
-  background: linear-gradient(135deg, rgb(245 213 122 / .14), rgb(212 175 55 / .04)); border: 1px solid hsl(var(--gold) / .22);
-}
+.qv__price:not(:empty) { order: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 0; }
 .qv__price .price { font-size: 30px; }
 .qv__price .price__lbl { font-size: 16px; }
-.qv__price .price--contact { height: 34px; padding: 0 16px; font-size: 15px; }
 .qv__price-note { flex-basis: 100%; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .qv__specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .qv__specs div { padding: 10px 12px; border-radius: 12px; border: 1px solid hsl(var(--gold) / .15); }

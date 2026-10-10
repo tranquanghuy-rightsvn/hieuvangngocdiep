@@ -184,12 +184,11 @@ def bake_home_cats(src):
 
 # ---------------------------------------------------------------- thẻ sản phẩm
 def price_html(p):
-    # có 'price' (VND) → "Giá: 1.250.000₫"; không có → "Giá: Liên hệ" (bấm để gọi hotline)
+    # có 'price' (VND) → "Giá: 1.250.000₫"; không có → "Giá: Liên hệ" (chữ thường, không phải link/nút)
     # main.js có hàm priceHtml tương ứng cho Xem nhanh
     if p.get('price'):
         return '<span class="price__lbl">Giá:</span><span class="price"><b class="price__num">%s</b><span class="price__cur">₫</span></span>' % fmt(p['price'])
-    return ('<span class="price__lbl">Giá:</span><a href="%s" class="price price--contact" aria-label="Giá liên hệ — gọi %s">%sLiên hệ</a>'
-            % (HREF['hotline'](CONTACT['hotline']), e(CONTACT['hotline']), icon('phone', 'i-14')))
+    return '<span class="price__lbl">Giá:</span><span class="price price--contact">Liên hệ</span>'
 
 
 def prod_card(p, idx, attrs='', hidden=False, delay=0):
