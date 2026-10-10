@@ -119,11 +119,13 @@
  },
  {
   "id": "ND-C09",
-  "img": "mat-khoa-heo-tua",
+  "img": "nd-c09__1",
   "cat": "trang-suc-cuoi",
   "sub": "Mặt Khoá",
   "name": "Mặt khoá heo tua chuông",
-  "desc": "Mặt khoá heo vàng nằm phúc hậu với tua chuông nhỏ, đeo hằng ngày hoặc trong dịp lễ cưới hỏi."
+  "desc": "Mặt khoá heo vàng nằm phúc hậu với tua chuông nhỏ, đeo hằng ngày hoặc trong dịp lễ cưới hỏi.",
+  "gold": "Vàng 980",
+  "featured": true
  },
  {
   "id": "ND-C10",
