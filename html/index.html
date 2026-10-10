@@ -407,9 +407,11 @@
     <div class="qv__overlay js-qv-close"></div>
     <div class="qv__panel" role="dialog" aria-modal="true" aria-labelledby="qv-title" tabindex="-1">
       <button type="button" class="qv__x js-qv-close" aria-label="Đóng"><svg class="i i-20" stroke-width="2"><use href="#i-x"/></svg></button>
-      <div class="qv__media"><img id="qv-img" src="data:," alt="" />
-        <button type="button" class="qv__nav qv__nav--prev" data-step="-1" aria-label="Sản phẩm trước"><svg class="i i-20" stroke-width="2"><use href="#i-chevron-down"/></svg></button>
-        <button type="button" class="qv__nav qv__nav--next" data-step="1" aria-label="Sản phẩm tiếp theo"><svg class="i i-20" stroke-width="2"><use href="#i-chevron-down"/></svg></button>
+      <div class="qv__media">
+        <div class="qv__track" id="qv-track" aria-roledescription="slide ảnh sản phẩm"></div>
+        <button type="button" class="qv__nav qv__nav--prev" data-step="-1" aria-label="Ảnh trước"><svg class="i i-20" stroke-width="2"><use href="#i-chevron-down"/></svg></button>
+        <button type="button" class="qv__nav qv__nav--next" data-step="1" aria-label="Ảnh tiếp theo"><svg class="i i-20" stroke-width="2"><use href="#i-chevron-down"/></svg></button>
+        <div class="qv__dots" id="qv-dots"></div>
       </div>
       <div class="qv__info">
         <p class="qv__crumb"><a href="/san-pham/" id="qv-cat"></a> · <a href="/san-pham/" id="qv-sub"></a></p>

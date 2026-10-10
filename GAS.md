@@ -71,7 +71,10 @@ khung "Xem nhanh". Vì vậy sản phẩm KHÔNG có slug/URL; định danh là 
    - **Nổi bật** (`featured`), **Mới** (`isNew`) — 2 ô tick. Chỉ ghi key khi `true` (giữ đúng
      quy ước file đang có).
    - **Mô tả** (`desc`) — dùng ở khung "Xem nhanh".
-   - **Ảnh** (`img`) — bắt buộc trước khi Lưu.
+   - **Ảnh** — NHIỀU ảnh/sản phẩm (chốt 10/10/2026), tối thiểu 1. Ảnh ĐẦU TIÊN là ảnh chính
+     (`img` — hiện trên thẻ sản phẩm); các ảnh sau nằm trong `gallery` (mảng tên file, đúng thứ tự).
+     Trong form: tải thêm nhiều ảnh 1 lần, xoá từng ảnh, đổi thứ tự (← →), chọn ảnh chính.
+     Key `gallery` chỉ có khi có từ 2 ảnh trở lên.
 2. **Hiển thị giá ngoài site** (`price_html` trong `scripts/bake_static.py` + `priceHtml` trong
    `html/assets/js/main.js` — 2 chỗ phải ra cùng 1 markup):
    - Có giá → CHỈ hiện số tiền, không có chữ "Giá": `1.800.000đ`.
@@ -80,19 +83,28 @@ khung "Xem nhanh". Vì vậy sản phẩm KHÔNG có slug/URL; định danh là 
    `services.json` của xevip — ~70 bản ghi, mỗi bản ghi nhỏ, không tách index/detail). Thứ tự
    trong file = thứ tự hiển thị (sản phẩm mới thêm vào cuối). File này là commit CHỐT.
 4. Ảnh: `html/assets/img/catalog/<img>.jpg`, ghi THẲNG vào vị trí site thật.
-   - Sản phẩm mới: `img` = mã sản phẩm viết thường (vd `nd-b09`) — đặt tên tất định theo mã.
-   - Sản phẩm đã có: giữ nguyên `img` cũ; tải ảnh mới = GHI ĐÈ đúng file đó.
+   - Mỗi lần tải lên tạo 1 file MỚI `<mã viết thường>__<N>.jpg` (vd `nd-b09__3.jpg`, N tăng dần,
+     không ghi đè). Dấu nối `__` vì mã sản phẩm chỉ có `[A-Z0-9-]` — tên ảnh của sản phẩm này không
+     bao giờ trùng tiền tố ảnh của sản phẩm khác (bài học gotcha "ghép 2 slug bằng `-`").
+   - Ảnh cũ đặt tên kiểu khác (vd `lac-bac-co-4-la-dinh-da.jpg`) vẫn giữ nguyên tên.
+   - Lưu = client gửi DANH SÁCH ĐẦY ĐỦ ảnh theo thứ tự. Server chỉ nhận tên file đã có trên kho VÀ
+     (đang thuộc sản phẩm này HOẶC mang tiền tố `<mã>__`). Ảnh cũ bị bỏ khỏi danh sách + file
+     `<mã>__*` đã tải mà không dùng (tải rồi không Lưu) bị XOÁ — trừ ảnh đại diện danh mục.
    - Nén phía client (`<canvas>`): cạnh dài tối đa 1200px, JPEG q=0.85. Thẻ sản phẩm là khung
      VUÔNG (`object-fit: cover`) → nên dùng ảnh vuông. Hiện ảnh tạm ngay, upload chạy ngầm.
-   - Ảnh 1-1 với sản phẩm → xoá sản phẩm xoá kèm ảnh, TRỪ KHI ảnh đó đang làm ảnh đại diện danh
-     mục (`img` trong `PRODUCTS` của `site.json`) — khi đó giữ ảnh lại.
+   - Ảnh thuộc riêng sản phẩm → xoá sản phẩm xoá kèm MỌI ảnh của nó, TRỪ ảnh đang làm ảnh đại diện
+     danh mục (`img` trong `PRODUCTS` của `site.json`) — khi đó giữ ảnh lại.
+   - Ngoài site: thẻ sản phẩm hiện ảnh chính + nhãn số ảnh; khung "Xem nhanh" là slide ảnh — vuốt
+     (điện thoại), nút ← → và phím ← → để đổi ẢNH. Nút ← → KHÔNG còn đổi sang sản phẩm khác (chốt
+     10/10/2026).
 5. Xoá sản phẩm: pop-up xác nhận → gỡ khỏi `catalog.json` (+ ảnh theo mục 4).
 6. Danh sách trong Admin: GAS đọc thẳng `scripts/data/catalog.json` + `scripts/data/site.json`
    từ kho mỗi lần `boot()` — luôn mới nhất kể cả site chưa build xong.
 
 ## III. Cập nhật giá nhanh
 
-- Tab riêng, hiện TẤT CẢ sản phẩm 1 lượt: ảnh nhỏ, mã, tên, danh mục, ô **Giá**.
+- Tab riêng tên **"Cập nhật giá nhanh"**, hiện TẤT CẢ sản phẩm 1 lượt: ảnh nhỏ, mã, tên, ô **Giá**
+  (KHÔNG có cột danh mục — chốt 10/10/2026).
 - Lọc theo danh mục + ô tìm (tên/mã) — chỉ là lọc hiển thị, không đổi dữ liệu.
 - Ô giá trống = Liên hệ. Ô đã sửa mà chưa lưu được tô nổi bật + đếm số ô đã đổi.
 - **Thanh "Lưu giá" CỐ ĐỊNH ở đầu vùng nội dung** (`position: sticky; top: 0` trong `.content`),
@@ -159,6 +171,19 @@ khung "Xem nhanh". Vì vậy sản phẩm KHÔNG có slug/URL; định danh là 
 - Thông báo: email qua `MailApp` tới ĐÚNG địa chỉ chủ dự án tự điền trong Script Property
   `NOTIFY_EMAIL` (chốt 10/10/2026: người nhận do chủ dự án cấu hình, code không ghi cứng địa chỉ
   nào). Trống thì không gửi mail nhưng vẫn lưu. Dùng CHUNG quota ~100 mail/ngày với OTP. Gửi mail lỗi KHÔNG làm hỏng việc đã lưu.
+- **Mẫu email (chốt 10/10/2026): HTML chuyên nghiệp có logo** — CHỈ cho mail báo liên hệ mới. Mail
+  mã OTP đăng nhập giữ dạng chữ thường (chủ dự án chốt: không cần làm đẹp). Mẫu nằm RIÊNG ở
+  `gas/email.html` (template; `contactEmailHtml_()` trong `Code.js` chỉ đổ dữ liệu vào): logo
+  `https://hieuvangngocdiep.vn/assets/img/logo-header.jpg` (JPG nền trắng — hiển thị ổn định mọi
+  trình đọc mail), viền vàng, chân mail nâu lấy địa chỉ/hotline/giờ mở cửa từ `CONTACT` của
+  `site.json` (đọc lỗi thì bỏ dòng đó, không chặn gửi mail). Bố cục bảng + style inline (trình
+  đọc mail không hỗ trợ CSS hiện đại). Luôn kèm bản chữ thường (`body`) cho máy không hiện HTML.
+  Tên người gửi hiển thị: "Hiệu Vàng Ngọc Diệp". Dữ liệu khách nhập chỉ chèn bằng thẻ template tự
+  escape (dấu-hỏi-bằng), KHÔNG dùng thẻ chèn thô.
+  ⚠️ KHÔNG viết cú pháp thẻ template trong comment của `email.html` — máy chủ đọc thẻ ở mọi nơi kể
+  cả trong comment → mẫu hỏng, mail liên hệ ngừng gửi (âm thầm, vì gửi mail nằm trong try). Đã gặp
+  khi test 10/10/2026.
+  Mail liên hệ có nút "Gọi lại ngay" (`tel:`) và "Mở trang quản trị" (`/admin/`).
 - Dữ liệu khách CHỈ nằm trong bảng dữ liệu nội bộ của CMS, **KHÔNG bao giờ ghi vào repo**.
 
 ## VI. Người dùng
@@ -249,6 +274,10 @@ cảnh báo bằng CSS), tự hiện nút "Mở ở tab riêng" (URL `/exec` th�
 - **Sheets tự convert ngày** → luôn `Utilities.formatDate` khi đọc.
 - **Đổi `let` → `const` khi dọn code** mà biến còn bị gán lại → `TypeError`.
 - **Thêm tab mới mà revalidate ngầm truy cập DOM không null-safe** → kẹt giao diện cũ.
+- **[ĐÃ GẶP 10/10/2026] Hàm `include` (không có `_`) gọi được từ trình duyệt** → ai cũng lấy được
+  markup trang quản trị/mẫu mail mà chưa đăng nhập (lỗi có sẵn từ bản mẫu). Đổi thành `include_`:
+  hàm tên có `_` cuối chỉ template phía máy chủ gọi được. Quy tắc: hàm nào không cho trình duyệt
+  gọi thì PHẢI có `_` cuối tên.
 
 ## X. Script Properties (Project Settings > Script Properties) — TÊN CỐ ĐỊNH
 

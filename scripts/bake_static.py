@@ -202,11 +202,16 @@ def prod_card(p, idx, attrs='', hidden=False, delay=0):
     data = ('data-id="%s" data-idx="%d" data-cat="%s" data-cat-title="%s" data-cat-desc="%s" data-sub="%s" data-name="%s" data-gold="%s" data-weight="%s" data-price="%s" data-desc="%s" data-q="%s"%s%s%s' % (
         e(p['id']), idx, e(p['cat']), e(cat['title']), e(cat['desc']), e(p['sub']), e(p['name']), e(gold), e(p.get('weight') or ''), p.get('price') or '', e(p['desc']), e(q),
         ' data-featured' if p.get('featured') else '', ' data-new' if p.get('isNew') else '', attrs))
+    # Nhiều ảnh (GAS.md mục II): ảnh chính img + gallery -> khung Xem nhanh dựng slide từ data-imgs
+    imgs = [p['img']] + list(p.get('gallery') or [])
+    if len(imgs) > 1:
+        data += ' data-imgs="%s"' % e(','.join(IMG + x + '.jpg' for x in imgs))
+    count = '<span class="prod__count">%s%d</span>' % ('<svg class="i i-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>', len(imgs)) if len(imgs) > 1 else ''
     return ('<article class="prod" %s%s style="animation-delay:%dms">'
             '<button type="button" class="prod__media js-qv" data-id="%s" aria-label="Xem nhanh %s">'
             '<img src="%s%s.jpg" alt="%s" loading="lazy" decoding="async" width="800" height="800" />'
             '<span class="prod__badges">%s%s</span>'
-            '<span class="prod__quick">%sXem nhanh</span>'
+            '%s<span class="prod__quick">%sXem nhanh</span>'
             '</button>'
             '<div class="prod__body">'
             '<p class="prod__meta">%s · %s%s</p>'
@@ -216,7 +221,7 @@ def prod_card(p, idx, attrs='', hidden=False, delay=0):
             '</div></article>') % (
         data, ' hidden' if hidden else '', min(delay, 12) * 45,
         e(p['id']), e(p['name']), IMG, p['img'], e(p['name']),
-        badge, '<span class="badge-new">Mới</span>' if p.get('isNew') else '', icon('eye', 'i-16'),
+        badge, '<span class="badge-new">Mới</span>' if p.get('isNew') else '', count, icon('eye', 'i-16'),
         e(p['id']), e(p['sub']), ' · ' + e(p['weight']) if p.get('weight') else '',
         e(p['id']), e(p['name']), price_html(p), e(p['id']), icon('arrow-right', 'i-16'))
 
@@ -293,9 +298,11 @@ QUICKVIEW = '''  <!-- ============ XEM NHANH SẢN PHẨM ============ -->
     <div class="qv__overlay js-qv-close"></div>
     <div class="qv__panel" role="dialog" aria-modal="true" aria-labelledby="qv-title" tabindex="-1">
       <button type="button" class="qv__x js-qv-close" aria-label="Đóng">%(x)s</button>
-      <div class="qv__media"><img id="qv-img" src="data:," alt="" />
-        <button type="button" class="qv__nav qv__nav--prev" data-step="-1" aria-label="Sản phẩm trước">%(chev)s</button>
-        <button type="button" class="qv__nav qv__nav--next" data-step="1" aria-label="Sản phẩm tiếp theo">%(chev)s</button>
+      <div class="qv__media">
+        <div class="qv__track" id="qv-track" aria-roledescription="slide ảnh sản phẩm"></div>
+        <button type="button" class="qv__nav qv__nav--prev" data-step="-1" aria-label="Ảnh trước">%(chev)s</button>
+        <button type="button" class="qv__nav qv__nav--next" data-step="1" aria-label="Ảnh tiếp theo">%(chev)s</button>
+        <div class="qv__dots" id="qv-dots"></div>
       </div>
       <div class="qv__info">
         <p class="qv__crumb"><a href="/san-pham/" id="qv-cat"></a> · <a href="/san-pham/" id="qv-sub"></a></p>

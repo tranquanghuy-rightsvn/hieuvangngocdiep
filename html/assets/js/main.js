@@ -579,32 +579,57 @@
   // Thông tin sản phẩm đọc từ thẻ đã in sẵn trong HTML
   function productOf(card) {
     var d = card.dataset;
-    return { id: d.id, name: d.name, cat: d.cat, catTitle: d.catTitle, catDesc: d.catDesc, sub: d.sub, gold: d.gold, weight: d.weight, price: +d.price || 0, desc: d.desc, img: $('img', card).getAttribute('src') };
+    var main = $('img', card).getAttribute('src');
+    return { id: d.id, name: d.name, cat: d.cat, catTitle: d.catTitle, catDesc: d.catDesc, sub: d.sub, gold: d.gold, weight: d.weight, price: +d.price || 0, desc: d.desc, imgs: d.imgs ? d.imgs.split(',') : [main] };
   }
 
-  var qv = $('#qv'), qvList = [], qvIndex = 0, qvReturn = null;
+  // Xem nhanh: nút/phím ← → và vuốt chỉ đổi ẢNH của sản phẩm đang xem — KHÔNG đổi sang sản phẩm khác.
+  var qv = $('#qv'), qvTrack = $('#qv-track'), qvReturn = null;
   function initQuickView() {
     if (!qv) return;
     qv.addEventListener('click', function (e) {
       if (e.target.closest('.js-qv-close')) return closeQuickView();
       var nav = e.target.closest('.qv__nav');
-      if (nav) return stepQuickView(+nav.dataset.step);
+      if (nav) return stepImage(+nav.dataset.step);
+      var dot = e.target.closest('.qv__dot');
+      if (dot) return goImage(+dot.dataset.i);
       // "Tư vấn ngay" -> mở/thu bảng chọn kênh: Zalo / Gọi điện / Messenger fanpage
       if (e.target.closest('.js-qv-consult')) setChannels(!$('#qv-channels').hidden ? false : true);
     });
     document.addEventListener('click', function (e) {
       var b = e.target.closest('.js-qv');
       if (!b) return;
-      var card = b.closest('.prod'), grid = b.closest('[data-grid]');
-      var cards = grid ? $$('.prod', grid).filter(function (c) { return !c.hidden; }) : [card];
-      openQuickView(cards.map(productOf), cards.indexOf(card));
+      openQuickView(productOf(b.closest('.prod')));
     });
     document.addEventListener('keydown', function (e) {
       if (qv.hidden) return;
       if (e.key === 'Escape') { e.stopImmediatePropagation(); closeQuickView(); }
-      else if (e.key === 'ArrowRight') stepQuickView(1);
-      else if (e.key === 'ArrowLeft') stepQuickView(-1);
+      else if (e.key === 'ArrowRight') stepImage(1);
+      else if (e.key === 'ArrowLeft') stepImage(-1);
     }, true);
+    // Vuốt/cuộn ngang trên ảnh -> cập nhật chấm đang chọn
+    qvTrack.addEventListener('scroll', function () {
+      clearTimeout(qvTrack._t);
+      qvTrack._t = setTimeout(markDot, 60);
+    }, { passive: true });
+  }
+  function imgIndex() { return Math.round(qvTrack.scrollLeft / Math.max(1, qvTrack.clientWidth)); }
+  function goImage(i) {
+    var n = qvTrack.children.length;
+    if (n < 2) return;
+    i = (i + n) % n; // ảnh cuối bấm tiếp -> quay về ảnh đầu
+    var left = i * qvTrack.clientWidth;
+    qvTrack.scrollTo({ left: left, behavior: 'smooth' });
+    // Phòng hờ trình duyệt bỏ/dừng hiệu ứng cuộn mượt -> không để ảnh đứng lệch giữa 2 ảnh
+    clearTimeout(qvTrack._fix);
+    qvTrack._fix = setTimeout(function () {
+      if (Math.abs(qvTrack.scrollLeft - left) > 2) { qvTrack.scrollLeft = left; markDot(); }
+    }, 700);
+  }
+  function stepImage(d) { goImage(imgIndex() + d); }
+  function markDot() {
+    var i = imgIndex();
+    $$('.qv__dot', qv).forEach(function (b, k) { b.classList.toggle('is-on', k === i); b.setAttribute('aria-current', k === i ? 'true' : 'false'); });
   }
   // Giá: có số → chỉ số tiền "1.800.000đ", không có → "Giá: Liên hệ" (ĐÚNG markup của price_html trong bake_static.py)
   function priceHtml(price) {
@@ -612,7 +637,17 @@
     return '<span class="price__lbl">Giá:</span><span class="price price--contact">Liên hệ</span>';
   }
   function fillQuickView(p) {
-    $('#qv-img').src = p.img; $('#qv-img').alt = p.name;
+    // Slide ảnh: chỉ 1 ảnh thì ẩn nút ← → và chấm
+    qvTrack.innerHTML = p.imgs.map(function (src, i) {
+      return '<img src="' + src + '" alt="' + (p.name + (p.imgs.length > 1 ? ' – ảnh ' + (i + 1) : '')).replace(/"/g, '&quot;') + '" draggable="false"' + (i ? ' loading="lazy"' : '') + ' />';
+    }).join('');
+    qvTrack.scrollLeft = 0;
+    var many = p.imgs.length > 1;
+    $$('.qv__nav', qv).forEach(function (n) { n.hidden = !many; });
+    $('#qv-dots').hidden = !many;
+    $('#qv-dots').innerHTML = many ? p.imgs.map(function (_, i) {
+      return '<button type="button" class="qv__dot' + (i ? '' : ' is-on') + '" data-i="' + i + '" aria-label="Ảnh ' + (i + 1) + '"></button>';
+    }).join('') : '';
     $('#qv-cat').textContent = p.catTitle; $('#qv-cat').href = shopUrl({ cat: p.cat });
     $('#qv-sub').textContent = p.sub; $('#qv-sub').href = shopUrl({ cat: p.cat, sub: p.sub });
     $('#qv-title').textContent = p.name;
@@ -626,8 +661,6 @@
     $('#qv-desc').textContent = p.desc;
     $('#qv-ch-id').textContent = p.id;
     setChannels(false);
-    var many = qvList.length > 1;
-    $$('.qv__nav', qv).forEach(function (n) { n.hidden = !many; });
   }
   // Messenger: máy tính mở hộp thư web với fanpage (href); điện thoại/máy tính bảng mở app qua m.me
   // (data-app-href) — m.me trên máy tính hay lỗi nên không dùng cho máy tính.
@@ -645,23 +678,14 @@
     if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (open) box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
-  function openQuickView(list, index) {
-    qvList = list;
-    qvIndex = Math.max(0, index);
-    fillQuickView(qvList[qvIndex]);
+  function openQuickView(p) {
+    fillQuickView(p);
     qvReturn = document.activeElement;
     qv.hidden = false;
     reflow(qv);
     qv.classList.add('is-open');
     lockScroll(true);
     setTimeout(function () { $('.qv__panel', qv).focus({ preventScroll: true }); }, 30);
-  }
-  function stepQuickView(d) {
-    if (qvList.length < 2) return;
-    qvIndex = (qvIndex + d + qvList.length) % qvList.length;
-    var media = $('.qv__media img', qv);
-    media.classList.add('is-swap');
-    setTimeout(function () { fillQuickView(qvList[qvIndex]); media.classList.remove('is-swap'); }, 160);
   }
   function closeQuickView() {
     if (!qv || qv.hidden) return;
