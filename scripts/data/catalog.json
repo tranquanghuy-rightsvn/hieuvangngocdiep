@@ -640,5 +640,16 @@
   "isNew": true,
   "name": "Cành hồng",
   "desc": "Quà tặng ý nghĩa cho ngày 20/10\nCành hồng vàng phối lên bó hoa tạo nên sự tinh tế , mang lại cho người được tặng cảm giác thích thú"
+ },
+ {
+  "id": "ND-L09",
+  "img": "nd-l09__1",
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "gold": "Vàng 610",
+  "featured": true,
+  "isNew": true,
+  "name": "Lắc phối charm hồ ly",
+  "desc": "Chiếc vòng mảnh mai phối chả hồ ly màu sắc đa dạng, giúp đôi tay trở nên đẹp hơn"
  }
 ]
