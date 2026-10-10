@@ -113,7 +113,9 @@
   "cat": "trang-suc-cuoi",
   "sub": "Dây Cổ Cưới",
   "name": "Dây cổ cưới hoa phượng",
-  "desc": "Mặt hoa phượng nổi khối điểm xuyết sao vàng nhỏ, đường nét mềm mại, nữ tính."
+  "desc": "Mặt hoa phượng nổi khối điểm xuyết sao vàng nhỏ, đường nét mềm mại, nữ tính.",
+  "gold": "Vàng 980",
+  "featured": true
  },
  {
   "id": "ND-C08",
