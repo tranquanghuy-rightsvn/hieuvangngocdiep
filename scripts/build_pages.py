@@ -557,6 +557,7 @@ PRIVACY = """
 <ul>
 <li>Địa chỉ: <a href="#" data-contact="address">94-96 Lý Thái Tổ, phường Thanh Khê, TP. Đà Nẵng</a></li>
 <li>Hotline / Zalo: <a href="#" data-contact="hotline">0905 887 044</a></li>
+<li>Hotline: <a href="#" data-contact="hotline2">0905 886 011</a></li>
 <li>Email: <a href="#" data-contact="email">Đang cập nhật</a></li>
 </ul>
 """
