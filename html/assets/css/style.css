@@ -944,11 +944,11 @@ html:not(.light) .refresh__text { color: #fff; }
 .prod__name button { text-align: left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color .2s var(--ease); }
 .prod__name button:hover { color: hsl(var(--gold)); }
 
-/* Giá: "Giá:" + .price (số tiền cụ thể) | .price--contact (Liên hệ — chữ thường) */
+/* Giá: .price (chỉ số tiền "1.800.000đ") | "Giá:" + .price--contact (Liên hệ — chữ thường) */
 .price__lbl { margin-right: 6px; font-size: 14px; font-weight: 600; color: hsl(var(--muted-foreground)); }
-.price { display: inline-flex; align-items: baseline; gap: 2px; font-family: var(--font-display); font-weight: 700; line-height: 1; color: #f0c75e; font-variant-numeric: tabular-nums; }
+.price { display: inline-flex; align-items: baseline; gap: 1px; font-family: var(--font-display); font-weight: 700; line-height: 1; color: #f0c75e; font-variant-numeric: tabular-nums; }
 .price__num { font-size: 1em; letter-spacing: .01em; }
-.price__cur { font-size: .7em; font-weight: 600; transform: translateY(-.35em); }
+.price__cur { font-size: .85em; font-weight: 700; }
 .price--contact { font-size: .8em; }
 /* margin-top: auto → giá dính đáy thẻ, thẳng hàng giữa các thẻ dù tên dài 1 hay 2 dòng */
 .prod__price { display: flex; align-items: center; margin-top: auto; padding-top: 8px; font-size: 19px; }
@@ -1009,6 +1009,24 @@ html:not(.light) .refresh__text { color: #fff; }
 .qv__ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 20px; flex: 1; border-radius: 9999px; border: 1px solid hsl(var(--gold) / .45); color: hsl(var(--gold)); font-size: 14px; font-weight: 600; transition: background-color .2s, color .2s; }
 .qv__ghost:hover { background: hsl(var(--gold) / .1); }
 .qv__note { font-size: 12px; line-height: 1.55; color: hsl(var(--muted-foreground)); }
+.qv__cta[aria-expanded="true"] { box-shadow: 0 0 0 3px hsl(var(--gold) / .3); }
+/* Bảng chọn kênh tư vấn (mở khi bấm "Tư vấn ngay"): Zalo / Gọi điện / Messenger fanpage */
+.qv__channels { margin-top: -4px; padding: 14px; border-radius: 14px; border: 1px solid hsl(var(--gold) / .25); background: hsl(var(--gold) / .06); animation: qchIn .22s var(--ease-out-expo) both; }
+.qv__channels-lbl { margin-bottom: 10px; font-size: 13px; color: hsl(var(--muted-foreground)); }
+.qv__channels-lbl b { color: hsl(var(--gold)); font-weight: 700; }
+.qv__channels-grid { display: grid; gap: 8px; }
+.qch { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 12px; background: hsl(var(--card)); border: 1px solid hsl(var(--border)); transition: transform .2s var(--ease), border-color .2s, box-shadow .2s; }
+.qch:hover { transform: translateX(3px); border-color: var(--qch); box-shadow: 0 8px 18px -12px var(--qch); }
+.qch__icon { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: var(--qch); color: #fff; }
+.qch__icon .i { width: 22px; height: 22px; }
+.qch__body { display: flex; flex: 1; min-width: 0; align-items: baseline; justify-content: space-between; gap: 10px; line-height: 1.25; }
+.qch__body b { display: block; font-size: 14px; font-weight: 700; }
+.qch__body small { white-space: nowrap; font-size: 13px; color: hsl(var(--muted-foreground)); }
+.qch--zalo { --qch: #0068ff; }
+.qch--phone { --qch: #c08a1e; }
+.qch--msg { --qch: #8b3dff; }
+.qch--msg .qch__icon { background: linear-gradient(135deg, #0a7cff, #a033ff 60%, #ff5c87); }
+@keyframes qchIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 @media (max-width: 767px) {
   .qv { align-items: flex-end; padding: 0; }
   .qv__panel { grid-template-columns: 1fr; max-height: 92dvh; border-radius: 20px 20px 0 0; overflow-y: auto; transform: translateY(100%); transition: opacity .2s var(--ease), transform .38s var(--ease-out-expo); }
@@ -1340,6 +1358,8 @@ html:not(.light) .ncat--san-pham { color: #c3c9d2; }
 @media (min-width: 640px) { .contact-form-card { padding: 32px; } }
 @media (min-width: 1024px) { .contact-form-card { position: sticky; top: 88px; } }
 .cform { display: grid; gap: 16px; }
+/* Ô bẫy bot (honeypot) — người thật không thấy. MẤT rule này là form hỏng IM LẶNG: khách/autofill điền vào bị coi là bot (GAS.md mục V) */
+.hp-field { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
 .cform__row { display: grid; gap: 16px; }
 @media (min-width: 640px) { .cform__row { grid-template-columns: 1fr 1fr; } }
 .cform textarea { width: 100%; min-height: 110px; padding: 10px 12px; border-radius: 8px; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); font: inherit; font-size: 14px; color: hsl(var(--foreground)); resize: vertical; outline: none; transition: border-color .15s, box-shadow .15s; }

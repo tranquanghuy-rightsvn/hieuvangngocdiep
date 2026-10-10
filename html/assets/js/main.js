@@ -632,11 +632,8 @@
       if (e.target.closest('.js-qv-close')) return closeQuickView();
       var nav = e.target.closest('.qv__nav');
       if (nav) return stepQuickView(+nav.dataset.step);
-      if (e.target.closest('.js-qv-chat')) {
-        chatProduct = qvList[qvIndex];
-        closeQuickView();
-        setTimeout(function () { askAboutProduct(chatProduct); }, 220);
-      }
+      // "Tư vấn ngay" -> mở/thu bảng chọn kênh: Zalo / Gọi điện / Messenger fanpage
+      if (e.target.closest('.js-qv-consult')) setChannels(!$('#qv-channels').hidden ? false : true);
     });
     document.addEventListener('click', function (e) {
       var b = e.target.closest('.js-qv');
@@ -652,11 +649,10 @@
       else if (e.key === 'ArrowLeft') stepQuickView(-1);
     }, true);
   }
-  // Giá: có số → giá cụ thể, không có → "Liên hệ" (cùng markup với price_html trong bake_static.py)
+  // Giá: có số → chỉ số tiền "1.800.000đ", không có → "Giá: Liên hệ" (ĐÚNG markup của price_html trong bake_static.py)
   function priceHtml(price) {
-    var lbl = '<span class="price__lbl">Giá:</span>';
-    if (price) return lbl + '<span class="price"><b class="price__num">' + price.toLocaleString('vi-VN') + '</b><span class="price__cur">₫</span></span>';
-    return lbl + '<span class="price price--contact">Liên hệ</span>';
+    if (price) return '<span class="price"><b class="price__num">' + price.toLocaleString('vi-VN') + '</b><span class="price__cur">đ</span></span>';
+    return '<span class="price__lbl">Giá:</span><span class="price price--contact">Liên hệ</span>';
   }
   function fillQuickView(p) {
     $('#qv-img').src = p.img; $('#qv-img').alt = p.name;
@@ -671,8 +667,26 @@
     $('#qv-subname').textContent = p.sub;
     $('#qv-id').textContent = p.id;
     $('#qv-desc').textContent = p.desc;
+    $('#qv-ch-id').textContent = p.id;
+    setChannels(false);
     var many = qvList.length > 1;
     $$('.qv__nav', qv).forEach(function (n) { n.hidden = !many; });
+  }
+  // Messenger: máy tính mở hộp thư web với fanpage (href); điện thoại/máy tính bảng mở app qua m.me
+  // (data-app-href) — m.me trên máy tính hay lỗi nên không dùng cho máy tính.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('.js-messenger');
+    if (!a || !a.dataset.appHref) return;
+    if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent))) {
+      a.href = a.dataset.appHref;
+    }
+  }, true);
+  function setChannels(open) {
+    var box = $('#qv-channels'), btn = $('.js-qv-consult', qv);
+    if (!box) return;
+    box.hidden = !open;
+    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
   function openQuickView(list, index) {
     qvList = list;
@@ -701,25 +715,6 @@
       if (qvReturn && qvReturn.focus && document.contains(qvReturn)) qvReturn.focus({ preventScroll: true });
     }, 220);
   }
-  // Mở chat kèm sản phẩm cần tư vấn
-  function askAboutProduct(p) {
-    setChat(true);
-    var msgs = $('#chat-msgs');
-    if (!msgs.hidden) {
-      var m = document.createElement('div');
-      m.className = 'chat__msg chat__msg--me';
-      m.textContent = 'Tôi muốn được tư vấn sản phẩm: ' + p.name + ' (' + p.id + ')';
-      msgs.appendChild(m);
-      $('#chat-body').scrollTop = $('#chat-body').scrollHeight;
-    } else {
-      var box = $('#chat-product');
-      $('img', box).src = p.img;
-      $('b', box).textContent = p.name;
-      $('span', box).textContent = p.id + ' · ' + p.sub;
-      box.hidden = false;
-    }
-  }
-
   // Lọc lưới sản phẩm: ẩn/hiện thẻ có sẵn (kèm hiệu ứng chuyển)
   function showCards(grid, cards) {
     clearTimeout(grid._swap); // lần lọc mới huỷ lần chuyển cũ chưa xong -> luôn hiện kết quả mới nhất
@@ -905,7 +900,10 @@
     });
   }
 
-  /* ---------------- FORM LIÊN HỆ (demo: chưa gửi lên server) ---------------- */
+  /* ---------------- FORM LIÊN HỆ → trang quản trị (GAS.md mục V) ---------------- */
+  // URL /exec của trang quản trị — điền sau khi deploy CMS lần đầu (gas/README.md). Deploy lại bằng
+  // "New version" thì URL không đổi. Để trống thì form báo lỗi, KHÔNG giả vờ gửi thành công.
+  var GAS_EXEC_URL = 'https://script.google.com/macros/s/AKfycbyRqZKiIw-jAzQ7EE4WIm5nR4oA-rYUajNv4M_7-CyCuZFQx8W1RO4F8l8MnPjho90x9Q/exec';
   function initContactForm() {
     var form = $('#contact-form');
     if (!form) return;
@@ -917,14 +915,30 @@
       err.textContent = msg; err.hidden = !msg;
       if (msg) { (name ? $('#cf-phone') : $('#cf-name')).focus(); return; }
       var btn = $('.cform__submit', form);
+      var fail = function (m) {
+        var hl = $('[data-contact="hotline"]');
+        err.textContent = m || 'Chưa gửi được yêu cầu. Quý khách vui lòng gọi hotline' + (hl ? ' ' + hl.textContent : '') + ' giúp em nhé.';
+        err.hidden = false;
+      };
+      if (!GAS_EXEC_URL) { fail(); return; }
       btn.disabled = true; btn.classList.add('is-loading');
-      setTimeout(function () {
+      // text/plain để trình duyệt không gửi preflight OPTIONS (máy chủ form không xử lý được)
+      fetch(GAS_EXEC_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          formType: 'contact', _hp: $('#cf-hp').value,
+          name: name, phone: $('#cf-phone').value.trim(), need: $('#cf-need').value, message: $('#cf-msg').value.trim()
+        })
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        if (!res.ok) { fail(res.error); return; }
         $('#cf-done-name').textContent = name;
         $('#cf-done-phone').textContent = $('#cf-phone').value.trim();
         form.hidden = true; $('#contact-done').hidden = false;
-        btn.disabled = false; btn.classList.remove('is-loading');
         form.reset();
-      }, 700);
+      }).catch(function () { fail(); }).then(function () {
+        btn.disabled = false; btn.classList.remove('is-loading');
+      });
     });
     $('#cf-again').addEventListener('click', function () { $('#contact-done').hidden = true; form.hidden = false; $('#cf-name').focus(); });
   }

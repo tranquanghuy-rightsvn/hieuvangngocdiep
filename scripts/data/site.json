@@ -7,6 +7,8 @@
     "hotline2": "0905 886 011",
     "email": "haulien2448@gmail.com",
     "facebook": "https://www.facebook.com/HieuVangNgocDiepHau/",
+    "messenger": "https://www.facebook.com/messages/t/104506112299464",
+    "messenger_app": "https://m.me/HieuVangNgocDiepHau",
     "hours": "Mở cửa 7h00 – 21h00 tất cả các ngày trong tuần"
   },
   "PRODUCTS": [
@@ -140,5 +142,23 @@
     }
   ],
   "PRICES_UPDATED_AT": "09:15 28/08/2026",
-  "SILVER_UPDATED_AT": "18:00 06/10/2026"
+  "SILVER_UPDATED_AT": "18:00 06/10/2026",
+  "NEWS_CATS": [
+    {
+      "slug": "cua-hang",
+      "title": "Tin cửa hàng"
+    },
+    {
+      "slug": "kien-thuc",
+      "title": "Kiến thức"
+    },
+    {
+      "slug": "cam-nang",
+      "title": "Cẩm nang"
+    },
+    {
+      "slug": "san-pham",
+      "title": "Sản phẩm mới"
+    }
+  ]
 }

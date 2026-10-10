@@ -1,0 +1,58 @@
+name: Build site tĩnh từ scripts/data/
+
+# Chỉ trigger ở đúng file LUÔN là commit CHỐT của một thao tác trong trang quản trị — KHÔNG theo cả
+# thư mục scripts/data/**. Một lần Lưu sinh nhiều commit liên tiếp (ảnh -> chi tiết bài -> danh sách);
+# trigger theo thư mục sẽ build ngay từ commit ĐẦU (lúc danh sách chưa cập nhật) -> deploy dở dang.
+#   scripts/data/catalog.json -> commit chốt của Lưu/Xoá sản phẩm + Lưu giá (1 file, tự nó là chốt)
+#   scripts/data/posts.json   -> commit chốt của Lưu/Xoá tin tức (ghi SAU CÙNG)
+on:
+  push:
+    branches: [master]
+    paths:
+      - "scripts/data/catalog.json"
+      - "scripts/data/posts.json"
+      - "scripts/data/site.json"
+      - "scripts/*.py"
+      - "scripts/content/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# Hai lần Lưu sát nhau có thể chạy chồng 2 job; job sau đợi job trước xong rồi chạy trên dữ liệu mới
+# nhất, tránh 2 job cùng push html/ và đá nhau.
+concurrency:
+  group: build-html
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # bake_static.py đọc giá vàng mặc định trong main.js bằng node (runner có sẵn node)
+      - name: Build html/ từ scripts/data/
+        run: |
+          python3 scripts/build_pages.py
+          python3 scripts/bake_static.py
+
+      # -A để stage cả thư mục bài đã bị build xoá (html/tin-tuc/<slug>/).
+      - name: Commit html/ đã build
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A html/
+          git diff --cached --quiet && echo "Không có thay đổi để commit." && exit 0
+          git commit -m "CI: build html từ scripts/data/"
+          git pull --rebase
+          git push
+
+      # KHÔNG có bước deploy: Cloudflare tự deploy khi có commit mới trên master (kể cả commit của
+      # CI ở trên). Không tự lặp CI vì commit của CI chỉ đụng html/.

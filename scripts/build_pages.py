@@ -5,11 +5,13 @@ Khung trang (head, header, menu, chat, nút nổi, drawer) lấy từ san-pham/i
 Khối bảng giá vàng / bạc lấy từ index.html (trang chủ).
 
 Chạy lại sau khi sửa nội dung:  python3 scripts/build_pages.py && python3 scripts/bake_static.py
-Thêm bài viết: thêm 1 mục vào POSTS (ảnh bìa đặt trong assets/img/news/, tỉ lệ 16:10).
+Tin tức: quản lý qua CMS (scripts/data/posts.json + scripts/data/tin-tuc/) — xem GAS.md mục IV.
 """
 import html
+import json
 import os
 import re
+import shutil
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.join(REPO, 'html')  # thư mục web (được deploy)
@@ -138,192 +140,32 @@ TOOLS = '''    <section class="tools-sec">
 '''
 
 # ---------------------------------------------------------------- tin tức
-CATS = {'cua-hang': 'Tin cửa hàng', 'kien-thuc': 'Kiến thức', 'cam-nang': 'Cẩm nang', 'san-pham': 'Sản phẩm mới'}
+# Dữ liệu do CMS ghi (xem GAS.md mục IV) — KHÔNG sửa tay:
+#   scripts/data/posts.json            danh sách bài (không có body)
+#   scripts/data/tin-tuc/<slug>.json   bản ghi đầy đủ 1 bài (có body, trừ bài smart)
+# Chuyên mục: NEWS_CATS trong scripts/data/site.json (CMS đọc cùng nguồn này).
+DATA = os.path.join(REPO, 'scripts', 'data')
+_load = lambda *p: json.load(open(os.path.join(DATA, *p), encoding='utf-8'))
+CATS = {c['slug']: c['title'] for c in _load('site.json')['NEWS_CATS']}
 
-POSTS = [
-    dict(slug='bo-suu-tap-qua-tang-vang-phong-thuy', cat='san-pham', date='03/10/2026', cover='qua-tang-vang.jpg',
-         title='Bộ sưu tập quà tặng vàng phong thuỷ: Thần Tài, Tài Thần cưỡi ngựa, Di Lặc…',
-         excerpt='Những linh vật vàng đặt trong hộp mica "Chiêu Tài Tiến Bảo" — món quà khai trương, tân gia, mừng thọ vừa sang trọng vừa mang lời chúc tài lộc.',
-         body='''
-<p>Bên cạnh trang sức, <strong>quà tặng vàng phong thuỷ</strong> đang là lựa chọn được nhiều Quý khách tìm đến tại Hiệu Vàng Ngọc Diệp. Mỗi linh vật được đặt trong hộp mica trong suốt có đế đỏ in chữ "Chiêu Tài Tiến Bảo", thắt nơ sẵn — mang đi tặng ngay mà không cần gói thêm.</p>
-<h2>Các mẫu đang có tại cửa hàng</h2>
-<ul>
-  <li><strong>Tượng Thần Tài, Ông Địa</strong> — cặp đôi quen thuộc đặt bàn thờ, quầy thu ngân để cầu buôn may bán đắt.</li>
-  <li><strong>Tài Thần cưỡi ngựa</strong> — mang ý nghĩa "mã đáo thành công", hợp làm quà khai trương.</li>
-  <li><strong>Tượng Di Lặc</strong> — tượng trưng cho niềm vui, sự an lạc của gia chủ.</li>
-  <li><strong>Linh vật 12 con giáp</strong>: rồng, rắn, ngựa, heo… — quà tặng theo tuổi rất được ưa chuộng.</li>
-  <li><strong>Cây tài lộc, nén vàng, hồ lô</strong> — vật phẩm phong thuỷ nhỏ gọn đặt bàn làm việc.</li>
-</ul>
-<blockquote>Mẹo nhỏ: chọn linh vật theo tuổi hoặc theo mong muốn của người nhận (tài lộc, bình an, sức khoẻ) để món quà thêm ý nghĩa.</blockquote>
-<h2>Gợi ý chọn quà theo dịp</h2>
-<p><strong>Khai trương:</strong> Tài Thần cưỡi ngựa, Thần Tài – Ông Địa. <strong>Tân gia:</strong> hồ lô, cây tài lộc. <strong>Mừng thọ:</strong> Di Lặc, nén vàng. <strong>Sinh nhật:</strong> linh vật theo tuổi.</p>
-<p>Quý khách có thể xem thêm các mẫu tại mục <a href="/san-pham/?cat=qua-tang">Quà Tặng Vàng</a> hoặc ghé trực tiếp cửa hàng để chọn mẫu ưng ý.</p>
-'''),
-    dict(slug='gia-cong-trang-suc-vang-bac-theo-yeu-cau', cat='san-pham', date='01/10/2026', cover='gia-cong-trang-suc.jpg',
-         title='Gia công trang sức vàng bạc theo yêu cầu — biến ý tưởng thành món trang sức riêng',
-         excerpt='Muốn một chiếc nhẫn khắc tên, bộ trang sức cưới theo mẫu riêng hay làm mới món đồ cũ? Hiệu Vàng Ngọc Diệp nhận gia công trang sức vàng bạc theo yêu cầu.',
-         body='''
-<p>Bên cạnh mua bán vàng 24K – 18K, <strong>gia công trang sức vàng bạc</strong> là dịch vụ mà Hiệu Vàng Ngọc Diệp đã gắn bó từ những ngày đầu. Với hơn 40 năm kinh nghiệm, chúng tôi giúp Quý khách sở hữu món trang sức mang dấu ấn riêng.</p>
-<h2>Những yêu cầu thường gặp</h2>
-<ul>
-  <li><strong>Nhẫn cưới, nhẫn đôi khắc tên</strong> hoặc ngày kỷ niệm.</li>
-  <li><strong>Trang sức cưới theo mẫu riêng</strong>: dây cổ, vòng, mặt khoá theo ý gia đình.</li>
-  <li><strong>Làm mới, sửa chữa</strong>: nối dây, thay khoá, chỉnh size nhẫn, đánh bóng.</li>
-  <li><strong>Đổi kiểu</strong> từ vàng cũ sang mẫu mới hợp xu hướng.</li>
-</ul>
-<h2>Quy trình đơn giản</h2>
-<ol>
-  <li><strong>Tư vấn:</strong> Quý khách mang mẫu tham khảo hoặc ý tưởng đến cửa hàng, hoặc gửi ảnh qua Zalo.</li>
-  <li><strong>Báo giá:</strong> cửa hàng tư vấn loại vàng, trọng lượng dự kiến, tiền công và thời gian hoàn thành.</li>
-  <li><strong>Chế tác:</strong> thợ kim hoàn thực hiện và cập nhật tiến độ khi cần.</li>
-  <li><strong>Nhận hàng:</strong> kiểm tra sản phẩm, cân trọng lượng thực tế và thanh toán.</li>
-</ol>
-<blockquote>Gửi ảnh mẫu qua <a href="https://zalo.me/0905887044" target="_blank" rel="noopener noreferrer">Zalo 0905 887 044</a> để được tư vấn và báo giá nhanh nhất.</blockquote>
-'''),
-    dict(slug='bac-999-va-bac-925-khac-nhau-the-nao', cat='kien-thuc', date='30/09/2026', cover='bac-999-bac-925.jpg',
-         title='Bạc 999 và bạc 925 khác nhau thế nào? Nên chọn loại nào?',
-         excerpt='Cùng là bạc nhưng bạc 999 và bạc 925 khác nhau về độ tinh khiết, độ cứng và mục đích sử dụng. Đây là cách chọn đúng loại cho nhu cầu của bạn.',
-         body='''
-<p>Khi mua bạc, Quý khách thường gặp hai cách gọi phổ biến: <strong>bạc 999</strong> và <strong>bạc 925</strong>. Con số thể hiện hàm lượng bạc nguyên chất trên 1.000 phần.</p>
-<h2>Bạc 999 (bạc nguyên chất)</h2>
-<p>Chứa khoảng <strong>99,9% bạc</strong>. Màu trắng sáng, mềm và dễ trầy. Bạc 999 thường được làm thành <strong>bạc miếng, bạc thỏi, đồng bạc</strong> để tích trữ, hoặc các món mỹ nghệ ít va chạm.</p>
-<h2>Bạc 925 (bạc Ý / sterling silver)</h2>
-<p>Gồm <strong>92,5% bạc</strong> và 7,5% kim loại khác (thường là đồng) giúp bạc cứng hơn, giữ dáng tốt. Đây là chất liệu phổ biến nhất cho <strong>dây chuyền, lắc tay, nhẫn, bông tai</strong> đeo hằng ngày.</p>
-<h2>Nên chọn loại nào?</h2>
-<ul>
-  <li><strong>Tích trữ, đầu tư:</strong> chọn bạc 999 dạng miếng, thỏi — giá bám sát giá bạc thị trường.</li>
-  <li><strong>Đeo hằng ngày:</strong> chọn trang sức bạc 925 — bền, nhiều kiểu dáng.</li>
-</ul>
-<blockquote>Xem giá bạc trang sức tham khảo trong ngày tại trang <a href="/bang-gia/#gia-bac">Bảng giá</a> hoặc tính nhanh bằng <a href="/may-tinh-gia-bac/">máy tính giá bạc</a>.</blockquote>
-'''),
-    dict(slug='cach-bao-quan-trang-suc-vang-bac-luon-sang-bong', cat='kien-thuc', date='25/09/2026', cover='bao-quan-trang-suc.jpg',
-         title='7 cách bảo quản trang sức vàng, bạc luôn sáng bóng như mới',
-         excerpt='Vài thói quen nhỏ giúp trang sức giữ được độ sáng và bền đẹp theo năm tháng — từ cách đeo, cách cất đến cách làm sạch tại nhà.',
-         body='''
-<p>Trang sức vàng, bạc theo thời gian có thể bị xỉn màu do mồ hôi, mỹ phẩm hay hoá chất. Chỉ với vài thói quen đơn giản, món trang sức của bạn sẽ luôn sáng bóng.</p>
-<h2>Khi đeo</h2>
-<ol>
-  <li><strong>Tháo trang sức khi tắm, bơi, làm việc nhà</strong> — xà phòng, nước tẩy, nước biển và nước hồ bơi dễ làm xỉn màu.</li>
-  <li><strong>Xịt nước hoa, thoa kem trước rồi mới đeo</strong> trang sức để hạn chế hoá chất bám lên bề mặt.</li>
-  <li><strong>Tháo ra khi ngủ, tập thể thao</strong> để tránh móp, đứt dây.</li>
-</ol>
-<h2>Khi cất giữ</h2>
-<ol start="4">
-  <li><strong>Cất riêng từng món</strong> trong túi vải hoặc hộp có ngăn, tránh cọ xát gây trầy.</li>
-  <li><strong>Để nơi khô ráo</strong>; với bạc, có thể cho thêm gói hút ẩm để hạn chế xỉn đen.</li>
-</ol>
-<h2>Khi làm sạch</h2>
-<ol start="6">
-  <li><strong>Ngâm nước ấm pha chút xà phòng dịu nhẹ</strong> 10–15 phút, chải nhẹ bằng bàn chải lông mềm, rửa sạch và lau khô bằng khăn mềm.</li>
-  <li><strong>Mang đến cửa hàng để đánh bóng, làm mới</strong> định kỳ — đặc biệt với trang sức đính đá hoặc có chi tiết nhỏ.</li>
-</ol>
-<blockquote>Hiệu Vàng Ngọc Diệp nhận làm sạch, đánh bóng và gia công sửa chữa trang sức vàng bạc. Liên hệ <a href="tel:0905887044">0905 887 044</a> để được tư vấn.</blockquote>
-'''),
-    dict(slug='phan-biet-vang-9999-vang-98-vang-610', cat='kien-thuc', date='20/09/2026', cover='phan-biet-tuoi-vang.jpg',
-         title='Phân biệt vàng 9999, vàng 98, vàng 96 và vàng 610 — tuổi vàng là gì?',
-         excerpt='"Tuổi vàng" cho biết hàm lượng vàng nguyên chất trong sản phẩm. Hiểu đúng giúp bạn chọn mua phù hợp, dù để tích trữ hay làm trang sức.',
-         body='''
-<p>Khi xem bảng giá, Quý khách sẽ thấy nhiều loại: vàng 9999, 98, 96, nữ trang 98, 610… Tất cả đều nói về <strong>tuổi vàng</strong> — tỉ lệ vàng nguyên chất có trong sản phẩm.</p>
-<h2>Các loại vàng phổ biến</h2>
-<ul>
-  <li><strong>Vàng 9999 (24K):</strong> 99,99% vàng nguyên chất, màu vàng đậm, mềm. Phù hợp <strong>tích trữ</strong>: nhẫn tròn trơn, vàng ép vỉ, đồng vàng.</li>
-  <li><strong>Vàng 98, vàng 96:</strong> 98% và 96% vàng, cứng hơn 9999 một chút, thường dùng cho nhẫn, vòng, trang sức cưới truyền thống.</li>
-  <li><strong>Vàng 750 (18K):</strong> 75% vàng, độ cứng tốt, giữ chi tiết đẹp — hay dùng cho trang sức đính đá.</li>
-  <li><strong>Vàng 610 (vàng tây, ~14,6K):</strong> 61% vàng, cứng, màu sắc đa dạng, giá mềm — phù hợp trang sức thời trang đeo hằng ngày.</li>
-</ul>
-<h2>Nên chọn loại nào?</h2>
-<p>Nếu mục tiêu là <strong>tích luỹ tài sản</strong>, hãy ưu tiên vàng 9999 vì dễ mua bán lại, ít hao hụt. Nếu cần <strong>trang sức đẹp, bền</strong> để đeo hằng ngày, vàng 18K hoặc 610 là lựa chọn hợp lý.</p>
-<blockquote>Giá từng loại vàng được cập nhật tại trang <a href="/bang-gia/">Bảng giá</a>. Bạn cũng có thể dùng <a href="/may-tinh-gia-vang/">máy tính giá vàng</a> để ước tính số tiền nhanh chóng.</blockquote>
-'''),
-    dict(slug='cach-doc-bang-gia-vang-mua-vao-ban-ra', cat='kien-thuc', date='18/09/2026', cover='doc-bang-gia.jpg',
-         title='Cách đọc bảng giá vàng: "mua vào", "bán ra" nghĩa là gì?',
-         excerpt='Giá mua vào và bán ra trên bảng giá được tính từ phía cửa hàng. Hiểu đúng giúp Quý khách biết mình sẽ trả bao nhiêu khi mua và nhận bao nhiêu khi bán.',
-         body='''
-<p>Mỗi ngày, bảng giá vàng tại cửa hàng hiển thị hai cột: <strong>Mua vào</strong> và <strong>Bán ra</strong>. Nhiều Quý khách vẫn hay nhầm lẫn hai con số này.</p>
-<h2>Hiểu theo góc nhìn của cửa hàng</h2>
-<ul>
-  <li><strong>Bán ra (Khách hàng mua):</strong> giá cửa hàng bán cho Quý khách. Đây là số tiền Quý khách trả khi mua vàng.</li>
-  <li><strong>Mua vào (Khách hàng bán):</strong> giá cửa hàng mua lại từ Quý khách. Đây là số tiền Quý khách nhận được khi bán vàng.</li>
-</ul>
-<p>Giá bán ra luôn cao hơn giá mua vào một khoản gọi là <strong>chênh lệch mua – bán</strong>, bù cho chi phí vận hành và biến động thị trường.</p>
-<h2>Đơn vị tính</h2>
-<p>Giá vàng thường niêm yết theo <strong>chỉ</strong> (1 chỉ = 3,75 gram; 10 chỉ = 1 lượng). Giá bạc thường niêm yết theo <strong>lượng</strong> hoặc <strong>kg</strong>.</p>
-<h2>Với trang sức</h2>
-<p>Khi mua trang sức, tổng số tiền = <strong>giá vàng × trọng lượng + tiền công</strong> chế tác. Khi bán lại, cửa hàng thường tính theo giá mua vào của tuổi vàng tương ứng.</p>
-<blockquote>Thử ngay <a href="/may-tinh-gia-vang/">máy tính giá vàng</a> để ước tính số tiền khi mua hoặc bán.</blockquote>
-'''),
-    dict(slug='kinh-nghiem-chon-trang-suc-cuoi-cho-co-dau', cat='cam-nang', date='15/09/2026', cover='trang-suc-cuoi.jpg',
-         title='Kinh nghiệm chọn trang sức cưới cho cô dâu: đủ lễ, đẹp và hợp túi tiền',
-         excerpt='Dây cổ cưới, vòng cưới, mặt khoá, nhẫn cưới… nên chuẩn bị những gì và chọn thế nào cho vừa đẹp vừa ý nghĩa? Cùng Ngọc Diệp điểm qua vài kinh nghiệm.',
-         body='''
-<p>Trang sức cưới không chỉ để làm đẹp mà còn là <strong>của hồi môn</strong>, là lời chúc của hai bên gia đình dành cho đôi uyên ương. Dưới đây là vài kinh nghiệm giúp cô dâu chuẩn bị chu đáo.</p>
-<h2>Bộ trang sức cưới thường gồm</h2>
-<ul>
-  <li><strong>Dây cổ cưới</strong> (dây chuyền nhiều tầng, mặt heo, phượng, mây cát tường) — điểm nhấn của bộ trang sức.</li>
-  <li><strong>Vòng tay cưới / vòng ximen</strong> — thường được mẹ chồng trao cho con dâu trong lễ rước dâu.</li>
-  <li><strong>Mặt khoá, bông tai, nhẫn cưới</strong> — hoàn thiện bộ trang sức.</li>
-</ul>
-<h2>Chọn thế nào cho hợp?</h2>
-<ol>
-  <li><strong>Theo dáng người:</strong> cô dâu cổ cao, vai nhỏ hợp dây cổ nhiều tầng; cổ ngắn nên chọn kiểu thanh, ít tầng.</li>
-  <li><strong>Theo trang phục:</strong> áo dài cổ cao hợp dây dài, mặt to; váy cưới cổ khoét hợp dây mảnh, mặt nhỏ.</li>
-  <li><strong>Theo ngân sách:</strong> xác định trước tổng số chỉ vàng dự kiến để cửa hàng tư vấn mẫu phù hợp.</li>
-  <li><strong>Đặt trước 2–4 tuần</strong> nếu muốn gia công theo mẫu riêng hoặc khắc tên.</li>
-</ol>
-<blockquote>Xem các mẫu dây cổ cưới, vòng cưới, mặt khoá thật tại mục <a href="/san-pham/?cat=trang-suc-cuoi">Trang Sức Cưới</a>.</blockquote>
-'''),
-    dict(slug='thong-bao-nghi-le-quoc-khanh-2-9-2026', cat='cua-hang', date='28/08/2026', cover='nghi-le-quoc-khanh-2-9.jpg',
-         title='Thông báo nghỉ lễ Quốc khánh 2/9/2026',
-         excerpt='Hiệu Vàng Ngọc Diệp nghỉ ngày 2/9/2026 và hoạt động lại bình thường từ ngày 3/9/2026. Kính chúc Quý khách có kỳ nghỉ lễ vui vẻ!',
-         body='''
-<p>Nhân dịp kỷ niệm Quốc khánh nước Cộng hoà Xã hội Chủ nghĩa Việt Nam, Hiệu Vàng Ngọc Diệp xin trân trọng thông báo lịch nghỉ lễ:</p>
-<ul>
-  <li><strong>Ngày 2/9/2026:</strong> cửa hàng <strong>nghỉ</strong>.</li>
-  <li><strong>Ngày 3/9/2026:</strong> hoạt động lại bình thường.</li>
-</ul>
-<p>Trong thời gian nghỉ lễ, Quý khách vẫn có thể nhắn tin qua <a href="https://zalo.me/0905887044" target="_blank" rel="noopener noreferrer">Zalo 0905 887 044</a> hoặc fanpage, chúng tôi sẽ phản hồi ngay khi mở cửa trở lại.</p>
-<blockquote>Kính chúc Quý khách có kỳ nghỉ lễ vui vẻ! Xin chân thành cảm ơn!</blockquote>
-'''),
-    dict(slug='thong-bao-lich-nghi-thang-6-2026', cat='cua-hang', date='01/06/2026', cover='lich-nghi-thang-6.jpg',
-         title='Thông báo lịch nghỉ ngày 5, 6, 7/6/2026',
-         excerpt='Hiệu Vàng Ngọc Diệp nghỉ 3 ngày 5/6, 6/6 và 7/6/2026, mở cửa lại vào thứ Hai ngày 8/6/2026. Hẹn gặp lại Quý khách!',
-         body='''
-<p>Hiệu Vàng Ngọc Diệp xin thông báo lịch nghỉ của cửa hàng như sau:</p>
-<ul>
-  <li><strong>Nghỉ:</strong> ngày 5/6, 6/6 và 7/6/2026.</li>
-  <li><strong>Mở cửa lại:</strong> thứ Hai, ngày 8/6/2026.</li>
-</ul>
-<p>Mong Quý khách thông cảm và sắp xếp thời gian giao dịch phù hợp. Mọi nhu cầu tư vấn vui lòng nhắn tin qua <a href="https://zalo.me/0905887044" target="_blank" rel="noopener noreferrer">Zalo 0905 887 044</a>.</p>
-<blockquote>Hẹn gặp lại Quý khách! Xin cảm ơn!</blockquote>
-'''),
-    dict(slug='mua-vang-ngay-via-than-tai-nen-chon-gi', cat='cam-nang', date='05/02/2026', cover='via-than-tai.jpg',
-         title='Mua vàng ngày vía Thần Tài: nên chọn loại nào để vừa may mắn vừa giữ giá?',
-         excerpt='Ngày mùng 10 tháng Giêng, nhiều người mua vàng để cầu tài lộc. Đâu là lựa chọn vừa ý nghĩa, vừa dễ tích luỹ?',
-         body='''
-<p>Theo quan niệm dân gian, <strong>ngày vía Thần Tài (mùng 10 tháng Giêng âm lịch)</strong> mua một chút vàng sẽ mang lại may mắn, tài lộc cả năm. Vậy nên mua gì?</p>
-<h2>Gợi ý các lựa chọn</h2>
-<ul>
-  <li><strong>Vàng ép vỉ Thần Tài 999.9:</strong> nhỏ gọn, ý nghĩa, phù hợp làm quà hoặc để dành.</li>
-  <li><strong>Nhẫn tròn trơn 24K:</strong> dễ mua bán lại, phù hợp tích luỹ dài hạn.</li>
-  <li><strong>Đồng vàng, vàng hoa mai:</strong> đẹp mắt, thích hợp lì xì, tặng người thân.</li>
-</ul>
-<h2>Lưu ý khi mua</h2>
-<ol>
-  <li><strong>Mua vừa sức</strong> — ý nghĩa nằm ở sự may mắn, không cần mua nhiều.</li>
-  <li><strong>Chọn cửa hàng uy tín</strong>, có tem nhãn, hoá đơn rõ ràng.</li>
-  <li><strong>Đi sớm hoặc đặt trước</strong> vì ngày vía Thần Tài thường rất đông khách.</li>
-</ol>
-<blockquote>Xem các mẫu vàng tích trữ tại mục <a href="/san-pham/?cat=vang-tich-tru">Vàng Tích Trữ</a> và theo dõi giá tại trang <a href="/bang-gia/">Bảng giá</a>.</blockquote>
-'''),
-]
 
-# Bài Smart content: thân bài thiết kế sẵn (khối tv-) ở scripts/content/tin-tuc/<slug>.html, thay cho body trong POSTS
+def _date_key(p):
+    d, m, y = p['date'].split('/')
+    return (y, m, d)
+
+
+POSTS = sorted((_load('tin-tuc', x['slug'] + '.json') for x in _load('posts.json')), key=_date_key, reverse=True)
+
+# Bài Smart content: thân bài thiết kế sẵn (khối tv-) ở scripts/content/tin-tuc/<slug>.html
 SMART_DIR = os.path.join(REPO, 'scripts', 'content', 'tin-tuc')  # bản đã duyệt; bản nháp để ở content/_drafts/
 for _p in POSTS:
-    _f = os.path.join(SMART_DIR, _p['slug'] + '.html')
-    if os.path.exists(_f):
-        _p['body'] = open(_f, encoding='utf-8').read()
-        _p['smart'] = True
+    if _p.get('smart'):
+        _p['body'] = open(os.path.join(SMART_DIR, _p['slug'] + '.html'), encoding='utf-8').read()
+
+
+def text_fields(p):
+    # Tiêu đề/mô tả do CMS nhập -> escape khi chèn vào HTML (giữ nguyên dấu nháy để trang cũ không đổi byte)
+    return {k: html.escape(p[k], quote=False) for k in ('title', 'excerpt')}
 
 
 def reading_time(body):
@@ -341,7 +183,7 @@ def post_card(p, cls='ncard'):
               <a href="/tin-tuc/%(slug)s/" class="ncard__more">Đọc tiếp <svg class="i i-16" stroke-width="2"><use href="#i-arrow-right"/></svg></a>
             </div>
           </article>
-''' % dict(p, cls=cls, catname=CATS[p['cat']], alt=html.escape(p['title']))
+''' % dict(p, cls=cls, catname=CATS[p['cat']], alt=html.escape(p['title']), **text_fields(p))
 
 
 POST_CTA = '''          <aside class="post-cta">
@@ -411,12 +253,21 @@ def build_news():
         </div>
       </section>
     </main>
-''' % dict(p, catname=CATS[p['cat']], alt=html.escape(p['title']), rt=reading_time(p['body']),
+''' % dict(p, catname=CATS[p['cat']], alt=html.escape(p['title']), rt=reading_time(p['body']), **text_fields(p),
            body='\n'.join('          ' + l if l.strip() else '' for l in p['body'].strip().split('\n')),
            related=''.join(post_card(x) for x in related[:3]),
            cta='' if p.get('smart') else POST_CTA)
         page('tin-tuc/%s/index.html' % p['slug'], '%s | Hiệu Vàng Ngọc Diệp' % p['title'], p['excerpt'], main,
              active='/tin-tuc/', og_image='/assets/img/news/' + p['cover'], page_id='post')
+
+    # Bài đã xoá qua CMS: gỡ thư mục html/tin-tuc/<slug>/ không còn trong posts.json (mọi thư mục con
+    # của tin-tuc/ đều do hàm này sinh ra, nên an toàn để xoá).
+    keep = {p['slug'] for p in POSTS}
+    news_dir = os.path.join(ROOT, 'tin-tuc')
+    for d in sorted(os.listdir(news_dir)):
+        if os.path.isdir(os.path.join(news_dir, d)) and d not in keep:
+            shutil.rmtree(os.path.join(news_dir, d))
+            print('  ✗ tin-tuc/%s/ (bài đã xoá)' % d)
 
 
 def build_prices():
@@ -460,7 +311,6 @@ def build_contact():
     from urllib.parse import quote_plus
     cards = HOME[HOME.index('<div class="contact-grid">'): HOME.index('<div class="footer__bottom">')].rstrip()
     cards = cards[:cards.rindex('</div>') + len('</div>')]
-    cards = re.sub(r'<br />\s*<a [^>]*data-contact="hotline2"[^>]*>.*?</a>', '', cards)  # số phụ chỉ hiện ở footer trang chủ
     main = '''    <main class="contact-page">
 %(hero)s      <div class="container contact-body">
         <div class="contact-quick">
@@ -493,6 +343,7 @@ def build_contact():
                 </select><svg class="i i-16" stroke-width="2"><use href="#i-chevron-down"/></svg></div>
               </div>
               <div class="calc-field"><label for="cf-msg">Nội dung</label><textarea id="cf-msg" rows="4" placeholder="Mẫu trang sức, trọng lượng, thời gian mong muốn…"></textarea></div>
+              <div class="hp-field" aria-hidden="true"><label for="cf-hp">Để trống ô này</label><input id="cf-hp" name="_hp" type="text" tabindex="-1" autocomplete="off" /></div>
               <p class="cform__err" id="cf-err" hidden></p>
               <button type="submit" class="btn-gold cform__submit"><svg class="i i-16" stroke-width="2"><use href="#i-send"/></svg>&nbsp;Gửi yêu cầu</button>
               <p class="cform__note">Thông tin của Quý khách chỉ dùng để liên hệ tư vấn, không chia sẻ cho bên thứ ba.</p>

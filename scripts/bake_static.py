@@ -3,7 +3,7 @@
 
 Dữ liệu:
   scripts/data/site.json     thông tin liên hệ (CONTACT), danh mục sản phẩm (PRODUCTS), thứ tự menu (MENU_ORDER)
-  scripts/data/catalog.json  toàn bộ sản phẩm — thêm "price": 1250000 (VND) để hiện giá, bỏ trống thì hiện "Liên hệ"
+  scripts/data/catalog.json  toàn bộ sản phẩm (do CMS ghi — GAS.md mục II); có "price" (VND) thì hiện giá, không có thì "Giá: Liên hệ"
   assets/js/main.js          giá vàng/bạc mặc định (PRICES, SILVER_PRICES) — JS tự cập nhật giá mới khi mở trang
 
 Sửa dữ liệu xong chạy:  python3 scripts/bake_static.py
@@ -95,6 +95,7 @@ HREF = {
     'zalo': lambda v: 'https://zalo.me/' + digits(v),
     'email': lambda v: 'mailto:' + v,
     'facebook': lambda v: v,
+    'messenger': lambda v: v,  # điện thoại: main.js đổi sang CONTACT.messenger_app (data-app-href)
 }
 
 
@@ -103,8 +104,10 @@ def link_attrs(tag, key):
     if not v or key not in HREF:
         return tag
     tag = set_attr(tag, 'href', HREF[key](v))
-    if key in ('address', 'zalo', 'facebook'):
+    if key in ('address', 'zalo', 'facebook', 'messenger'):
         tag = set_attr(set_attr(tag, 'target', '_blank'), 'rel', 'noopener noreferrer')
+    if key == 'messenger' and CONTACT.get('messenger_app'):
+        tag = set_attr(tag, 'data-app-href', CONTACT['messenger_app'])
     return tag
 
 
@@ -184,10 +187,10 @@ def bake_home_cats(src):
 
 # ---------------------------------------------------------------- thẻ sản phẩm
 def price_html(p):
-    # có 'price' (VND) → "Giá: 1.250.000₫"; không có → "Giá: Liên hệ" (chữ thường, không phải link/nút)
-    # main.js có hàm priceHtml tương ứng cho Xem nhanh
+    # có 'price' (VND) → chỉ số tiền "1.800.000đ"; không có → "Giá: Liên hệ" (chữ thường, không phải link/nút)
+    # main.js có hàm priceHtml ra ĐÚNG markup này cho Xem nhanh — sửa 1 chỗ phải sửa chỗ kia (GAS.md mục II.2)
     if p.get('price'):
-        return '<span class="price__lbl">Giá:</span><span class="price"><b class="price__num">%s</b><span class="price__cur">₫</span></span>' % fmt(p['price'])
+        return '<span class="price"><b class="price__num">%s</b><span class="price__cur">đ</span></span>' % fmt(p['price'])
     return '<span class="price__lbl">Giá:</span><span class="price price--contact">Liên hệ</span>'
 
 
@@ -307,15 +310,24 @@ QUICKVIEW = '''  <!-- ============ XEM NHANH SẢN PHẨM ============ -->
         </dl>
         <p class="qv__desc" id="qv-desc"></p>
         <div class="qv__actions">
-          <button type="button" class="btn-gold qv__cta js-qv-chat">%(msg)sTư vấn ngay</button>
+          <button type="button" class="btn-gold qv__cta js-qv-consult" aria-expanded="false" aria-controls="qv-channels">%(msg)sTư vấn ngay</button>
           <a href="#" class="qv__ghost" data-contact-link="hotline">%(phone)sGọi đặt hàng</a>
+        </div>
+        <div class="qv__channels" id="qv-channels" hidden>
+          <p class="qv__channels-lbl">Chọn kênh tư vấn — Quý khách báo mã <b id="qv-ch-id"></b> để được tư vấn nhanh</p>
+          <div class="qv__channels-grid">
+            <a href="#" data-contact-link="zalo" class="qch qch--zalo"><span class="qch__icon">%(zalo)s</span><span class="qch__body"><b>Zalo</b><small data-contact="zalo">0905 887 044</small></span></a>
+            <a href="#" data-contact-link="hotline" class="qch qch--phone"><span class="qch__icon">%(phone)s</span><span class="qch__body"><b>Gọi điện</b><small data-contact="hotline">0905 887 044</small></span></a>
+            <a href="#" data-contact-link="messenger" class="qch qch--msg js-messenger"><span class="qch__icon">%(msgr)s</span><span class="qch__body"><b>Messenger</b><small>Fanpage Ngọc Diệp</small></span></a>
+          </div>
         </div>
         <p class="qv__note">Mẫu có sẵn tại cửa hàng 94-96 Lý Thái Tổ, Đà Nẵng. Nhận gia công theo yêu cầu về kiểu dáng, trọng lượng — vui lòng liên hệ để được tư vấn.</p>
       </div>
     </div>
   </div>
 
-''' % {'x': icon('x', 'i-20'), 'chev': icon('chevron-down', 'i-20'), 'msg': icon('message-circle', 'i-18'), 'phone': icon('phone', 'i-18')}
+''' % {'x': icon('x', 'i-20'), 'chev': icon('chevron-down', 'i-20'), 'msg': icon('message-circle', 'i-18'), 'phone': icon('phone', 'i-18'),
+   'zalo': icon('zalo', 'i-20', 0), 'msgr': '<svg class="i i-20" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.9 1.4 5.5 3.6 7.2V22l3.3-1.8c1 .3 2 .4 3.1.4 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.6-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.9-2.7-5.4 5.7z"/></svg>'}
 
 CHAT_EXTRA = '''
       <div class="chat__product" id="chat-product" hidden><img src="data:," alt="" /><div><b></b><span></span></div></div>
@@ -528,7 +540,7 @@ def write_sitemap(pages):
 def main():
     pages = {}
     for dirpath, dirs, files in os.walk(ROOT):
-        dirs[:] = [d for d in dirs if d not in ('.git', 'assets', 'node_modules', '.vercel')]
+        dirs[:] = [d for d in dirs if d not in ('.git', 'assets', 'node_modules', '.vercel', 'admin', 'vendor')]
         for name in files:
             if name != 'index.html' and not (name == '404.html' and dirpath == ROOT):
                 continue

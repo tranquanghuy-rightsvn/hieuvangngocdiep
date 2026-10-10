@@ -424,8 +424,16 @@
         </dl>
         <p class="qv__desc" id="qv-desc"></p>
         <div class="qv__actions">
-          <button type="button" class="btn-gold qv__cta js-qv-chat"><svg class="i i-18" stroke-width="2"><use href="#i-message-circle"/></svg>Tư vấn ngay</button>
+          <button type="button" class="btn-gold qv__cta js-qv-consult" aria-expanded="false" aria-controls="qv-channels"><svg class="i i-18" stroke-width="2"><use href="#i-message-circle"/></svg>Tư vấn ngay</button>
           <a href="tel:0905887044" class="qv__ghost" data-contact-link="hotline"><svg class="i i-18" stroke-width="2"><use href="#i-phone"/></svg>Gọi đặt hàng</a>
+        </div>
+        <div class="qv__channels" id="qv-channels" hidden>
+          <p class="qv__channels-lbl">Chọn kênh tư vấn — Quý khách báo mã <b id="qv-ch-id"></b> để được tư vấn nhanh</p>
+          <div class="qv__channels-grid">
+            <a href="https://zalo.me/0905887044" data-contact-link="zalo" class="qch qch--zalo" target="_blank" rel="noopener noreferrer"><span class="qch__icon"><svg class="i i-20" stroke-width="0"><use href="#i-zalo"/></svg></span><span class="qch__body"><b>Zalo</b><small data-contact="zalo">0905 887 044</small></span></a>
+            <a href="tel:0905887044" data-contact-link="hotline" class="qch qch--phone"><span class="qch__icon"><svg class="i i-18" stroke-width="2"><use href="#i-phone"/></svg></span><span class="qch__body"><b>Gọi điện</b><small data-contact="hotline">0905 887 044</small></span></a>
+            <a href="https://www.facebook.com/messages/t/104506112299464" data-contact-link="messenger" class="qch qch--msg js-messenger" target="_blank" rel="noopener noreferrer" data-app-href="https://m.me/HieuVangNgocDiepHau"><span class="qch__icon"><svg class="i i-20" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.9 1.4 5.5 3.6 7.2V22l3.3-1.8c1 .3 2 .4 3.1.4 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.6-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.9-2.7-5.4 5.7z"/></svg></span><span class="qch__body"><b>Messenger</b><small>Fanpage Ngọc Diệp</small></span></a>
+          </div>
         </div>
         <p class="qv__note">Mẫu có sẵn tại cửa hàng 94-96 Lý Thái Tổ, Đà Nẵng. Nhận gia công theo yêu cầu về kiểu dáng, trọng lượng — vui lòng liên hệ để được tư vấn.</p>
       </div>

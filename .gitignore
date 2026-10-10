@@ -1,0 +1,4 @@
+.DS_Store
+
+# Code trang quản trị — deploy qua clasp, không qua git (xem gas/README.md, GAS.md)
+gas/

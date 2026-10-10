@@ -1,0 +1,5 @@
+# Trang quản trị: chặn bot index bằng header (lớp mạnh nhất, phủ cả file con).
+# CỐ Ý không khai Disallow trong robots.txt — robots.txt công khai, khai ở đó là tự lộ đường dẫn (GAS.md mục VIII).
+/admin/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  Referrer-Policy: no-referrer
