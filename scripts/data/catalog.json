@@ -656,5 +656,16 @@
   "isNew": true,
   "name": "Cành Hồng quà tặng cho người thương",
   "desc": ""
+ },
+ {
+  "id": "ND-Q21",
+  "img": "nd-q21__1",
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "gold": "Vàng 610",
+  "weight": "1phân5ly",
+  "isNew": true,
+  "name": "Đoá Hồng",
+  "desc": "Đoá hồng quà tặng 20/10 thật ý nghĩa"
  }
 ]
