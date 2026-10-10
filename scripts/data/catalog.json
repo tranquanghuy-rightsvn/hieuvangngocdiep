@@ -59,7 +59,7 @@
  },
  {
   "id": "ND-C01",
-  "img": "day-co-cuoi-5-tang",
+  "img": "nd-c01__1",
   "cat": "trang-suc-cuoi",
   "sub": "Dây Cổ Cưới",
   "featured": true,
@@ -68,7 +68,7 @@
  },
  {
   "id": "ND-C02",
-  "img": "day-co-cuoi-may-3-tang",
+  "img": "nd-c02__1",
   "cat": "trang-suc-cuoi",
   "sub": "Dây Cổ Cưới",
   "name": "Dây cổ cưới mây cát tường 3 tầng",
@@ -627,5 +627,56 @@
   "isNew": true,
   "name": "Mặt dây chuyền bạc cỏ 4 lá lồng đôi",
   "desc": "Mặt dây chuyền bạc hai cỏ 4 lá lồng vào nhau — một cỏ màu, một cỏ đính đá — độc đáo, ý nghĩa gắn kết."
+ },
+ {
+  "id": "ND-L08",
+  "img": "nd-l08__1",
+  "gallery": [
+   "nd-l08__2",
+   "nd-l08__3",
+   "nd-l08__4",
+   "nd-l08__5",
+   "nd-l08__6",
+   "nd-l08__7"
+  ],
+  "cat": "lac-vong",
+  "sub": "Lắc Tay",
+  "gold": "Vàng 610",
+  "featured": true,
+  "isNew": true,
+  "name": "Lắc charm",
+  "desc": ""
+ },
+ {
+  "id": "ND-Q20",
+  "img": "nd-q20__1",
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "gold": "Vàng 610",
+  "isNew": true,
+  "name": "Cành Hồng quà tặng cho người thương",
+  "desc": ""
+ },
+ {
+  "id": "ND-Q21",
+  "img": "nd-q21__1",
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "gold": "Vàng 610",
+  "weight": "1phân5ly",
+  "isNew": true,
+  "name": "Đoá Hồng",
+  "desc": "Đoá hồng quà tặng 20/10 thật ý nghĩa"
+ },
+ {
+  "id": "ND-TT07",
+  "img": "nd-tt07__1",
+  "cat": "vang-tich-tru",
+  "sub": "Nhẫn Tròn Trơn",
+  "gold": "Vàng 9999",
+  "weight": "2phân",
+  "isNew": true,
+  "name": "Hạt đậu tích luỹ",
+  "desc": "Tích tiểu thành đại"
  }
 ]
