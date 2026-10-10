@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Dựng các trang: /bang-gia/, /may-tinh-gia-vang/, /may-tinh-gia-bac/, /lien-he/, /tin-tuc/ và từng bài /tin-tuc/<slug>/.
 
-Khung trang (head, header, menu, chat, nút nổi, drawer) lấy từ san-pham/index.html để mọi trang đồng bộ.
+Khung trang (head, header, menu, nút nổi, drawer) lấy từ san-pham/index.html để mọi trang đồng bộ.
 Khối bảng giá vàng / bạc lấy từ index.html (trang chủ).
 
 Chạy lại sau khi sửa nội dung:  python3 scripts/build_pages.py && python3 scripts/bake_static.py
@@ -23,9 +23,9 @@ HOME = read('index.html')
 # ---------------------------------------------------------------- khung trang
 HEAD_END = SHOP.index('<body')
 SPRITE_AND_HEADERS = SHOP[SHOP.index('>', HEAD_END) + 1: SHOP.index('    <!-- ============ DANH SÁCH SẢN PHẨM ============ -->')]
-FOOTER = SHOP[SHOP.index('    <footer class="afooter">'): SHOP.index('  <!-- ============ LIVE CHAT PANEL')]
+FOOTER = SHOP[SHOP.index('    <footer class="afooter">'): SHOP.index('  <!-- ============ TOOLBAR MOBILE')]
 FOOTER = FOOTER.split('  <!-- ============ XEM NHANH')[0]  # khung xem nhanh chỉ cần ở trang có lưới sản phẩm
-TAIL = SHOP[SHOP.index('  <!-- ============ LIVE CHAT PANEL'):]
+TAIL = SHOP[SHOP.index('  <!-- ============ TOOLBAR MOBILE'):]
 
 
 def page(path, title, desc, main, active=None, og_image=None, page_id='page'):
@@ -194,7 +194,7 @@ POST_CTA = '''          <aside class="post-cta">
             </div>
             <div class="post-cta__actions">
               <a href="tel:0905887044" class="btn-gold"><svg class="i i-16" stroke-width="2"><use href="#i-phone"/></svg>&nbsp;0905 887 044</a>
-              <button type="button" class="btn-outline js-open-chat">Nhắn tin tư vấn</button>
+              <a href="#" data-contact-link="messenger" class="btn-outline js-messenger">Nhắn tin Messenger</a>
             </div>
           </aside>
 '''

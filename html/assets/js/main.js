@@ -348,7 +348,7 @@
       drawer.hidden = true;
       drawer.classList.remove('is-closing');
       lockScroll(false);
-      if (!chatOpen) $('#fabs').classList.remove('is-hidden');
+      $('#fabs').classList.remove('is-hidden');
       if (after) after();
     }, 300);
   }
@@ -454,49 +454,6 @@
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     if (menuOpen) closeMenu();
-    else if (chatOpen) setChat(false);
-  });
-
-  /* ---------------- LIVE CHAT ---------------- */
-  var chat = $('#chat'), chatOpen = false;
-  function setChat(on) {
-    chatOpen = on;
-    chat.classList.toggle('is-open', on);
-    chat.setAttribute('aria-hidden', String(!on));
-    chat.inert = !on; // panel đóng thì không nhận focus bàn phím
-    $('#fabs').classList.toggle('is-hidden', on);
-    $('#mbar').classList.toggle('is-hidden', on);
-    if (on) setTimeout(function () { var f = chat.querySelector('input'); if (f) f.focus({ preventScroll: true }); }, 300);
-  }
-  $$('.js-open-chat').forEach(function (b) { b.addEventListener('click', function () { setChat(!chatOpen); }); });
-  $$('.js-close-chat').forEach(function (b) { b.addEventListener('click', function () { setChat(false); }); });
-  var cName = $('#chat-name'), cSubmit = $('.chat__submit');
-  cName.addEventListener('input', function () { cSubmit.disabled = !cName.value.trim(); });
-  $('#chat-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var name = cName.value.trim();
-    if (!name) return;
-    $$('#chat-body > :not(#chat-msgs)').forEach(function (n) { n.hidden = true; });
-    $('#chat-hello').textContent = 'Xin chào ' + name + '! Nhân viên Hiệu Vàng Ngọc Diệp sẽ phản hồi trong giây lát.';
-    if (chatProduct) {
-      $('#chat-ask').textContent = 'Tôi muốn được tư vấn sản phẩm: ' + chatProduct.name + ' (' + chatProduct.id + ')';
-      $('#chat-ask').hidden = false;
-    }
-    $('#chat-msgs').hidden = false;
-    var compose = $('#chat-compose'), inp = $('input', compose);
-    compose.hidden = false;
-    inp.focus();
-    compose.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var v = inp.value.trim();
-      if (!v) return;
-      var m = document.createElement('div');
-      m.className = 'chat__msg chat__msg--me';
-      m.textContent = v;
-      $('#chat-msgs').appendChild(m);
-      inp.value = '';
-      $('#chat-body').scrollTop = $('#chat-body').scrollHeight;
-    });
   });
 
   /* ---------------- MOBILE TOOLBAR ---------------- */
@@ -625,7 +582,7 @@
     return { id: d.id, name: d.name, cat: d.cat, catTitle: d.catTitle, catDesc: d.catDesc, sub: d.sub, gold: d.gold, weight: d.weight, price: +d.price || 0, desc: d.desc, img: $('img', card).getAttribute('src') };
   }
 
-  var qv = $('#qv'), qvList = [], qvIndex = 0, qvReturn = null, chatProduct = null;
+  var qv = $('#qv'), qvList = [], qvIndex = 0, qvReturn = null;
   function initQuickView() {
     if (!qv) return;
     qv.addEventListener('click', function (e) {

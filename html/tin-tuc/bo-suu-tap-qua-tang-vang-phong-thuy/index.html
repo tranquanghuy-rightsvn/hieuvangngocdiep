@@ -191,7 +191,7 @@
             </div>
             <div class="post-cta__actions">
               <a href="tel:0905887044" class="btn-gold"><svg class="i i-16" stroke-width="2"><use href="#i-phone"/></svg>&nbsp;0905 887 044</a>
-              <button type="button" class="btn-outline js-open-chat">Nhắn tin tư vấn</button>
+              <a href="https://www.facebook.com/messages/t/104506112299464" data-contact-link="messenger" class="btn-outline js-messenger" target="_blank" rel="noopener noreferrer" data-app-href="https://m.me/HieuVangNgocDiepHau">Nhắn tin Messenger</a>
             </div>
           </aside>
         </div>
@@ -237,48 +237,6 @@
     </footer>
   </div>
 
-  <!-- ============ LIVE CHAT PANEL ============ -->
-  <div class="chat" id="chat" role="dialog" aria-hidden="true" inert aria-label="Tư vấn trực tuyến">
-    <div class="chat__head">
-      <div class="chat__who">
-        <span class="chat__avatar"><svg class="i i-16" stroke-width="1.8"><use href="#i-gem"/></svg></span>
-        <div class="chat__meta">
-          <p class="chat__name">Hiệu Vàng Ngọc Diệp</p>
-          <p class="chat__status">Tư vấn trực tuyến ·<span class="chat__dot"></span>Online (Trực tuyến)</p>
-        </div>
-      </div>
-      <button type="button" class="chat__close js-close-chat" aria-label="Đóng khung chat"><svg class="i i-16" stroke-width="2"><use href="#i-x"/></svg></button>
-    </div>
-    <div class="chat__body" id="chat-body">
-      <div class="chat__greet">Kính chào Quý khách!
-
-Đây là kênh tư vấn trực tiếp trên website.
-
-Quý khách có thể trao đổi với nhân viên tư vấn ngay tại đây.</div>
-      <div class="chat__product" id="chat-product" hidden><img src="data:," alt="" /><div><b></b><span></span></div></div>
-      <div class="chat__msgs" id="chat-msgs" hidden>
-        <div class="chat__msg chat__msg--me" id="chat-ask" hidden></div>
-        <div class="chat__msg chat__msg--them" id="chat-hello"></div>
-      </div>
-      <form class="chat__form" id="chat-form">
-        <div>
-          <label class="chat__label" for="chat-name">Họ và tên *</label>
-          <input type="text" id="chat-name" class="chat__input" required placeholder="Nguyễn Văn A" />
-        </div>
-        <div>
-          <label class="chat__label" for="chat-phone">Số điện thoại</label>
-          <input type="tel" id="chat-phone" class="chat__input" placeholder="09xxxxxxxx" inputmode="tel" />
-        </div>
-        <div class="chat__hours">
-          <svg class="i i-16 text-gold" stroke-width="1.8"><use href="#i-clock"/></svg>
-          <p data-contact="hours">Mở cửa 7h00 – 21h00 tất cả các ngày trong tuần</p>
-        </div>
-        <button type="submit" class="chat__submit" disabled><svg class="i i-16" stroke-width="2"><use href="#i-send"/></svg>Bắt đầu trò chuyện</button>
-      </form>
-    </div>
-    <form class="chat__compose" id="chat-compose" hidden><input type="text" class="chat__input" placeholder="Nhập tin nhắn..." aria-label="Tin nhắn" /><button type="submit" aria-label="Gửi"><svg class="i i-16" stroke-width="2"><use href="#i-send"/></svg></button></form>
-  </div>
-
   <!-- ============ TOOLBAR MOBILE (<640) ============ -->
   <div class="mbar" id="mbar">
     <div class="mbar__wrap" id="mbar-wrap">
@@ -289,7 +247,7 @@ Quý khách có thể trao đổi với nhân viên tư vấn ngay tại đây.<
         <button type="button" class="fab fab--sm js-home" aria-label="Trang Chủ" title="Trang Chủ"><svg class="i i-20 text-gold" stroke-width="2"><use href="#i-house"/></svg></button>
         <a href="tel:0905887044" data-contact-link="hotline" class="fab fab--sm ring" aria-label="Gọi Điện" title="Gọi Điện"><svg class="i i-20 text-gold" stroke-width="2"><use href="#i-phone"/></svg></a>
         <a href="https://zalo.me/0905887044" data-contact-link="zalo" class="fab fab--sm ring" aria-label="Chat Qua Zalo" title="Chat Qua Zalo" target="_blank" rel="noopener noreferrer"><svg width="36" height="36" aria-hidden="true"><use href="#i-zalo"/></svg></a>
-        <button type="button" class="fab fab--sm ring js-open-chat" aria-label="Live Chat" title="Live Chat"><svg class="i i-20 text-gold" stroke-width="2"><use href="#i-message-circle"/></svg></button>
+        <a href="https://www.facebook.com/messages/t/104506112299464" data-contact-link="messenger" class="fab fab--sm ring js-messenger" aria-label="Nhắn Messenger" title="Nhắn Messenger" target="_blank" rel="noopener noreferrer" data-app-href="https://m.me/HieuVangNgocDiepHau"><svg class="i i-20 text-gold" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.9 1.4 5.5 3.6 7.2V22l3.3-1.8c1 .3 2 .4 3.1.4 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.6-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.9-2.7-5.4 5.7z"/></svg></a>
         <button type="button" class="theme-btn theme-btn--bar js-theme" aria-label="Chuyển sang chế độ tối" title="Chuyển sang chế độ tối"><svg class="i i-20" stroke-width="1.75"><use href="#i-moon"/></svg></button>
       </div>
     </div>
@@ -301,7 +259,8 @@ Quý khách có thể trao đổi với nhân viên tư vấn ngay tại đây.<
   <!-- ============ NÚT NỔI DESKTOP (>=640) ============ -->
   <div class="fabs" id="fabs">
     <a href="https://zalo.me/0905887044" data-contact-link="zalo" class="fab ring" aria-label="Chat Qua Zalo" title="Chat Qua Zalo" target="_blank" rel="noopener noreferrer"><svg width="36" height="36" aria-hidden="true"><use href="#i-zalo"/></svg></a>
-    <button type="button" class="fab ring js-open-chat" aria-label="Live Chat" title="Live Chat"><svg class="i i-24 text-gold" stroke-width="2"><use href="#i-message-circle"/></svg></button>
+    <a href="https://www.facebook.com/messages/t/104506112299464" data-contact-link="messenger" class="fab ring js-messenger" aria-label="Nhắn Messenger" title="Nhắn Messenger" target="_blank" rel="noopener noreferrer" data-app-href="https://m.me/HieuVangNgocDiepHau"><svg class="i i-24 text-gold" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.9 1.4 5.5 3.6 7.2V22l3.3-1.8c1 .3 2 .4 3.1.4 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.6-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.9-2.7-5.4 5.7z"/></svg></a>
+    <a href="tel:0905887044" data-contact-link="hotline" class="fab ring" aria-label="Gọi Điện" title="Gọi Điện"><svg class="i i-24 text-gold" stroke-width="2"><use href="#i-phone"/></svg></a>
   </div>
 
   <a href="/" class="theme-btn theme-btn--float theme-btn--home" aria-label="Về trang chủ" title="Về trang chủ"><svg class="i i-20" stroke-width="1.75"><use href="#i-house"/></svg></a>

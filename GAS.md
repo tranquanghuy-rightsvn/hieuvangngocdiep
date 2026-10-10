@@ -156,9 +156,9 @@ khung "Xem nhanh". Vì vậy sản phẩm KHÔNG có slug/URL; định danh là 
   giả vờ gửi thành công.
 - Trong Admin: xem danh sách, đổi trạng thái, xoá — chỉ `admin`/`root`. `status`: `"Mới"` /
   `"Đã xử lý"`.
-- Thông báo: email qua `MailApp` tới Script Property `NOTIFY_EMAIL` (chủ dự án chọn
-  `haulien2448@gmail.com`). Không có mặc định trong code; trống thì không gửi mail nhưng vẫn
-  lưu. Dùng CHUNG quota ~100 mail/ngày với OTP. Gửi mail lỗi KHÔNG làm hỏng việc đã lưu.
+- Thông báo: email qua `MailApp` tới ĐÚNG địa chỉ chủ dự án tự điền trong Script Property
+  `NOTIFY_EMAIL` (chốt 10/10/2026: người nhận do chủ dự án cấu hình, code không ghi cứng địa chỉ
+  nào). Trống thì không gửi mail nhưng vẫn lưu. Dùng CHUNG quota ~100 mail/ngày với OTP. Gửi mail lỗi KHÔNG làm hỏng việc đã lưu.
 - Dữ liệu khách CHỈ nằm trong bảng dữ liệu nội bộ của CMS, **KHÔNG bao giờ ghi vào repo**.
 
 ## VI. Người dùng
@@ -256,5 +256,6 @@ cảnh báo bằng CSS), tự hiện nút "Mở ở tab riêng" (URL `/exec` th�
 - `GITHUB_OWNER` — bắt buộc (`tranquanghuy-rightsvn`).
 - `GITHUB_REPO` — bắt buộc (`hieuvangngocdiep`).
 - `GITHUB_BRANCH` — bắt buộc (`master`).
-- `NOTIFY_EMAIL` — nhận mail báo liên hệ mới (`haulien2448@gmail.com`). Trống = không gửi mail.
+- `NOTIFY_EMAIL` — địa chỉ nhận mail báo liên hệ mới, chủ dự án tự điền/đổi bất cứ lúc nào (không
+  cần deploy lại). Trống = không gửi mail.
 - `SPREADSHEET_ID` — KHÔNG cần điền, code tự tạo lần đầu và tự lưu lại.

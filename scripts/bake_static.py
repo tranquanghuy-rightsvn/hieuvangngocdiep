@@ -287,7 +287,7 @@ def bake_prices(src):
     return src
 
 
-# ---------------------------------------------------------------- khối tĩnh dùng chung (xem nhanh, chat)
+# ---------------------------------------------------------------- khối tĩnh dùng chung (xem nhanh)
 QUICKVIEW = '''  <!-- ============ XEM NHANH SẢN PHẨM ============ -->
   <div class="qv" id="qv" hidden>
     <div class="qv__overlay js-qv-close"></div>
@@ -329,25 +329,9 @@ QUICKVIEW = '''  <!-- ============ XEM NHANH SẢN PHẨM ============ -->
 ''' % {'x': icon('x', 'i-20'), 'chev': icon('chevron-down', 'i-20'), 'msg': icon('message-circle', 'i-18'), 'phone': icon('phone', 'i-18'),
    'zalo': icon('zalo', 'i-20', 0), 'msgr': '<svg class="i i-20" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.9 1.4 5.5 3.6 7.2V22l3.3-1.8c1 .3 2 .4 3.1.4 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.6-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.9-2.7-5.4 5.7z"/></svg>'}
 
-CHAT_EXTRA = '''
-      <div class="chat__product" id="chat-product" hidden><img src="data:," alt="" /><div><b></b><span></span></div></div>
-      <div class="chat__msgs" id="chat-msgs" hidden>
-        <div class="chat__msg chat__msg--me" id="chat-ask" hidden></div>
-        <div class="chat__msg chat__msg--them" id="chat-hello"></div>
-      </div>'''
-CHAT_COMPOSE = '''
-    <form class="chat__compose" id="chat-compose" hidden><input type="text" class="chat__input" placeholder="Nhập tin nhắn..." aria-label="Tin nhắn" /><button type="submit" aria-label="Gửi">%s</button></form>''' % icon('send', 'i-16')
-
-
 def bake_shared(src):
-    if 'id="chat-msgs"' not in src:
-        src = src.replace('Quý khách có thể trao đổi với nhân viên tư vấn ngay tại đây.</div>',
-                          'Quý khách có thể trao đổi với nhân viên tư vấn ngay tại đây.</div>' + CHAT_EXTRA, 1)
-        i = src.index('id="chat-body"')
-        j = src.index('</form>\n    </div>', i) + len('</form>\n    </div>')
-        src = src[:j] + CHAT_COMPOSE + src[j:]
     if 'data-grid' in src and 'id="qv"' not in src:
-        src = src.replace('  <!-- ============ LIVE CHAT PANEL', QUICKVIEW + '  <!-- ============ LIVE CHAT PANEL', 1)
+        src = src.replace('  <!-- ============ TOOLBAR MOBILE', QUICKVIEW + '  <!-- ============ TOOLBAR MOBILE', 1)
     # catalog.js không còn dùng
     src = src.replace('  <script src="/assets/js/catalog.js" defer></script>\n', '')
     return src
