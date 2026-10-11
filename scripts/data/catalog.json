@@ -283,9 +283,10 @@
   "img": "day-hoa-men",
   "cat": "day-chuyen",
   "sub": "Dây Hoa Men",
-  "weight": "1 chỉ 7",
   "name": "Dây hoa men nhiều màu",
-  "desc": "Dây vàng kết hoa men nhiều màu sắc rực rỡ, nổi bật và đầy cá tính."
+  "desc": "Dây vàng kết hoa men nhiều màu sắc rực rỡ, nổi bật và đầy cá tính.",
+  "gold": "Vàng 610",
+  "featured": true
  },
  {
   "id": "ND-L01",
