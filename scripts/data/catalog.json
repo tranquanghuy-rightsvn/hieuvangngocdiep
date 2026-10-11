@@ -512,7 +512,9 @@
   "sub": "Quà Tặng Bé",
   "name": "Thiệp vàng sinh nhật",
   "desc": "Thiệp sinh nhật gắn vàng ép hình bánh kem, món quà độc đáo cho bé và người thân.",
-  "gold": "Vàng 999.9"
+  "gold": "Vàng 999.9",
+  "weight": "2 li",
+  "price": 450000
  },
  {
   "id": "ND-Q19",
