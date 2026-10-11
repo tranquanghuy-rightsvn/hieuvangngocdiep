@@ -536,8 +536,9 @@
   "sub": "Lắc Tay Bạc",
   "gold": "Bạc 925",
   "isNew": true,
-  "name": "Lắc tay bạc 5 cỏ 4 lá",
-  "desc": "Lắc tay bạc gắn 5 bông cỏ 4 lá dọc dây, có dây nối điều chỉnh độ dài. Nhiều màu: trắng, xanh lá, đen, xanh dương, đỏ mận."
+  "name": "Lắc tay bạc  cỏ 4 lá",
+  "desc": "Lắc tay bạc gắn 5 bông cỏ 4 lá dọc dây, có dây nối điều chỉnh độ dài. Nhiều màu: trắng, xanh lá, đen, xanh dương, đỏ mận.",
+  "featured": true
  },
  {
   "id": "ND-B03",
