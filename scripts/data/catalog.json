@@ -443,7 +443,8 @@
   "cat": "qua-tang",
   "sub": "Tượng Vàng Phong Thuỷ",
   "name": "Heo vàng phú quý",
-  "desc": "Heo vàng tròn trịa đáng yêu, biểu tượng của sự đủ đầy và sung túc."
+  "desc": "Heo vàng tròn trịa đáng yêu, biểu tượng của sự đủ đầy và sung túc.",
+  "gold": "Vàng 999.9"
  },
  {
   "id": "ND-Q10",
