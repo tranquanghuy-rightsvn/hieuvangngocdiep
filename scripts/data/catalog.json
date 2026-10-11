@@ -493,7 +493,9 @@
   "isNew": true,
   "name": "Bó hoa vàng hộp nhung",
   "desc": "Bó hoa vàng chạm nổi đặt trong hộp nhung đỏ, sang trọng và trang nhã.",
-  "gold": "Vàng 999.9"
+  "gold": "Vàng 999.9",
+  "weight": "5 phân",
+  "price": 450000
  },
  {
   "id": "ND-Q17",
