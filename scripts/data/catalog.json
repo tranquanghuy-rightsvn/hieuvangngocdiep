@@ -642,7 +642,8 @@
   "isNew": true,
   "name": "Đoá Hồng",
   "desc": "Đoá hồng quà tặng 20/10 thật ý nghĩa",
-  "price": 420000
+  "price": 420000,
+  "featured": true
  },
  {
   "id": "ND-TT07",
