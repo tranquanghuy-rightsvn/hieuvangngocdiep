@@ -351,7 +351,8 @@
   "sub": "Tượng Vàng Phong Thuỷ",
   "featured": true,
   "name": "Tượng Tài Thần cưỡi ngựa",
-  "desc": "Tượng vàng Tài Thần cưỡi ngựa trong hộp mica \"Chiêu Tài Tiến Bảo\" — quà khai trương, tân gia mang ý nghĩa phát tài."
+  "desc": "Tượng vàng Tài Thần cưỡi ngựa trong hộp mica \"Chiêu Tài Tiến Bảo\" — quà khai trương, tân gia mang ý nghĩa phát tài.",
+  "gold": "Vàng 999.9"
  },
  {
   "id": "ND-Q02",
