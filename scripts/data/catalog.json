@@ -653,7 +653,8 @@
   "weight": "2phân",
   "isNew": true,
   "name": "Hạt đậu tích luỹ",
-  "desc": "Tích tiểu thành đại"
+  "desc": "Tích tiểu thành đại",
+  "featured": true
  },
  {
   "id": "ND-Q22",
