@@ -434,7 +434,8 @@
   "cat": "qua-tang",
   "sub": "Tượng Vàng Phong Thuỷ",
   "name": "Rắn vàng cuộn tiền",
-  "desc": "Linh vật rắn vàng — quà tặng cầu may cho người tuổi Tỵ."
+  "desc": "Linh vật rắn vàng — quà tặng cầu may cho người tuổi Tỵ.",
+  "gold": "Vàng 999.9"
  },
  {
   "id": "ND-Q09",
