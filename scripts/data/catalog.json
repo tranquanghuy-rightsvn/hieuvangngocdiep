@@ -425,7 +425,8 @@
   "cat": "qua-tang",
   "sub": "Tượng Vàng Phong Thuỷ",
   "name": "Rồng vàng phong thuỷ",
-  "desc": "Linh vật rồng vàng uy nghi, tượng trưng cho quyền lực và thịnh vượng."
+  "desc": "Linh vật rồng vàng uy nghi, tượng trưng cho quyền lực và thịnh vượng.",
+  "gold": "Vàng 999.9"
  },
  {
   "id": "ND-Q08",
