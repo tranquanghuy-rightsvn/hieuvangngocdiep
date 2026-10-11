@@ -388,7 +388,8 @@
   "cat": "qua-tang",
   "sub": "Tượng Vàng Phong Thuỷ",
   "name": "Tượng Thần Tài đứng",
-  "desc": "Tượng Thần Tài đứng cầm thỏi vàng, mang lời chúc tài lộc dồi dào."
+  "desc": "Tượng Thần Tài đứng cầm thỏi vàng, mang lời chúc tài lộc dồi dào.",
+  "gold": "Vàng 999.9"
  },
  {
   "id": "ND-Q04",
