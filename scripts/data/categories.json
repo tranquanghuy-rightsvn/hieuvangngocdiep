@@ -103,15 +103,6 @@
   ]
  },
  {
-  "slug": "trang-suc-nu",
-  "title": "Trang Sức Nữ",
-  "desc": "Bông tai và trang sức dành cho phái nữ",
-  "img": "nd-d13__1.jpg",
-  "children": [
-   "Bông Tai"
-  ]
- },
- {
   "slug": "trang-suc-nam",
   "title": "Trang Sức Nam",
   "desc": "Nhẫn nam và trang sức dành cho phái mạnh",
