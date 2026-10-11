@@ -461,7 +461,8 @@
   "cat": "qua-tang",
   "sub": "Tượng Vàng Phong Thuỷ",
   "name": "Nén vàng phong thuỷ",
-  "desc": "Nén vàng (thỏi nguyên bảo) trong hộp mica — tượng trưng cho tiền tài và sự giàu sang."
+  "desc": "Nén vàng (thỏi nguyên bảo) trong hộp mica — tượng trưng cho tiền tài và sự giàu sang.",
+  "gold": "Vàng 999.9"
  },
  {
   "id": "ND-Q12",
