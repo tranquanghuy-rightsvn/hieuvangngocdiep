@@ -472,7 +472,9 @@
   "desc": "Cành hồng vàng ép vỉ trong hộp quà hồng pastel, sẵn sàng để trao tặng.",
   "gold": "Vàng 999.9",
   "weight": "1 phân",
-  "price": 450000
+  "price": 450000,
+  "featured": true,
+  "isNew": true
  },
  {
   "id": "ND-Q16",
