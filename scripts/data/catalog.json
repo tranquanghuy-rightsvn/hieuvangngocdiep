@@ -134,11 +134,12 @@
  {
   "id": "ND-C10",
   "img": "vong-cuoi-tron",
-  "cat": "trang-suc-cuoi",
-  "sub": "Vòng Cưới",
+  "cat": "lac-vong",
+  "sub": "Còng",
   "featured": true,
-  "name": "Vòng tay cưới trơn vàng",
-  "desc": "Vòng tay trơn bóng, đủ cỡ tay, có tem nhãn từng chiếc — món trang sức không thể thiếu trong bộ cưới."
+  "name": "Vòng trơn 610",
+  "desc": "Vòng tay trơn bóng, đủ cỡ tay, có tem nhãn từng chiếc — món trang sức không thể thiếu trong bộ sưu tập của bạn",
+  "gold": "Vàng 610"
  },
  {
   "id": "ND-C11",
