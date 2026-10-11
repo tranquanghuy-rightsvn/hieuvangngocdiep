@@ -153,11 +153,12 @@
  {
   "id": "ND-C12",
   "img": "vong-xi-men",
-  "cat": "trang-suc-cuoi",
-  "sub": "Vòng Cưới",
+  "cat": "lac-vong",
+  "sub": "Còng",
   "isNew": true,
-  "name": "Vòng ximen chạm hoa văn",
-  "desc": "Vòng ximen bản lớn chạm hoa văn tinh tế, bắt sáng lấp lánh — sang trọng khi đeo đôi hoặc phối nhiều chiếc."
+  "name": "Vòng múc mắt mèo",
+  "desc": "Vòng ximen bản lớn chạm hoa văn tinh tế, bắt sáng lấp lánh — sang trọng khi đeo đôi hoặc phối nhiều chiếc.",
+  "gold": "Vàng 610"
  },
  {
   "id": "ND-D01",
