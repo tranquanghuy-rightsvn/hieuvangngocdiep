@@ -470,7 +470,8 @@
   "cat": "qua-tang",
   "sub": "Tượng Vàng Phong Thuỷ",
   "name": "Hồ lô vàng",
-  "desc": "Hồ lô vàng mang ý nghĩa bình an, sức khoẻ và hoá giải điều không may."
+  "desc": "Hồ lô vàng mang ý nghĩa bình an, sức khoẻ và hoá giải điều không may.",
+  "gold": "Vàng 999.9"
  },
  {
   "id": "ND-Q15",
