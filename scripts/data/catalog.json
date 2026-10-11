@@ -397,7 +397,8 @@
   "cat": "qua-tang",
   "sub": "Tượng Vàng Phong Thuỷ",
   "name": "Tượng Ông Địa",
-  "desc": "Tượng Ông Địa phúc hậu, đi đôi cùng Thần Tài để cầu buôn may bán đắt."
+  "desc": "Tượng Ông Địa phúc hậu, đi đôi cùng Thần Tài để cầu buôn may bán đắt.",
+  "gold": "Vàng 999.9"
  },
  {
   "id": "ND-Q05",
