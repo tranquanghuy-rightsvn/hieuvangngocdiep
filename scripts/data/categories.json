@@ -3,7 +3,7 @@
   "slug": "vang-tich-tru",
   "title": "Vàng Tích Trữ",
   "desc": "Nhẫn tròn 24K, đồng vàng, vàng ép vỉ 999.9",
-  "img": "dong-vang-999.jpg",
+  "img": "vang-tich-tru.danh-muc.jpg",
   "children": [
    "Nhẫn Tròn Trơn",
    "Đồng Vàng",
@@ -14,7 +14,7 @@
   "slug": "trang-suc-cuoi",
   "title": "Trang Sức Cưới",
   "desc": "Dây cổ cưới, mặt khoá, vòng cưới truyền thống",
-  "img": "day-co-cuoi-5-tang.jpg",
+  "img": "trang-suc-cuoi.danh-muc.jpg",
   "children": [
    "Dây Cổ Cưới",
    "Mặt Khoá",
@@ -27,8 +27,8 @@
  {
   "slug": "day-chuyen",
   "title": "Dây Chuyền",
-  "desc": "Cỏ 4 lá, mặt charm, dây hoa men",
-  "img": "day-chuyen-co-4-la-vang.jpg",
+  "desc": "Cỏ 4 lá, mặt charm, dây hoa men, xoắn lá, móc xích....",
+  "img": "day-chuyen.danh-muc.jpg",
   "children": [
    "Dây Chuyền Cỏ 4 Lá",
    "Dây Chuyền Mặt Charm",
@@ -43,7 +43,7 @@
   "slug": "lac-vong",
   "title": "Lắc & Vòng Tay",
   "desc": "Lắc tay cỏ 4 lá, bọ rùa, bộ lắc & nhẫn",
-  "img": "lac-co-4-la-xanh.jpg",
+  "img": "lac-vong.danh-muc.jpg",
   "children": [
    "Lắc Tay",
    "Bộ Lắc & Nhẫn",
@@ -62,7 +62,7 @@
   "slug": "nhan",
   "title": "Nhẫn Thời Trang",
   "desc": "Nhẫn nữ đính đá, bản lưới, mắt xích",
-  "img": "nhan-hoa-dinh-da.jpg",
+  "img": "nhan.danh-muc.jpg",
   "children": [
    "Nhẫn Nữ",
    "Nhẫn Cặp",
@@ -74,7 +74,7 @@
   "slug": "qua-tang",
   "title": "Quà Tặng Vàng",
   "desc": "Tượng phong thuỷ, hoa hồng vàng, quà cho bé",
-  "img": "tuong-tai-than-cuoi-ngua.jpg",
+  "img": "qua-tang.danh-muc.jpg",
   "children": [
    "Tượng Vàng Phong Thuỷ",
    "Hoa Vàng",
@@ -88,7 +88,7 @@
   "slug": "trang-suc-bac",
   "title": "Trang Sức Bạc",
   "desc": "Lắc tay, mặt dây chuyền bạc cỏ 4 lá",
-  "img": "mat-day-bac-co-4-la-doi.jpg",
+  "img": "trang-suc-bac.danh-muc.jpg",
   "children": [
    "Lắc Tay Bạc",
    "Mặt Dây Chuyền Bạc",
@@ -102,5 +102,12 @@
    "Lắc Chân",
    "Bông Tai"
   ]
+ },
+ {
+  "slug": "mat-day-chuyen",
+  "title": "Mặt Dây Chuyền",
+  "desc": "Mặt đa dạng mẫu mã",
+  "img": "mat-day-chuyen.danh-muc.jpg",
+  "children": []
  }
 ]
