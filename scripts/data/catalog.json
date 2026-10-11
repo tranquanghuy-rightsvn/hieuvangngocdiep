@@ -521,7 +521,8 @@
   "name": "Thiệp vàng gấu bông",
   "desc": "Thiệp quà tặng gắn vàng ép hình gấu bông đáng yêu.",
   "gold": "Vàng 999.9",
-  "weight": "2 li"
+  "weight": "2 li",
+  "price": 450000
  },
  {
   "id": "ND-B01",
