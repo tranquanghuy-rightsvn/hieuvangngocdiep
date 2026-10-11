@@ -101,14 +101,5 @@
    "Lắc Chân",
    "Bông Tai"
   ]
- },
- {
-  "slug": "trang-suc-nam",
-  "title": "Trang Sức Nam",
-  "desc": "Nhẫn nam và trang sức dành cho phái mạnh",
-  "img": "nhan-tron-ban-day.jpg",
-  "children": [
-   "Nhẫn Nam"
-  ]
  }
 ]
