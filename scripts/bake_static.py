@@ -6,6 +6,7 @@ Dữ liệu:
   scripts/data/categories.json  danh mục + nhóm sản phẩm, ĐÚNG thứ tự hiển thị (do trang quản trị ghi — GAS.md mục II-B)
   scripts/data/catalog.json  toàn bộ sản phẩm (do CMS ghi — GAS.md mục II); có "price" (VND) thì hiện giá, không có thì "Giá: Liên hệ"
   scripts/data/prices.json   giá vàng + bạc (do trang quản trị ghi) — in sẵn vào bảng giá, ticker, máy tính giá
+  scripts/data/posts.json    tin tức — 4 bài mới nhất in sẵn vào trang chủ (#home-news)
 
 Sửa dữ liệu xong chạy:  python3 scripts/bake_static.py
 (Nếu chạy scripts/build_pages.py thì chạy lại file này sau đó.)
@@ -241,6 +242,14 @@ def bake_featured(src):
         cards.append(prod_card(p, i, attrs, hidden=not is_feat, delay=shown))
         shown += is_feat
     return fill(src, 'feat-grid', ''.join(cards))
+
+
+def bake_home_news(src):
+    # Trang chủ: 4 bài mới nhất, dùng chung thẻ bài với /tin-tuc/ (build_pages.post_card)
+    if 'id="home-news"' not in src:
+        return src
+    from build_pages import POSTS, post_card
+    return fill(src, 'home-news', '\n' + ''.join(post_card(p) for p in POSTS[:4]) + '        ')
 
 
 # ---------------------------------------------------------------- trang sản phẩm
@@ -568,6 +577,7 @@ def main():
             src = fill(src, 'nav-products', drawer_products())
             src = bake_home_cats(src)
             src = bake_featured(src)
+            src = bake_home_news(src)
             src = bake_shop(src)
             src = bake_prices(src)
             src = bake_contact(src)

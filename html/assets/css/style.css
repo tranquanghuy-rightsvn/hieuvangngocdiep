@@ -379,7 +379,7 @@ html:not(.light) .refresh__text { color: #fff; }
 }
 .prow__label { font-size: 14px; line-height: 20px; color: hsl(var(--foreground) / .9); }
 .prow__price {
-  text-align: center; font-size: 18px; line-height: 28px; font-weight: 600;
+  text-align: center; font-size: 20px; line-height: 28px; font-weight: 600;
   font-variant-numeric: tabular-nums; letter-spacing: -.025em; color: hsl(var(--foreground));
 }
 
@@ -389,14 +389,14 @@ html:not(.light) .refresh__text { color: #fff; }
 @media (max-width: 374px) {
   .pm-th { letter-spacing: .04em; padding-left: 4px; padding-right: 4px; }
   .pm-th--name { white-space: normal; line-height: 1.3; padding-left: 8px; }
-  .ptable--m .prow--m td { padding-left: 4px; padding-right: 4px; font-size: 11.5px; }
+  .ptable--m .prow--m td { padding-left: 4px; padding-right: 4px; font-size: 13.5px; }
   .ptable--m .prow--m td:first-child { white-space: normal; line-height: 1.3; padding-left: 8px; }
   .prices__inner { padding-left: 16px; padding-right: 16px; }
   .ptable--m table { table-layout: fixed; }
 }
 .pm-th--sell { color: hsl(var(--gold)); }
 .light .pm-th--buy { color: #000; }
-.prow--m td { padding: 14px 6px; text-align: center; font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.025em; color: hsl(var(--foreground)); }
+.prow--m td { padding: 14px 6px; text-align: center; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.025em; color: hsl(var(--foreground)); }
 .prow--m td:first-child { padding: 14px 8px; text-align: left; font-weight: 500; line-height: 1; letter-spacing: normal; white-space: nowrap; color: hsl(var(--gold)); }
 .prow--m td.gold-text, .prow td.gold-text { color: transparent; }
 
@@ -1218,6 +1218,11 @@ html:not(.light) .calc--silver .calc-sum__total span:last-child { color: #c3c9d2
 .news-list.is-filtered .ncard--feat .ncard__media { flex: none; aspect-ratio: 16 / 10; min-height: 0; }
 .news-list.is-filtered .ncard--feat .ncard__body { padding: 18px 20px 20px; gap: 10px; justify-content: flex-start; }
 .news-list.is-filtered .ncard--feat .ncard__title { font-size: 22px; }
+
+/* trang chủ: 4 bài mới nhất (bake_static.py in sẵn vào #home-news) */
+.home-news { padding: 48px 0; background: hsl(var(--background)); }
+@media (min-width: 640px) { .home-news { padding: 64px 0; } }
+@media (min-width: 1024px) { .news-grid--home { grid-template-columns: repeat(4, 1fr); gap: 20px; } .news-grid--home .ncard__title { font-size: 20px; } }
 
 /* Nhãn chuyên mục */
 .ncat { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: hsl(var(--gold) / .12); color: hsl(var(--gold)); }

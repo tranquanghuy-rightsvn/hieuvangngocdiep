@@ -206,6 +206,8 @@ khung "Xem nhanh". Vì vậy sản phẩm KHÔNG có slug/URL; định danh là 
    có) + ảnh bìa + mọi ảnh `<slug>-content-*` + gỡ khỏi `posts.json` (ghi SAU CÙNG).
    `build_pages.py` tự xoá thư mục `html/tin-tuc/<slug>/` không còn trong `posts.json`.
 7. Bài mới nhất (theo `date`) là bài nổi bật đầu trang `/tin-tuc/`.
+8. Trang chủ có mục **Tin Tức & Cẩm Nang** hiện 4 bài mới nhất (theo `date`) — `bake_static.py`
+   (`bake_home_news`) in sẵn vào `#home-news`, dùng chung thẻ bài `post_card` của `build_pages.py`.
 
 ## V. Liên hệ (form công khai `/lien-he/`)
 
