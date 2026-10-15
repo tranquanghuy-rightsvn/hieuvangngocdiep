@@ -289,6 +289,7 @@ File commit CHỐT LUÔN ghi SAU CÙNG trong 1 thao tác.
 **Build/deploy**: GitHub Actions `.github/workflows/build.yml` chạy khi push đụng 2 file chốt
 (hoặc `scripts/*.py`) → `python3 scripts/build_pages.py && python3 scripts/bake_static.py` →
 commit `html/`. Cloudflare tự deploy mỗi commit trên `master`. Độ trễ thực tế ~1-2 phút.
+Link `style.css`/`blocks.css`/`main.js` trong mọi trang có `?v=<mã nội dung>` do `bake_static.py` (`asset_ver`) tự gắn — sửa CSS/JS thì CI tự đổi mã để điện thoại không dùng bản cũ đã lưu (CI chạy cả khi đổi `html/assets/css|js/**`).
 
 | Thư mục | Ai ghi | Sửa tay được? |
 |---|---|---|

@@ -12,6 +12,7 @@ Sửa dữ liệu xong chạy:  python3 scripts/bake_static.py
 (Nếu chạy scripts/build_pages.py thì chạy lại file này sau đó.)
 Cũng sinh: canonical/og/twitter/JSON-LD từng trang, dòng credit cuối trang, html/sitemap.xml, html/robots.txt.
 """
+import hashlib
 import html
 import json
 import os
@@ -304,7 +305,7 @@ def bake_prices(src):
         if 'id="price-data"' in src:
             src = re.sub(r'<script type="application/json" id="price-data">.*?</script>', lambda m: tag, src, flags=re.S)
         else:
-            src = src.replace('  <script src="/assets/js/main.js" defer></script>', '  ' + tag + '\n  <script src="/assets/js/main.js" defer></script>', 1)
+            src = src.replace('  <script src="/assets/js/main.js', '  ' + tag + '\n  <script src="/assets/js/main.js', 1)
     return src
 
 
@@ -358,6 +359,17 @@ def bake_shared(src):
     # catalog.js không còn dùng
     src = src.replace('  <script src="/assets/js/catalog.js" defer></script>\n', '')
     return src
+
+
+def asset_ver(src):
+    # ?v=<mã nội dung file> sau style.css / blocks.css / main.js: file đổi -> link đổi -> trình duyệt
+    # (nhất là điện thoại, trình duyệt trong Zalo/Facebook) buộc tải bản mới thay vì dùng bản đã lưu
+    def ver(m):
+        path = os.path.join(ROOT, m.group(1).lstrip('/'))
+        if not os.path.exists(path):
+            return m.group(0)
+        return '%s?v=%s"' % (m.group(1), hashlib.md5(open(path, 'rb').read()).hexdigest()[:8])
+    return re.sub(r'(/assets/(?:css|js)/[\w.-]+\.(?:css|js))(?:\?v=[0-9a-f]+)?"', ver, src)
 
 
 # ---------------------------------------------------------------- SEO: canonical, meta, JSON-LD, sitemap, robots
@@ -582,6 +594,7 @@ def main():
             src = bake_prices(src)
             src = bake_contact(src)
             src = bake_seo(src, rel)
+            src = asset_ver(src)
             pages[rel] = src
             if src != old:
                 open(path, 'w', encoding='utf-8').write(src)

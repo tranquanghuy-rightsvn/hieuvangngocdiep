@@ -40,8 +40,8 @@ def page(path, title, desc, main, active=None, og_image=None, page_id='page'):
     if active:  # đánh dấu mục menu đang xem
         body = body.replace('<a href="%s" class="topnav__link">' % active, '<a href="%s" class="topnav__link is-active" aria-current="page">' % active)
     if 'class="tv-' in main:  # bài Smart content: nạp CSS các khối thiết kế
-        head = head.replace('<link rel="stylesheet" href="/assets/css/style.css" />',
-                            '<link rel="stylesheet" href="/assets/css/style.css" />\n  <link rel="stylesheet" href="/assets/css/blocks.css" />')
+        head = re.sub(r'(<link rel="stylesheet" href="/assets/css/style\.css[^"]*" />)',
+                      r'\1\n  <link rel="stylesheet" href="/assets/css/blocks.css" />', head, count=1)
     out = head + '<body data-page="%s">' % page_id + body + main + '\n' + FOOTER + TAIL
     full = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)

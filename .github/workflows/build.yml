@@ -18,6 +18,9 @@ on:
       - "scripts/data/site.json"
       - "scripts/*.py"
       - "scripts/content/**"
+      # sửa CSS/JS -> build lại để đổi ?v= trên link (bake_static.asset_ver). Không tự lặp: CI chỉ commit *.html
+      - "html/assets/css/**"
+      - "html/assets/js/**"
   workflow_dispatch: {}
 
 permissions:
