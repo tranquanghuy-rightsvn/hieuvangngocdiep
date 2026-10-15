@@ -319,7 +319,7 @@ input::placeholder { color: hsl(var(--muted-foreground)); opacity: 1; }
 }
 .ticker__item { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; line-height: 20px; }
 .ticker__name { font-weight: 600; color: hsl(var(--gold)); }
-.ticker__val { font-variant-numeric: tabular-nums; color: hsl(var(--foreground) / .8); }
+.ticker__val { font-size: 16px; font-variant-numeric: tabular-nums; color: hsl(var(--foreground) / .8); }
 
 /* =========================================================
    BẢNG GIÁ
@@ -390,14 +390,14 @@ html:not(.light) .refresh__text { color: #fff; }
   .pm-th { letter-spacing: .04em; padding-left: 4px; padding-right: 4px; }
   .pm-th--name { white-space: normal; line-height: 1.3; padding-left: 8px; }
   .ptable--m .prow--m td { padding-left: 4px; padding-right: 4px; font-size: 13.5px; }
-  .ptable--m .prow--m td:first-child { white-space: normal; line-height: 1.3; padding-left: 8px; }
+  .ptable--m .prow--m td:first-child { white-space: normal; line-height: 1.3; padding-left: 8px; font-size: 11.5px; }
   .prices__inner { padding-left: 16px; padding-right: 16px; }
   .ptable--m table { table-layout: fixed; }
 }
 .pm-th--sell { color: hsl(var(--gold)); }
 .light .pm-th--buy { color: #000; }
 .prow--m td { padding: 14px 6px; text-align: center; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.025em; color: hsl(var(--foreground)); }
-.prow--m td:first-child { padding: 14px 8px; text-align: left; font-weight: 500; line-height: 1; letter-spacing: normal; white-space: nowrap; color: hsl(var(--gold)); }
+.prow--m td:first-child { padding: 14px 8px; text-align: left; font-size: 12px; font-weight: 500; line-height: 1; letter-spacing: normal; white-space: nowrap; color: hsl(var(--gold)); }
 .prow--m td.gold-text, .prow td.gold-text { color: transparent; }
 
 .ptable__note { border-top: 1px solid hsl(var(--gold) / .4); padding: 12px 24px; text-align: center; font-size: 12px; line-height: 16px; color: hsl(var(--muted-foreground)); }
