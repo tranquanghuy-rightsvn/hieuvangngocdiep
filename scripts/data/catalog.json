@@ -734,5 +734,20 @@
   "name": "Miếng Vàng Đại Hỷ",
   "desc": "Nếu mọi người đã nhàm chán với trao quà cưới bằng 1 chiếc nhẫn trơn , thay vào đó trao món quà ý nghĩa cho lứa đôi ngày vui trọng đại",
   "price": 450000
+ },
+ {
+  "id": "ND-Q24",
+  "img": "nd-q24__1",
+  "gallery": [
+   "nd-q24__2",
+   "nd-q24__3"
+  ],
+  "cat": "qua-tang",
+  "sub": "Hoa Vàng",
+  "gold": "Vàng 9999",
+  "featured": true,
+  "isNew": true,
+  "name": "Cây Hoa Hồng Vàng",
+  "desc": "Cây hoa hồng gồm 3 phân- 5 phân bối lên bó hoa xinh xinh tặng quà rất ý nghĩa cho các dịp lễ"
  }
 ]
