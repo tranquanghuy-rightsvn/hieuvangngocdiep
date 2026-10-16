@@ -721,5 +721,18 @@
   "isNew": true,
   "name": "Nhẫn nam phối đá trắng sang trọng",
   "desc": "1 chiếc nhẫn khiến cho nam giới trở nên cuốn hút, sang trọng hơn"
+ },
+ {
+  "id": "ND-TT08",
+  "img": "nd-tt08__1",
+  "cat": "vang-tich-tru",
+  "sub": "Vàng Ép Vỉ",
+  "gold": "Vàng 9999",
+  "weight": "5 li",
+  "featured": true,
+  "isNew": true,
+  "name": "Miếng Vàng Đại Hỷ",
+  "desc": "Nếu mọi người đã nhàm chán với trao quà cưới bằng 1 chiếc nhẫn trơn , thay vào đó trao món quà ý nghĩa cho lứa đôi ngày vui trọng đại",
+  "price": 450000
  }
 ]
