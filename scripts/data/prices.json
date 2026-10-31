@@ -35,19 +35,19 @@
   ]
  },
  "silver": {
-  "updated_at": "17:31 10/10/2026",
+  "updated_at": "07:29 31/10/2026",
   "rows": [
    {
     "id": "AG925",
     "name": "Bạc trang sức 925 (bạc Ý)",
-    "buy": 130,
-    "sell": 230
+    "buy": 120,
+    "sell": 210
    },
    {
     "id": "AG999TS",
     "name": "Bạc trang sức 999 (bạc ta)",
-    "buy": 150,
-    "sell": 230
+    "buy": 130,
+    "sell": 210
    }
   ]
  }
