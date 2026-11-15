@@ -749,5 +749,16 @@
   "isNew": true,
   "name": "Cây Hoa Hồng Vàng",
   "desc": "Cây hoa hồng gồm 3 phân- 5 phân bối lên bó hoa xinh xinh tặng quà rất ý nghĩa cho các dịp lễ"
+ },
+ {
+  "id": "ND-L10",
+  "img": "nd-l10__1",
+  "cat": "lac-vong",
+  "sub": "Lắc",
+  "gold": "Vàng 610",
+  "featured": true,
+  "isNew": true,
+  "name": "Lắc Liên Hoa Trường Mệnh",
+  "desc": "Lắc Liên Hoa Trường mệnh đem lại may mắn cho người đeo lên tay"
  }
 ]
